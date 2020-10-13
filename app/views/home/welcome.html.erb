@@ -1,2 +1,47 @@
 <%= render 'layouts/navbar'%>
-hi
+<div class="container mt-4">
+	<div class="row rowheight_two">
+		<!-- create a new bot -->
+		<div class="col-6 colomn_break" >
+			<div class="mx-auto" style="width: 300px;">
+				<div class="mx-auto mt-5" style="width: 100px;">
+					<%= image_tag('chatbot.JPG', size: "120", class: "rounded-circle")%>
+				</div >
+				<div class="mx-auto mt-5" style="width: 300px;">
+					<h1 class="grey">Create New Bot</h1>
+				</div>
+				<div class="mx-auto mt-4" style="width: 350px;">
+					<p>Set up Business messages to send your clients automatically when they reach out to you</p>
+				</div>
+				<div class="mx-auto" style="width: 100px;">
+					<button type="button" class="btn btn-secondary">Create  > </button>
+				</div>
+			</div>
+		</div>
+		<!-- edit from existing bot -->
+		<div class="col-6">
+			<div class="mx-auto" style="width: 300px;">
+				<div class="mx-auto mt-5" style="width: 100px;">
+					<%= image_tag('white.jpg', size: "120")%>
+				</div >
+				<div class="mx-auto mt-5" style="width: 400px;">
+					<h1 class="grey">Edit from Existing Bot</h1>
+				</div>
+				<div class="mx-auto mt-4" style="width: 300px;">
+					<p>Pre Created Bots that you can edit and customise as per your Business needs</p>
+				</div>
+				<div class="mx-auto" style="width: 150px;">
+					<button type="button" class="btn btn-secondary">Choose Bot  > </button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- view my bots -->
+	<div class="container">
+		<div class="mx-auto mt-4 text-center" style="width: 300px;">
+			<%= link_to 'View my bots' , root_path,  class: "custom_link" %>
+			<span>&#8681;</span>
+		</div>
+	</div>
+	
+</div>
