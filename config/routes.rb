@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root 'home#welcome'
   get '/createbot/intro', to: 'home#createbot_intro'
   get '/selectbot', to: 'home#selectbot'
+  resources :bots
 end
