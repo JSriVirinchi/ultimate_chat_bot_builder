@@ -11,5 +11,38 @@
 
   <body>
     <%= yield %>
+
+    <script type="text/javascript">
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.add('hide');
+       document.getElementById('first_message').classList.remove('hide');
+      }, 2000);
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.remove('hide');
+      }, 2500);
+
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.add('hide');
+       document.getElementById('second_message').classList.remove('hide');
+      }, 4000);
+
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.remove('hide');
+      }, 4500);
+
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.add('hide');
+       document.getElementById('third_message').classList.remove('hide');
+       
+       var div = document.getElementById("intro_chat");
+       div.scrollTop = div.scrollHeight - div.clientHeight;
+      }, 6000);
+
+      setTimeout(function(){
+       document.getElementById('new_bot_name').classList.remove('hide');
+      }, 6500);
+
+      
+    </script>
   </body>
 </html>

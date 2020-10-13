@@ -1,5 +1,9 @@
 @import 'bootstrap/dist/css/bootstrap';
 
+.hide {
+ display: none;
+}
+
 .login_background{
 	background-image : url(phone.jpg);
 	background-size : 640px 1000px;
@@ -13,6 +17,11 @@
 	height: 480px;
 }
 
+#intro_chat{
+	height: 180px;
+	overflow: auto;
+}
+
 .colomn_break{
 	border-right: 1px solid rgb(160, 156, 156);
 }
@@ -24,3 +33,8 @@
 .custom_link{
 	color:grey;
 }
+
+.padding_min{
+	padding:5px;
+}
+

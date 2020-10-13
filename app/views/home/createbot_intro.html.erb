@@ -1,0 +1,56 @@
+<%= render 'layouts/navbar'%>
+
+<div class="container">
+	<div class="mx-auto mt-2 mb-4" style="width: 120px;">
+		<%= image_tag('chatbot.JPG', size: "120", class: "rounded-circle")%>
+	</div>
+
+	<div id="intro_chat">
+		<div class="mx-auto mb-1 hide" style="width: 75px;" id="first_message">
+			<div class="shadow-sm p-3 mb-1 bg-white rounded text-center">
+				Hi
+			</div>
+		</div>
+
+		<div class="mx-auto mb-1 hide" style="width: 200px;" id="second_message">
+			<div class="shadow-sm p-3 mb-1 bg-white rounded text-center">
+				I am your Whatsapp chatbot
+			</div>
+		</div>
+
+		<div class="mx-auto mb-1 hide" style="width: 300px;" id="third_message">
+			<div class="shadow-sm p-3 mb-1 bg-white rounded text-center">
+				I send and reply messages on your behalf
+			</div>
+		</div>
+
+		<div class="mx-auto" style="width: 100px;" id="loading_symbol">
+			<div class="shadow-sm p-3 mb-5 bg-white rounded text-center">
+					<div class="spinner-grow text-secondary " style="width: 0.75rem; height: 0.75rem;" role="status">
+				  		<span class="sr-only">Loading...</span>
+					</div>
+					<div class="spinner-grow text-secondary " style="width: 0.75rem; height: 0.75rem;" role="status">
+				  		<span class="sr-only">Loading...</span>
+					</div>
+					<div class="spinner-grow text-secondary " style="width: 0.75rem; height: 0.75rem;" role="status">
+				  		<span class="sr-only">Loading...</span>
+					</div>
+			</div>  
+		</div>
+	</div>
+	
+	<div class="hide mt-5" id="new_bot_name">
+		<%= form_with scope: :bot, url: root_path, method: :post,  local: true do |f| %>
+			<div class="form-group mx-auto text-center" style="width: 300px;">
+					<%= f.label :"Give me a name to continue", class: "col-form-label" %>
+			</div>
+			<div class="form-group mx-auto" style="width: 300px;" >
+				<%= f.text_field :name, class: "form-control shadow rounded" %> 
+			</div>
+			<div class="form-group mx-auto text-center" style="width: 300px;">
+				<%= f.submit value: "Enter", class: "btn btn-secondary"%>
+			</div>				
+		<% end %>
+	</div>
+
+</div>
