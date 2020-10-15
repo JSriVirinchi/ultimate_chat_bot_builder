@@ -1,5 +1,5 @@
 <%= render 'layouts/navbar'%>
-
+<%= render 'layouts/messages'%>
 <div class="container">
 	<div class="mx-auto mt-2 mb-4" style="width: 120px;">
 		<%= image_tag('chatbot.JPG', size: "120", class: "rounded-circle")%>
@@ -39,13 +39,13 @@
 		</div>
 	</div>
 	
-	<div class="hide mt-5" id="new_bot_name">
-		<%= form_with scope: :bot, url: root_path, method: :post,  local: true do |f| %>
+	<div class="hide mt-3" id="new_bot_name">
+		<%= form_with scope: :bot, url: bots_path, method: :post,  local: true do |f| %>
 			<div class="form-group mx-auto text-center" style="width: 300px;">
-					<%= f.label :"Give me a name to continue", class: "col-form-label" %>
+				<%= f.label :"Give me a name to continue", class: "col-form-label" %>
 			</div>
-			<div class="form-group mx-auto" style="width: 300px;" >
-				<%= f.text_field :name, class: "form-control shadow rounded" %> 
+			<div class="mx-auto text-center" style="width: 300px;" >
+				<%= f.text_field :name, class: "formStyle", placeholder: "Give the bot a name" %> 
 			</div>
 			<div class="form-group mx-auto text-center" style="width: 300px;">
 				<%= f.submit value: "Enter", class: "btn btn-secondary"%>
