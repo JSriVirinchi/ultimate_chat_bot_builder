@@ -114,24 +114,24 @@
 						<%= f.label :days , "Everyday", value: "Everyday" , class: "ml-2"%>
 					</div>
 					<div class="ml-3 mt-2 mb-4 hide" id="first_time">
-						<%=time_field("bots", "starttime", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime", {ampm: true, class: "ml-2"})%>
+						<%=time_field("bots", "starttime1", {ampm: true, class: "mr-2"} )%> to
+						<%=time_field("bots", "endtime1", {ampm: true, class: "ml-2"})%>
 					</div>
 					<div class="mt-2 ml-4">	
 						<%= f.radio_button :days , "Monday_to_Friday", id: "second_schedule"%>
 						<%= f.label :days , "Monday to Friday", value: "Monday_to_Friday" , class: "ml-2"%>
 					</div>
 					<div class="ml-3 mt-2 mb-4 hide" id="second_time">
-						<%=time_field("bots", "starttime", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime", {ampm: true, class: "ml-2"})%>
+						<%=time_field("bots", "starttime2", {ampm: true, class: "mr-2"} )%> to
+						<%=time_field("bots", "endtime2", {ampm: true, class: "ml-2"})%>
 					</div>
 					<div class="mt-2 ml-4">	
 						<%= f.radio_button :days , "Saturday_and_Sunday", id: "third_schedule"%>
 						<%= f.label :days , "Saturday and Sunday", value: "Saturday_and_Sunday" , class: "ml-2"%>
 					</div>
 					<div class="ml-3 mt-2 mb-4  hide" id="third_time">
-						<%=time_field("bots", "starttime", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime", {ampm: true, class: "ml-2"})%>
+						<%=time_field("bots", "starttime3", {ampm: true, class: "mr-2"} )%> to
+						<%=time_field("bots", "endtime3", {ampm: true, class: "ml-2"})%>
 					</div>
 					<div class="mt-2 ml-4">	
 						<%= f.radio_button :days , "Custom", id: "fourth_schedule"%>
@@ -142,8 +142,8 @@
 						<%= date_field("bots", "enddate", class: "ml-2") %>
 					</div>
 					<div class="ml-3 mt-2 mb-4 hide" id="fourth_time">
-						<%=time_field("bots", "starttime", {ampm: true, class: "mr-2"} )%> to
-						<%=time_field("bots", "endtime", {ampm: true, class: "ml-2"})%>
+						<%=time_field("bots", "starttime4", {ampm: true, class: "mr-2"} )%> to
+						<%=time_field("bots", "endtime4", {ampm: true, class: "ml-2"})%>
 					</div>
 				</div>
 				
