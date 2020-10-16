@@ -11,6 +11,16 @@ class BotsController < ApplicationController
 	end
 
 	def update
-		redirect_to composemessage_path
+		
+		@bot = Bot.find(params[:id])
+		if @bot.update(params.require(:botsettings).permit(:language, :initconv, :triggerpoint, :days))
+			@bot.update(params.require(:bots).permit( :startdate, :enddate, :starttime, :endtime ))
+			@bot.update(params.require(:date).permit(:rebootconv))
+			flash[:notice]="successfully saved"
+			redirect_to composemessage_path
+		else
+			flash[:alert]="not successfully saved"
+			redirect_to composemessage_path
+		end	
 	end
 end

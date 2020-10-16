@@ -1,0 +1,10 @@
+#date_rebootconv{
+  box-shadow: 0px 0px 5px;
+  padding: 2px;
+  border-color: white;
+  border-radius: 10px;
+  #date_rebootconv , &::after{
+  background-color: red;
+  }
+}
+

@@ -42,31 +42,33 @@
 				</div>
 				<div class="ml-3">
 					<% i=0%>
-					<% for x in Language.all %>
-						<% if i < 3 %>
-							<span class="mb-1 mr-4 mt-4" style="width: 100px; display: inline;">
-								<span class="shadow p-2 mb-4 bg-white rounded text-center">
-									<%= x.language %>
-								</span>
+					<%= collection_radio_buttons(:botsettings, :language, Language.all, :language, :language) do |b| %>
+							<% if i < 3%>
+							<span class="radio-toolbar mb-1 mr-4 mt-4">
+								<%= b.radio_button %> 
+								<%= b.label(:"data-value" => b.value ,class: "shadow p-2 mb-4 rounded text-center")%>
 							</span>
-						<% end %>
+							<% else %>
+								<%if i==3%>
+									<span class="dropdown shadow p-2 mb-4 bg-white rounded text-center">
+								  <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								    More Languages
+								  </button>  
+								  <div class="dropdown-menu overflow_two" aria-labelledby="dropdownMenuButton">
+							  <% end %>    
+							     <span class="radio-toolbar text-center">
+								   	<%= b.radio_button%>
+								   	<%= b.label(:"data-value" => b.value , class: "shadow p-2 ml-3 rounded text-center")%> <br>
+								   	</span>
+								<% if i== Language.all.count - 1%>   		
+									</div>	
+								</span>
+								<% end %>
+							<% end %>
 						<% i=i+1%>
 					<% end %>
 					
-						<span class="dropdown shadow p-2 mb-4 bg-white rounded text-center">
-						  <button class="btn btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						    More Languages
-						  </button>
-						  <div class="dropdown-menu overflow_two" aria-labelledby="dropdownMenuButton">
-							  <% i=0%>
-								<% for x in Language.all %>
-									<% if i >= 3%>
-									   <span class="dropdown-item"><%= x.language%></span>
-								  <% end %>
-							  	<% i=i+1%>
-								<% end %>
-							</div>	
-						</span>	
+						
 				</div>
 				<!-- initiate conversation -->
 				<div class="row mt-4 ml-1">
@@ -148,13 +150,19 @@
 				<!-- auto reboot -->
 				<div class="ml-3 mt-2 alert alert-warning">
 					<p>Note:</p>
-					<p>If user doesn’t reply in  minutes, bot will reboot the conversation</p>
+					<p>If user doesn’t reply in 
+						<span class="mr-2 ml-2" style="width: 15px;">
+							<%= select_minute(5, field_name: 'rebootconv') %>
+						</span>
+						 minutes, bot will reboot the conversation</p>
 				</div>
 				<!-- submit -->
 				<div class="ml-3">
 					Awesome, Lets set up the messages now.
 					<%= f.submit value: "Set up Messages  >", class: "btn btn-secondary ml-3"%>
 				</div>
+
+		
 			<% end %>
 		</div>
 	</div>
