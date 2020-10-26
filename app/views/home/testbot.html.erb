@@ -1,0 +1,94 @@
+<%= render 'layouts/navbar'%>
+<%= render 'layouts/messages'%>
+<div class="container">
+	<div class="phonebackground mt-4 row", style="height: 530px;">
+		<div class="col-6 shadow testcontent bg-white", style="height: 530px;">
+			<div class="mt-2 mb-2 row">
+				<div class="col-3">
+					<%= link_to '← Go Back', selectbot_path, class: "custom_link"%>
+				</div>
+				<div class="col-6">
+					
+				</div>
+				<div class="col-3">
+					<%= link_to 'Edit the Bot', composemessage_path(@bot.id), class: "custom_link"%>
+				</div>
+			</div>
+			
+			<div class="overflow_four">
+				<table class="table table-bordered mt-2">
+				  <thead>
+				    <tr>
+				      <th scope="col">Bot Parameter</th>
+				      <th scope="col">Value</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <th scope="row">Name:</th>
+				      <td><%= @bot.name%>	</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Phone Number:</th>
+				      <td><%= @bot.phone%></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Default Language:</th>
+				      <td ><%= @bot.language%></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Initiate conversation by:</th>
+				      <td ><%= @bot.initconv%></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Bot gets triggered by:</th>
+				      <td ><%= @bot.triggerpoint%></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Working Schedule:</th>
+				      <td ><%= @bot.days%></td>
+				    </tr>
+				    <% if @bot.startdate%>
+				    <tr>
+				      <th scope="row">Start Date:</th>
+				      <td ><%= @bot.startdate.to_date.to_formatted_s :long_ordinal %></td>
+				    </tr>
+				    <% end %>
+				    <% if @bot.enddate%>
+				    <tr>
+				      <th scope="row">End Date:</th>
+				      <td ><%= @bot.enddate.to_date.to_formatted_s :long_ordinal %></td>
+				    </tr>
+				    <% end %>
+				    <tr>
+				      <th scope="row">Start Time:</th>
+				      <td ><%= @bot.starttime.utc.strftime('%H:%M %p')%></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">End Time:</th>
+				      <td ><%= @bot.endtime.utc.strftime('%H:%M %p')%></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Bot reboots in:</th>
+				      <td ><%= @bot.rebootconv%> mins</td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Created at:</th>
+				      <td ><%= time_ago_in_words(@bot.created_at) %></td>
+				    </tr>
+				    <tr>
+				      <th scope="row">Updated at:</th>
+				      <td ><%= time_ago_in_words(@bot.updated_at)%></td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
+			
+		</div>
+		<div class="col-6">
+			<%= render 'home/edit/test'%>
+		</div>
+		
+	</div>	
+</div>
+

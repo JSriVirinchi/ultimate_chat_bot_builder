@@ -1,0 +1,44 @@
+.phonebackground{
+	background: url(phone_outline_2.png) 80% 50% no-repeat;
+	width: 1200px;
+	background-size: 250px 530px;
+}
+
+.testcontent{
+	border-radius: 20px 20px 20px 20px;
+}
+
+.whatsapphead{
+	background-color: rgb(7,94,84);
+	transform: translate(154px,28px);
+	border-radius: 20px 20px 0px 0px;
+	color: white;
+}
+
+.whatsappbackbutton{
+	color: white;
+}
+
+.whatsappbody{
+	background: url(whatsapp_background.jpg) 50% 50% no-repeat;
+	background-size: 235px 450px;
+	transform: translate(154px,20px);
+	border-radius: 0px 0px 20px 20px;
+}
+
+.whatsapprecievemessage{
+	
+}
+
+.whatsappsendmessage{
+	
+}
+
+.send{
+	background: url(whatsapp_send.jpg) 50% 50% no-repeat;
+	background-size: 25px 25px;
+}
+
+.sendmessage{
+	border-radius: 20px;
+}

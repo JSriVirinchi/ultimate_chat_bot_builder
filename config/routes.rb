@@ -5,8 +5,13 @@ Rails.application.routes.draw do
   get '/welcome', to: 'home#welcome'
   get '/createbot/intro', to: 'home#createbot_intro'
   get '/selectbot', to: 'home#selectbot'
-  get '/botsettings', to: 'home#botsettings'
-  get '/composemessage', to: 'home#composemessage'
-  get '/activatebot', to: 'home#activatebot'
+  #bot editing part
+  get '/botsettings/:id', to: 'home#botsettings', as: 'botsettings'
+  get '/composemessage/:id', to: 'home#composemessage',as: 'composemessage'
+  get '/activatebot/:id', to: 'home#activatebot', as: 'activatebot'
+  #bot info part
+  get '/statistics/:id', to: 'home#statistics', as: 'statistics'
+  get '/testbot/:id', to: 'home#testbot', as: 'testbot'
   resources :bots
 end
+

@@ -12,14 +12,28 @@ class HomeController < ApplicationController
 	end
 
 	def botsettings
-		@bot = Bot.where( user_id: current_user.id).last
+		@id = params[:id]
+		@bot = Bot.find_by(id: @id)
 	end
 
 	def composemessage
-		@bot = Bot.where( user_id: current_user.id).last
+		@id = params[:id]
+		@bot = Bot.find(@id)
+		
 	end
 
 	def activatebot
-		@bot = Bot.where( user_id: current_user.id).last
+		@id = params[:id]
+		@bot = Bot.find(@id)
+	end
+
+	def statistics
+		@id = params[:id]
+		@bot = Bot.find(@id)
+	end
+	
+	def testbot
+		@id = params[:id]
+		@bot = Bot.find(@id)
 	end
 end

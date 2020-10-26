@@ -1,5 +1,8 @@
 @import 'bootstrap/dist/css/bootstrap';
 
+body{
+	background-color: rgb(240,240,240);
+}
 .hide {
  display: none;
 }
@@ -17,6 +20,16 @@
 
 .overflow_two{
 	height : 120px;
+	overflow: auto;
+}
+
+.overflow_three{
+	height : 380px;
+	overflow: auto;
+}
+
+.overflow_four{
+	height : 265px;
 	overflow: auto;
 }
 
@@ -44,9 +57,17 @@
 	color: grey;
 }
 
+.heading{
+	font-size: 30px;
+}
+
 .custom_link{
 	color:grey;
 }
+.deletelink :hover{
+	color: rgb(255,0,0) !important;
+}
+
 a:hover{
 	color: rgb(30,30,30);
 	text-decoration: none;
@@ -72,7 +93,11 @@ a:hover{
 	color: grey;
 }
 
-
+.box{
+	background-color: white;
+	margin-top: 20px;
+	border-radius: 30px;
+}
 
 .radio-toolbar input[type="radio"] {  
     display: none;                                      
@@ -88,3 +113,4 @@ a:hover{
      background-color: rgb(200,200,200); 
      box-shadow: 0px  0px 10px;  
 }
+

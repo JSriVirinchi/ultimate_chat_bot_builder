@@ -3,7 +3,9 @@ class BotsController < ApplicationController
 		@bot = Bot.new(params.require(:bot).permit(:name).merge(user_id: current_user.id))
 		if @bot.save
 			flash[:notice]= "The bot was created successfully"
-			redirect_to botsettings_path
+			bot= Bot.where( user_id: current_user.id).last
+			@id= bot.id
+			redirect_to botsettings_path(@id)
 		else
 			flash[:alert]= "Bot was not created"
 			redirect_to createbot_intro_path
@@ -39,11 +41,24 @@ class BotsController < ApplicationController
 				@bot.update(startdate: startdate, enddate: enddate)
 			end
 
-			flash[:notice]="successfully saved"
+			flash[:notice]="Successfully saved"
 			redirect_to composemessage_path
 		else
-			flash[:alert]="not successfully saved"
+			flash[:alert]="Not successfully saved"
 			redirect_to botsettings_path
 		end	
+	end
+
+
+	def destroy
+		id = params[:id]
+		@bot = Bot.find(params[:id])
+		if @bot.destroy
+			flash[:notice]= "Successfully deleted"
+			redirect_to selectbot_path
+		else
+			flash[:alert]="Not successfully deleted"
+			redirect_to selectbot_path
+		end
 	end
 end

@@ -1,0 +1,28 @@
+<div class="whatsapphead p-2", style="height: 50px; width: 235px;">
+	<%= link_to '←', welcome_path, class: "mr-2 whatsappbackbutton"%>
+	<%= image_tag('chatbot.JPG', size: "30", class: "rounded-circle mr-1")%>
+	<%= @bot.name%>
+</div>
+<div class="whatsappbody", style="height: 450px; width: 235px;">
+	<div class="whatsapprecievemessage", style="height: 400px; width: 235px;">
+		
+	</div>
+	<div class="whatsappsendmessage", style="height: 50px; width: 235px;">
+		<%= form_with scope: :test, url: root_path, method: :post,  local: true do |f| %>
+			<div class="row">
+				<div class="form-group col-9 ml-2">
+					<%= f.text_area :user_test_message, class: "form-control shadow sendmessage", size: "1x1" %> 
+				</div>
+				<% if @bot%>
+					<%= f.hidden_field :bot_id, value: @bot.id %>
+				<% end %>
+				<% if current_user%>
+					<%= f.hidden_field :user_id, value: current_user.id %>
+				<% end %>
+				<div class="form-group col-2">
+					<%= f.submit value: "", class: "btn send "%>
+				</div>
+			</div>	
+		<% end %>
+	</div>
+</div>

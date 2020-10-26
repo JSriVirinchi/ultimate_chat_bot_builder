@@ -28,7 +28,7 @@
 				<div class="col-3">
 				</div>
 				<div class="col-1 text-center">
-					<%= link_to image_tag('radiooff.png', size: "15", class: "rounded-circle"), botsettings_path, class: "custom_link"%>
+					<%= link_to image_tag('radiooff.png', size: "15", class: "rounded-circle"), botsettings_path(@id), class: "custom_link"%>
 				</div>
 				<div class="col-2 text-center">
 					<svg height="20" width="300">
@@ -36,7 +36,7 @@
 					</svg>
 				</div>
 				<div class="col-1 text-center">
-					<%= link_to image_tag('radiooff.png', size: "15", class: "rounded-circle"), composemessage_path, class: "custom_link"%>
+					<%= link_to image_tag('radiooff.png', size: "15", class: "rounded-circle"), composemessage_path(@id), class: "custom_link"%>
 				</div>
 				<div class="col-2 text-center">
 					<svg height="20" width="300">
@@ -44,7 +44,7 @@
 					</svg>
 				</div>
 				<div class="col-1 text-center">
-					<%= link_to image_tag('radioon.png', size: "15", class: "rounded-circle"), activatebot_path, class: "custom_link"%>
+					<%= link_to image_tag('radioon.png', size: "15", class: "rounded-circle"), activatebot_path(@id), class: "custom_link"%>
 				</div>
 				<div class="col-2">
 				</div>
@@ -59,7 +59,7 @@
 		<div class="col-1">
 		</div>
 
-		<div class="col-10 rowheight_three border">
+		<div class="col-10 rowheight_three border bg-white">
 			<%= render 'home/edit/activatebot_main'%>
 		</div>
 

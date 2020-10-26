@@ -1,1 +1,53 @@
-select bot
+<%= render 'layouts/navbar'%>
+<%= render 'layouts/messages'%>
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<div class="ml-4 row">
+				<div class="col-2">
+					<%= link_to '← Go Back', welcome_path, class: "custom_link"%>
+				</div>
+				<div class="col-6 text-center">
+					<span class="p-2 ml-4 mt-4 grey heading">List of Bots</span>
+				</div>
+				<div class="col-4">
+					
+				</div>
+			</div>
+			<div class="box overflow_three">
+				<table class="table table-bordered">
+				  <thead>
+				    <tr>
+				      <th scope="col">S.no</th>
+				      <th scope="col">Name</th>
+				      <th scope="col" colspan="5" class="text-center">Options</th>
+				      <th scope="col">Created</th>
+				      <th scope="col">Updated</th>
+				    </tr>
+				  </thead> 
+				  <tbody>
+				  	<% i=0 %>
+				  	<% for bot in Bot.all %>
+				  	<%i=i+1%>
+					    <tr>				    	
+					      <td scope="row"><%= i%></td>
+					      <td ><%= bot.name %></td>
+					      <td><%= link_to 'Statistics', statistics_path(bot.id)%></td>
+					      <td><%= link_to 'Test the bot', testbot_path(bot.id) %></td>
+					      <td><%= link_to 'Edit', composemessage_path(bot.id)%></td>
+					      <td><%= link_to 'Clone', root_path%></td>
+					       <td><%= link_to 'Delete', bot_path(bot.id), method: :delete, data: {confirm: "Are you Sure do you want to delete this bot permanantly?"}%></td>
+					      <td><%= time_ago_in_words(bot.created_at) %></td>
+        				  <td><%= time_ago_in_words(bot.updated_at)%></td>
+					    </tr>
+				    <% end %>
+				  </tbody>
+				</table>
+			</div>
+			<div class="text-center mt-4" style="width: 100%;">
+				<%= link_to '+ Add a new bot', createbot_intro_path, class: "btn bg-white"%>
+			</div>
+			
+		</div>
+	</div>
+</div>
