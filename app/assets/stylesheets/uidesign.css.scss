@@ -1,0 +1,95 @@
+:root{
+  --primary-text:#3b3939;
+  --secondary-text:#7e7e7e;
+  --error-color-1:#e26000;
+  --slate:#3b445b;
+  --ry-green:#00b15c;
+  --pale-turquoise:#a6f8e2;
+  --background:#f7f2ed;
+}
+.Whatsapp-Bot {
+  width: 151px;
+  height: 22px;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.28;
+  letter-spacing: 0.22px;
+  text-align: left;
+  color: var(--primary-text);
+}
+
+.Whatsapp-Bot:hover {
+  width: 151px;
+  height: 22px;
+  font-size: 18px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.28;
+  letter-spacing: 0.22px;
+  text-align: left;
+  text-decoration: none;
+  color: var(--primary-text);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 31px;
+  height: 15px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 11px;
+  width: 11px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--ry-green);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 15px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

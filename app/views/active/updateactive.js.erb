@@ -1,0 +1,9 @@
+// console.log('virinchi and anmol');
+// console.log(<%= @bot.id %>);
+// console.log(str.id);
+str = <%= "update_active_toggle" + (@bot.id).to_s %>;
+<% if @bot.active == true%>
+	document.getElementById(str.id).innerHTML = "Active";
+<% else%>
+	document.getElementById(str.id).innerHTML = "Inactive";
+<% end %>

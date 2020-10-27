@@ -1,7 +1,7 @@
 @import 'bootstrap/dist/css/bootstrap';
 
 body{
-	background-color: rgb(240,240,240);
+	background-color: #f7f2ed;
 }
 .hide {
  display: none;
@@ -11,6 +11,33 @@ body{
 	background-image : url(phone.jpg);
 	background-size : 640px 1000px;
 	background-repeat: no-repeat;
+}
+.createbotdiv{
+	background-color: #3b445b;
+	border-radius: 20px;
+}
+.whitetext{
+	color:white;
+	font-size: 30px;
+}
+.whitetext_two{
+	color:white;
+	font-size: 14px;
+}
+
+.smallfont{
+	font-size: 14px;
+}
+
+.margintopcenter{
+	margin-top: 150px;
+}
+
+.botlist{
+	padding: 10px 0px 10px 0px;
+	margin: 0px 5px 0px 5px;
+	border-radius: 10px;
+	border: 1px solid grey;
 }
 
 .overflow{
@@ -62,14 +89,14 @@ body{
 }
 
 .custom_link{
-	color:grey;
+	color:rgb(90,90,90);
 }
 .deletelink :hover{
 	color: rgb(255,0,0) !important;
 }
 
-a:hover{
-	color: rgb(30,30,30);
+.custom_link:hover{
+	color: rgb(0,0,0);
 	text-decoration: none;
 }
 
