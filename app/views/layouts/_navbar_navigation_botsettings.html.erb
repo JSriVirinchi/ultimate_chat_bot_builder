@@ -1,0 +1,42 @@
+<nav class="mynavbar bg-white">
+  <div class="row">
+
+    <div class="col-8">
+      <ul class="steps">
+        <li class="past">
+          <span>
+            <strong>Steps</strong>
+          </span>
+        </li>
+        
+        <li class="present">
+          <span>
+            <%= link_to botsettings_path(@bot.id), class:"navbar_custom_links" do%>
+              <div style="height: 50px; width: 200px;">1. Bot Settings</div>
+            <% end %>
+          </span><i></i> 
+        </li>  
+        
+        <li class="future">
+          <span>
+            <%= link_to composemessage_path(@bot.id), class:"navbar_custom_links" do%>
+              <div style="height: 50px; width: 200px;">2. Compose Message</div>
+            <% end %>
+          </span><i></i>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-2">
+      <div class="navbar_content_height_undo">
+        <%= link_to image_tag('undoicon.png', size: "12"), root_path%>
+        <%= link_to 'Undo', root_path, class: "Undo"%>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="text-center navbar_content_height_activate">
+        Activate
+      </div>
+    </div>
+  </div>
+</nav>

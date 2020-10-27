@@ -1,11 +1,11 @@
 .formStyle {
-  background-color: rgb(240,240,240);
+  background-color: var(--background);
   padding: 20px; 
   width: 300px; 
-  margin-bottom: 20px; 
+  margin-bottom: 5px; 
   border-bottom-width: 1px; 
   border-bottom-style: solid; 
-  border-bottom-color: #ecf0f1; 
+  border-bottom-color: black; 
   border-top-style: none; 
   border-right-style: none; 
   border-left-style: none; 

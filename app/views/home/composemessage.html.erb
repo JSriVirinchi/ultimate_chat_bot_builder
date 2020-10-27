@@ -1,59 +1,7 @@
-<%= render 'layouts/navbar'%>
+<%= render 'layouts/navbar_main'%>
+<%= render 'layouts/navbar_navigation_composemessage'%>
 <%= render 'layouts/messages'%>
 <div class="container">
-	<!-- top page navigation -->
-	<div class="row mt-1">
-		<div class="col-1">
-		</div>
-		<div class="col-10 ">
-			<div class="row">
-				<div class="col-2">
-					<%= link_to '← Go Back', root_path, class: "custom_link"%>						
-				</div>
-				
-				<div class="col-3 text-center">
-					Bot settings
-				</div>
-				<div class="col-3 text-center">
-					Compose Message
-				</div>
-				<div class="col-3 text-center">
-					Activate Bot
-				</div>
-				<div class="col-1">
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-3">
-				</div>
-				<div class="col-1 text-center">
-					<%= link_to image_tag('radiooff.png', size: "15", class: "rounded-circle"), botsettings_path(@id), class: "custom_link"%>
-				</div>
-				<div class="col-2 text-center">
-					<svg height="20" width="300">
-					  <line x1="0" y1="15" x2="150" y2="15" style="stroke:rgb(0,0,0);stroke-width:1" />
-					</svg>
-				</div>
-				<div class="col-1 text-center">
-					<%= link_to image_tag('radioon.png', size: "15", class: "rounded-circle"), composemessage_path(@id), class: "custom_link"%>
-				</div>
-				<div class="col-2 text-center">
-					<svg height="20" width="300">
-					  <line x1="0" y1="15" x2="150" y2="15" style="stroke:rgb(0,0,0);stroke-width:1" />
-					</svg>
-				</div>
-				<div class="col-1 text-center">
-					<%= link_to image_tag('radiooff.png', size: "15", class: "rounded-circle"), activatebot_path(@id), class: "custom_link"%>
-				</div>
-				<div class="col-2">
-				</div>
-			</div>
-		</div>
-		<div class="col-1">
-		</div>	
-	</div>
-
 	<!-- main content -->
 	<div class="row mt-4">
 		<div class="col-1">

@@ -93,3 +93,8 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.createbotbutton{
+  background-color: var(--slate);
+  color: white;
+}

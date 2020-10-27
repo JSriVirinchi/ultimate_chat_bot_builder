@@ -13,70 +13,7 @@
     <%= yield %>
 
     <script type="text/javascript">
-      // animation of chat messages in create bot
-      setTimeout(function(){
-       document.getElementById('loading_symbol').classList.add('hide');
-       document.getElementById('first_message').classList.remove('hide');
-      }, 2000);
-      setTimeout(function(){
-       document.getElementById('loading_symbol').classList.remove('hide');
-      }, 2500);
-
-      setTimeout(function(){
-       document.getElementById('loading_symbol').classList.add('hide');
-       document.getElementById('second_message').classList.remove('hide');
-      }, 4000);
-
-      setTimeout(function(){
-       document.getElementById('loading_symbol').classList.remove('hide');
-      }, 4500);
-
-      setTimeout(function(){
-       document.getElementById('loading_symbol').classList.add('hide');
-       document.getElementById('third_message').classList.remove('hide');
-       
-       var div = document.getElementById("intro_chat");
-       div.scrollTop = div.scrollHeight - div.clientHeight;
-      }, 6000);
-
-      setTimeout(function(){
-       document.getElementById('new_bot_name').classList.remove('hide');
-      }, 6500);
-
-      // bot settings select date and time
-      document.getElementById('first_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('first_time').classList.remove('hide');
-      }
-      document.getElementById('second_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('second_time').classList.remove('hide');
-      }
-      document.getElementById('third_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('third_time').classList.remove('hide');
-      }
-      document.getElementById('fourth_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('fourth_time').classList.remove('hide');
-        document.getElementById('fourth_date').classList.remove('hide');
-      }
+      
     </script>
   </body>
 </html>

@@ -1,24 +1,23 @@
 <%= render 'layouts/navbar'%>
 <%= render 'layouts/messages'%>
-<div class="container">
+<div class="container"  style="margin-top: 100px;">
 	<div class="mx-auto mt-2 mb-4" style="width: 120px;">
 		<%= image_tag('chatbot.JPG', size: "120", class: "rounded-circle")%>
 	</div>
-
 	<div id="intro_chat">
-		<div class="mx-auto mb-1 hide" style="width: 75px;" id="first_message">
+		<div class="mx-auto mb-1 hide smallfont" style="width: 75px;" id="first_message">
 			<div class="shadow-sm p-3 mb-1 bg-white rounded text-center">
 				Hi
 			</div>
 		</div>
 
-		<div class="mx-auto mb-1 hide" style="width: 200px;" id="second_message">
+		<div class="mx-auto mb-1 hide smallfont" style="width: 200px;" id="second_message">
 			<div class="shadow-sm p-3 mb-1 bg-white rounded text-center">
 				I am your Whatsapp chatbot
 			</div>
 		</div>
 
-		<div class="mx-auto mb-1 hide" style="width: 300px;" id="third_message">
+		<div class="mx-auto mb-1 hide smallfont" style="width: 300px;" id="third_message">
 			<div class="shadow-sm p-3 mb-1 bg-white rounded text-center">
 				I send and reply messages on your behalf
 			</div>
@@ -41,16 +40,48 @@
 	
 	<div class="hide mt-3" id="new_bot_name">
 		<%= form_with scope: :bot, url: bots_path, method: :post,  local: true do |f| %>
-			<div class="form-group mx-auto text-center" style="width: 300px;">
+			<div class=" mx-auto text-center" style="width: 300px;">
 				<%= f.label :"Give me a name to continue", class: "col-form-label" %>
 			</div>
-			<div class="mx-auto text-center" style="width: 300px;" >
+			<div class="mx-auto text-center" style="width: 300px; " >
 				<%= f.text_field :name, class: "formStyle", placeholder: "Give the bot a name" %> 
 			</div>
-			<div class="form-group mx-auto text-center" style="width: 300px;">
-				<%= f.submit value: "Enter", class: "btn btn-secondary"%>
+			<div class="form-group mx-auto text-center mt-4" style="width: 300px;">
+				<%= f.submit value: "Enter", class: "btn createbotbutton"%>
 			</div>				
 		<% end %>
 	</div>
 
 </div>
+
+<script type="text/javascript">
+	// animation of chat messages in create bot
+	setTimeout(function(){
+       document.getElementById('loading_symbol').classList.add('hide');
+       document.getElementById('first_message').classList.remove('hide');
+      }, 2000);
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.remove('hide');
+      }, 2500);
+
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.add('hide');
+       document.getElementById('second_message').classList.remove('hide');
+      }, 4000);
+
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.remove('hide');
+      }, 4500);
+
+      setTimeout(function(){
+       document.getElementById('loading_symbol').classList.add('hide');
+       document.getElementById('third_message').classList.remove('hide');
+       
+       var div = document.getElementById("intro_chat");
+       div.scrollTop = div.scrollHeight - div.clientHeight;
+      }, 6000);
+
+      setTimeout(function(){
+       document.getElementById('new_bot_name').classList.remove('hide');
+      }, 6500);
+</script>

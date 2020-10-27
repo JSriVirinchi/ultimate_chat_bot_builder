@@ -5,8 +5,8 @@
 
 /* button */
 ::-webkit-scrollbar-button {
-    background: white; 
-    content: "\25B6";
+    background: var(--background); 
+    content: "↑";
 }
 
 /* Handle */
