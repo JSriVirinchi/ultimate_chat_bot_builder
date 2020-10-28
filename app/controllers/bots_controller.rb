@@ -55,10 +55,10 @@ class BotsController < ApplicationController
 		@bot = Bot.find(params[:id])
 		if @bot.destroy
 			flash[:notice]= "Successfully deleted"
-			redirect_to selectbot_path
+			redirect_to root_path
 		else
 			flash[:alert]="Not successfully deleted"
-			redirect_to selectbot_path
+			redirect_to root_path
 		end
 	end
 end

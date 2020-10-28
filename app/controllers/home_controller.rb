@@ -31,6 +31,7 @@ class HomeController < ApplicationController
 	def botsettings
 		@id = params[:id]
 		@bot = Bot.find_by(id: @id)
+		@userbots= Bot.where(user_id: current_user.id)
 	end
 
 	def composemessage

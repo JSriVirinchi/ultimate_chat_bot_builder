@@ -35,7 +35,7 @@
 						Action
 					</div>
 				</div>
-
+				<div style="height: 323px; overflow: auto;">
 				<% for bot in Bot.all%>
 				<div class="row mt-3 mb-3 bg-white botlist smallfont">
 					<div class="col-3">
@@ -72,10 +72,27 @@
 					</div>
 					<div class="col-3 text-center">
 						<%= link_to 'Edit', composemessage_path(bot.id), class: "btn btn-dark"%>
-						<%= image_tag('hamburger.png', size: "20", class: "ml-4")%>
+
+						<span class="dropdown">
+							<button class="btn dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<%= image_tag("hamburger.png", size: "20" ) %>
+							</button>
+							<style>.dropdown-toggle::after { 
+								content: none;
+							    } 
+							</style>
+							<div class="dropdown-menu" style="width: 50px;">
+							  <%= link_to 'Statistics', statistics_path(bot.id), class: "dropdown-item" %> 
+								<%= link_to 'Test the bot', testbot_path(bot.id), class: "dropdown-item"  %>
+								<%= link_to 'Clone', root_path, class: "dropdown-item"%>  
+                <%= link_to 'Delete', bot_path(bot.id), method: :delete, data: { confirm: "Are you sure about deleting this bot. This is an irreversible action!" }, class: "dropdown-item delete_link"%>    
+							</div>
+						</span>
+
 					</div>
 				</div>
 				<% end %>
+				</div>
 
 			</div>
 		</div>

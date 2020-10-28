@@ -1,0 +1,24 @@
+<div class="container">
+  <h3 class="botsettings_heading">Bot Settings</h3>
+  <p class="botsettings_matter mt-2">Get started by setting up basic details of how your bot should behave.</p>
+  <button class="btn btn-success mt-2">
+    <div class="botsettings_button" id="startsetup">Start Setup</div>
+  </button>
+
+  <div class="botsettings_question">
+    Already Have Bot Settings ?  
+  </div>
+  <div class="botsettings_matter mt-3">
+    You can Import settings from your Existing Bot
+  </div>
+  <div class="dropdown ">
+    <button class="dropdown-toggle botsettings_dropdown_border" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: solid 1px grey; width: 130px;">
+      Select Bot
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="height: 110px; overflow: auto;">
+      <% for bot in @userbots%>
+       <%= link_to bot.name, botsettings_path(bot.id), class:"dropdown-item"%>
+      <% end %>
+    </div>
+  </div>
+</div>

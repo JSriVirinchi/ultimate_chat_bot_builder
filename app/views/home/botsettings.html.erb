@@ -2,54 +2,34 @@
 <%= render 'layouts/navbar_navigation_botsettings'%>
 <%= render 'layouts/messages'%>
 <div class="container">
-
 	<!-- main content -->
 	<div class="row mt-4">
-		<div class="col-1">
+    <!-- left content -->
+    <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil && @bot.starttime==nil && @bot.endtime==nil && @bot.startdate == nil && @bot.enddate== nil && @bot.rebootconv==nil && @bot.days==nil && @bot.active==nil)%>
+		<div class="col-4 rowheight_three bg-white botsettings_border">
+      <%= render 'home/edit/botsettings_startsetup'%>
 		</div>
-
-		<div class="col-10 rowheight_three border bg-white">
-			<%= render 'home/edit/botsettings_main'%>
-		</div>
-
-		<div class="col-1">
-		</div>
+    <% else%>
+      <div class="col-4 rowheight_three bg-white botsettings_border">
+        <%= render 'home/edit/botsettings_startsetup_edit'%>
+      </div>
+    <% end %>
+    <!-- actual form -->
+		  <div class="col-8 rowheight_three" id="actualform">
+        <%= render 'home/edit/botsettings_main'%>
+      </div>
 	</div>
 </div>
 
 <script type="text/javascript">
-      // bot settings select date and time
-      document.getElementById('first_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('first_time').classList.remove('hide');
-      }
-      document.getElementById('second_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('second_time').classList.remove('hide');
-      }
-      document.getElementById('third_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('third_time').classList.remove('hide');
-      }
-      document.getElementById('fourth_schedule').onclick = function() {
-        document.getElementById('first_time').classList.add('hide');
-        document.getElementById('second_time').classList.add('hide');
-        document.getElementById('third_time').classList.add('hide');
-        document.getElementById('fourth_time').classList.add('hide');
-        document.getElementById('fourth_date').classList.add('hide');
-        document.getElementById('fourth_time').classList.remove('hide');
-        document.getElementById('fourth_date').classList.remove('hide');
+      // show form
+      <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil && @bot.starttime==nil && @bot.endtime==nil && @bot.startdate == nil && @bot.enddate== nil && @bot.rebootconv==nil && @bot.days==nil && @bot.active==nil)%>
+      setTimeout(function(){
+       document.getElementById('actualform').classList.add('hide');
+      }, 1);
+        
+      <% end %>
+      document.getElementById('startsetup').onclick = function() {
+        document.getElementById('actualform').classList.remove('hide');
       }
 </script>

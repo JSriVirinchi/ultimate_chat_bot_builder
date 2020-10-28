@@ -1,0 +1,41 @@
+<div class="container">
+	<h3 class="botsettings_heading">Bot Settings</h3>
+	<p class="botsettings_attribute mt-3">Outgoing Number</p>
+	<div class="row">
+		<div class="col-9">Business 1 : ( +91 <%= @bot.phone%>)</div>
+		<div class="col-3"><%= link_to 'Change', root_path, class: "Change"%></div>
+	</div>
+
+	<p class="botsettings_attribute mt-3">Bot Language</p>
+	<div class="row">
+		<div class="col-9"><%= @bot.language%></div>
+		<div class="col-3"><%= link_to 'Change', root_path, class: "Change"%></div>
+	</div>
+	
+	<p class="botsettings_attribute mt-3">Conversation Starter</p>
+	<div class="row">
+		<div class="col-9"><%= @bot.initconv%></div>
+		<div class="col-3"><%= link_to 'Change', root_path, class: "Change"%></div>
+	</div>
+
+	<p class="botsettings_attribute mt-3">Bot Trigger</p>
+	<div class="row">
+		<% if @bot.triggerpoint == "any_message"%>
+			<div class="col-9">Any message triggers the bot</div>
+		<% else %>
+			<div class="col-9">Trigger Phrases</div>
+		<% end %>
+		<div class="col-3"><%= link_to 'Change', root_path, class: "Change"%></div>
+	</div>
+
+	<p class="botsettings_attribute mt-3">When no customer response</p>
+	<div class="row">
+		<div class="col-9">
+			<ol style="padding-left: 15px;">
+				<li>‘Hi we are waiting…’</li>
+			</ol>
+		</div>
+		<div class="col-3"><%= link_to 'Change', root_path, class: "Change"%></div>
+	</div>
+
+</div>
