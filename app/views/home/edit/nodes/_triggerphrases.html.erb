@@ -1,0 +1,10 @@
+<div class="container" style="height: 55px; width: 300px; overflow-y: auto; overflow-x: hidden;">
+	<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+		<span class="triggerphrase ml-1 mr-1 mt-4 mb-2">
+			<span class= "triggerphrase_text ml-2 mr-2"><%= phrase.triggerphrase %></span>
+			<span class="hide" id= <%= "triggerphrase_delete" + (phrase.id).to_s%>>
+				<%= link_to image_tag('deleteicon.png', size: "10"), triggerphrasedelete_path(phrase.id,@bot.id), method: :delete ,remote: true, class: ""%>		
+			</span>
+		</span>			
+	<% end %>
+</div>

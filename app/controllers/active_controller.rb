@@ -34,14 +34,20 @@ class ActiveController < ApplicationController
 		@bot = Bot.find(params[:id])
 		@triggerphrase = Triggerphrase.new(params.require(:triggerphrase).permit(:triggerphrase).merge(bot_id: @bot.id))
 		@triggerphrase.save
-		redirect_to composemessage_path(@bot.id)
+		# redirect_to composemessage_path(@bot.id)
+		respond_to do |format|
+			format.js
+	  	end
 	end
 
 	def triggerphrasedelete
 		@bot = Bot.find(params[:botid])
 		@triggerphrase = Triggerphrase.find(params[:id])
 		@triggerphrase.destroy
-		redirect_to composemessage_path(@bot.id)
+		# redirect_to composemessage_path(@bot.id)
+		respond_to do |format|
+			format.js
+	  	end
 	end
 	
 end

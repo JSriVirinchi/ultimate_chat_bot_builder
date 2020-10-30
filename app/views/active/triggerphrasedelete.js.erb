@@ -1,0 +1,5 @@
+document.getElementById('triggerphrases_partial').innerHTML = "<%= j render 'home/edit/nodes/triggerphrases' %>";
+<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+	str = <%= "triggerphrase_delete" + (phrase.id).to_s %>;
+	document.getElementById(str.id).classList.remove('hide');
+<% end %>
