@@ -1,0 +1,64 @@
+.usermessage_before {
+  width: 300px;
+  height: 100px;
+  border-radius: 9px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: var(--white);
+}
+
+.usermessage_after {
+  width: 300px;
+  height: 150px;
+  border-radius: 9px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: var(--white);
+}
+
+.addtriggerphrasefield{
+	width: 200px;
+	border: 1px solid grey;
+	border-radius: 10px;
+	font-size: 14px;
+}
+
+.card_divider {
+  width: 300px;
+  height: 0;
+  border-top: solid 1px grey;
+}
+
+.Initial-Message-from-Customer {
+  width: 300px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--primary-text);
+  margin: 5px;
+  padding: 10px;
+}
+
+.triggerphrase {
+  width: 52px;
+  height: 32px;
+  border-radius: 5px;
+  border: solid 1px #d0d0d0;
+  background-color: var(--white);
+}
+
+.triggerphrase_text {
+  width: 27px;
+  height: 14px;
+  font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: left;
+  color: #383838;
+}

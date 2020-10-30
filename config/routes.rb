@@ -15,5 +15,10 @@ Rails.application.routes.draw do
   get '/testbot/:id', to: 'home#testbot', as: 'testbot'
   resources :bots
   put 'active/:id', to: 'active#updateactive', as: 'bot_active'
+  #compose message
+  get 'triggerphrase/edit/:id' , to: 'active#triggerphraseedit' , as: 'triggerphraseedit'
+  get 'triggerphrase/confirm/:id' , to: 'active#triggerphraseconfirm' , as: 'triggerphraseconfirm'
+  post 'triggerphrase/create/:id' , to: 'active#triggerphrasecreate' , as: 'triggerphrasecreate'
+  delete 'triggerphrase/delete/:id/:botid' , to: 'active#triggerphrasedelete' , as: 'triggerphrasedelete'
 end
 

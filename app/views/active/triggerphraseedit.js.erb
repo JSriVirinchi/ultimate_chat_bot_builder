@@ -1,0 +1,9 @@
+document.getElementById("triggerphrase_usermessage").classList.replace('usermessage_before', 'usermessage_after');
+document.getElementById("triggerphrase_edit_icon").classList.add('hide');
+document.getElementById("triggerphrase_tick_icon").classList.remove('hide');
+document.getElementById("triggerphrase_usermessage_second_card_divider").classList.remove('hide');
+document.getElementById("triggerphrase_add_a_new_phrase").classList.remove('hide');
+<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+	str = <%= "triggerphrase_delete" + (phrase.id).to_s %>;
+	document.getElementById(str.id).classList.remove('hide');
+<% end %>
