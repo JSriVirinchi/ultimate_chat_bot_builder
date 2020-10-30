@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'home#welcome'
   get '/createbot/intro', to: 'home#createbot_intro'
-  get '/createbot/:id', to: 'home#createbot_edit', as: 'createbot_edit'
-  put '/createbot/update/:id', to: 'home#createbot_update', as: 'createbot_update'
+  get '/createbot/:id', to: 'home#createbotedit', as: 'createbotedit'
+  put '/createbot/update/:id', to: 'home#createbotupdate', as: 'createbotupdate'
   get '/selectbot', to: 'home#selectbot'
   #bot editing part
   get '/botsettings/:id', to: 'home#botsettings', as: 'botsettings'

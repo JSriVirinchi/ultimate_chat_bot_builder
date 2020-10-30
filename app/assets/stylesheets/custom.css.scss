@@ -80,6 +80,15 @@ body{
 	border-right: 1px solid rgb(160, 156, 156);
 }
 
+.colomn_break_two{
+	border-right: 1px solid rgb(160, 156, 156);
+	border-left: 1px solid rgb(160, 156, 156);
+	padding-top: 20px; 
+	padding-bottom: 5px; 
+	padding-right: 5px;
+	padding-left: 5px;
+}
+
 .grey{
 	color: grey;
 }
@@ -148,4 +157,11 @@ body{
 .delete_link:hover{
 	color: red;
 	text-decoration: underline;
+}
+
+.editnamefield{
+	border-radius: 25px;
+	width: 150px;
+	border: 1px black solid;
+	padding: 5px;
 }

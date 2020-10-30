@@ -7,10 +7,20 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li class="nav-item" id="name_edit">
         <%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle mr-3")%>
-        <span class= "whitetext_two mr-2"><%= truncate(@bot.name, length: 15)%></span>
-        <%= link_to image_tag('editicon.png', size: "12"), createbot_edit_path(@bot.id)%>
+        <span class= "whitetext_two mr-2" id="name_edit_name"><%= truncate(@bot.name, length: 15)%></span>
+         <span><%= link_to image_tag('editicon.png', size: "12"), createbotedit_path(@bot.id), id: "name_edit_icon", remote: true%></span>
+      </li>
+      <li class="nav-item hide" id="name_update">
+        <%= form_with scope: :bot, url: createbotupdate_path, method: :put, remote: true do |f| %>
+          <span class="mx-auto text-center" style="width: 300px; " >
+            <%= f.text_field :name, class: "editnamefield", value: @bot.name, remote: true%> 
+          </span>
+          <span class="form-group mx-auto text-center mt-4" style="width: 300px;">
+            <%= f.submit value: "Update", class: "btn btn-sm createbotbutton", remote: true%>
+          </span>
+        <% end %>  
       </li>
       <!-- <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>

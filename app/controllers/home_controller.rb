@@ -8,21 +8,22 @@ class HomeController < ApplicationController
 	def createbot_intro
 	end
 
-	def createbot_edit
+	def createbotedit
 		@id = params[:id]
 		@bot = Bot.find_by(id: @id)
+		respond_to do |format|
+			format.js
+		end
 	end
 
-	def createbot_update
+
+	def createbotupdate
 		@id = params[:id]
 		@bot = Bot.find_by(id: @id)
-		 if @bot.update(params.require(:bot).permit(:name))
-		 	flash[:notice]= "The bot was updated successfully"
-		 	redirect_to botsettings_path(@bot.id)
-		 else
-		 	flash[:alert]= "The bot was not created"
-		 	redirect_to botsettings_path(@bot.id)
-		 end
+		@bot.update(params.require(:bot).permit(:name))
+	 	respond_to do |format|
+			format.js
+		end
 	end
 
 	def selectbot

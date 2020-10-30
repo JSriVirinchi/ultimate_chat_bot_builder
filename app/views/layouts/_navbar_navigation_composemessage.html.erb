@@ -24,14 +24,27 @@
         </li>
       </ul>
     </div>
-
-    <div class="col-2">
-      <div class="navbar_content_height_undo">
-        <%= link_to image_tag('undoicon.png', size: "12"), root_path%>
-        <%= link_to 'Undo', root_path, class: "Undo"%>
+    <div class="col-1 p-0">
+      <div class="navbar_content_height_undo colomn_break_two text-center">
+        <%= link_to testbot_path(@bot.id), class: "Undo" do%>
+          <div style="height: 50px; width: 100px;">
+            <%= image_tag('phoneicon.png', size: "12")%>
+            Test the Bot
+          </div>
+        <% end %>
       </div>
     </div>
-    <div class="col-2">
+    <div class="col-1 p-0">
+      <div class="navbar_content_height_undo colomn_break_two text-center">
+        <%= link_to root_path, class: "Undo" do%>
+          <div style="height: 50px; width: 100px;">
+            <%= image_tag('phoneicon.png', size: "12")%>
+            Save & Close
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-2 p-0">
       <div class="text-center navbar_content_height_activate">
         Activate
       </div>
