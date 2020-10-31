@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_30_111602) do
+ActiveRecord::Schema.define(version: 2020_10_31_060834) do
 
   create_table "bots", force: :cascade do |t|
     t.string "name"
@@ -34,6 +34,12 @@ ActiveRecord::Schema.define(version: 2020_10_30_111602) do
     t.string "language"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "nodes", force: :cascade do |t|
+    t.string "node_type"
+    t.integer "bot_id"
+    t.integer "parent_id"
   end
 
   create_table "triggerphrases", force: :cascade do |t|

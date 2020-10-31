@@ -1,0 +1,103 @@
+<div class="botresponses_box_after hide mb-4" id="botresponses_box_after">
+	<div class="row">
+		<div class="col-9 row mb-2">
+			<%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle mr-3 ml-4 mt-2")%>
+			<div class="botresponses_text">Bot Response</div>
+		</div>
+		<div class="col-3 text-center">
+			<%= link_to image_tag('dustbin.png', size: "15", class: "mt-2 mr-2"), root_path %>
+			<%= link_to image_tag('expand.png', size: "15", class: "mt-2"), root_path %>
+		</div>
+	</div>
+
+	<div class="card_divider mb-2"></div>
+
+	<!-- text area -->
+	<div class="text-center mx-auto">
+		<div class="text-center botresponses_messages_area_full">
+			<%= text_area(:application, :notes, cols: 30, rows: 4, class: 'botresponses_messages_area')%>
+			<div class="card_divider_two ml-2 mt-2 mb-1"></div>
+			<div class="row mb-1 ml-2">
+				<div class="col-4 mt-2">
+					<%= link_to image_tag('boldicon.png', size: "12", class: ""), root_path %>
+					<%= link_to image_tag('italics.jpg', size: "12", class: "ml-1"), root_path %>
+					<%= link_to image_tag('underline.png', size: "15", class: "ml-1"), root_path %>
+				</div>
+				<div class="col-8" style="text-align: right;">
+					<button type="button" class="btn btn-outline-secondary btn-sm mr-4" style="height: 30px; margin-top: 5px; text-align: right;">Add</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- options -->
+	<div class="row">
+		<div class="options_text ml-3 mb-2 mt-1 col-4">
+			Add Message
+		</div>
+		<div class="ml-2 ">
+			<%= link_to image_tag('addbutton.JPG', size: "25", class: "ml-1"), root_path %>
+		</div>
+	</div>
+	<div class="row mt-2 mb-2">
+		<div class="options_text ml-3 mb-2 mt-1 col-4">
+			Attach Media
+		</div>
+		<div class="ml-2 ">
+			<%= link_to image_tag('photoicon.JPG', size: "25", class: "ml-1"), root_path %>
+			<%= link_to image_tag('videoicon.JPG', size: "25", class: "ml-1"), root_path %>
+			<%= link_to image_tag('pdficon.JPG', size: "25", class: "ml-1"), root_path %>
+		</div>
+	</div>
+	<div class="row mb-2">
+		<div class="options_text ml-3 mb-2 mt-1 col-5">
+			Advanced Settings
+		</div>
+		<div class="">
+			<%= link_to image_tag('downarrow.png', size: "10", class: ""), root_path %>
+		</div>
+	</div>
+	
+	<!-- set next action divider-->
+	<div class="row">
+		<div class="col-4 options_text_lite ml-3 mt-2 mb-2">
+			Set next Action
+		</div>
+		<div class="card_divider_three col-6 mt-3 mb-2"></div>
+	</div>
+
+	<!-- set next action -->
+	<%= form_with scope: :set_next_action, url: root_path, method: :put,  local: true do |f| %>
+		<div class="mt-1 ml-4">
+			<%= f.radio_button :set_next_action , "add_a_node", id: "add_a_node"%>
+			<%= f.label :set_next_action , "Add a node", value: "add_a_node" , class: "ml-2 options_text_bold"%>
+		</div>
+		<div class="mt-1 ml-4">
+			<%= f.radio_button :set_next_action , "transfer_to_agent", id: "transfer_to_agent"%>
+			<%= f.label :set_next_action , "Transfer to an agent", value: "transfer_to_agent" , class: "ml-2 options_text_bold"%>
+		</div>
+		<div class="mt-1 ml-4 mb-2">
+			<%= f.radio_button :set_next_action , "exit_bot", id: "exit_bot", checked: "checked"%>
+			<%= f.label :set_next_action , "Exit Conversation", value: "exit_bot" , class: "ml-2 options_text_bold"%>
+		</div>
+		<div class="mb-2 text-center" id="exit_message">
+			<%= text_area(:set_next_action, :exit_bot_message, cols: 40, rows: 3, class: 'botresponses_exit_area p-2', value: "Thank You for having a conversation.")%>
+		</div>
+
+		<div class="mb-2">
+			<%= f.submit value: "Save", class: "btn btn-outline-secondary ml-3", style: "width: 270px;"%>
+		</div>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+	 document.getElementById('exit_bot').onclick = function() {
+	 	document.getElementById('exit_message').classList.remove('hide');
+	 }
+	 document.getElementById('add_a_node').onclick = function() {
+	 	document.getElementById('exit_message').classList.add('hide');
+	 }
+	 document.getElementById('transfer_to_agent').onclick = function() {
+	 	document.getElementById('exit_message').classList.add('hide');
+	 }
+</script>

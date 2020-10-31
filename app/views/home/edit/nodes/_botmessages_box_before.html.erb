@@ -1,0 +1,9 @@
+<div id="botresponses_box_before" class="botresponses_box_before row">
+	<div class="col-10 row">
+		<%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle mr-3 ml-3 mt-2")%>
+		<div class="botresponses_text">Bot Response</div>
+	</div>
+	<div class="col-2">
+		<%= link_to 'Add', nodescreate_path(@bot.id, 0 , "bot"), class: "btn btn-dark btn-sm", method: :post , remote: true, style: "height: 35px; margin-top: 5px;" %>
+	</div>
+</div>

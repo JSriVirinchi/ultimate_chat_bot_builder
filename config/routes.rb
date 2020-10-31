@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   get 'triggerphrase/confirm/:id' , to: 'active#triggerphraseconfirm' , as: 'triggerphraseconfirm'
   post 'triggerphrase/create/:id' , to: 'active#triggerphrasecreate' , as: 'triggerphrasecreate'
   delete 'triggerphrase/delete/:id/:botid' , to: 'active#triggerphrasedelete' , as: 'triggerphrasedelete'
+  #nodes
+  post 'nodes/create/:botid/:parentid/:nodetype' , to: 'nodes#create' , as: 'nodescreate'
 end
 

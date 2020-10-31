@@ -27,6 +27,18 @@
   border-top: solid 1px grey;
 }
 
+.card_divider_two {
+  width: 250px;
+  height: 0;
+  border-top: solid 1px grey;
+}
+
+.card_divider_three {
+  width: 150px;
+  height: 0;
+  border-top: solid 1px grey;
+}
+
 .Initial-Message-from-Customer {
   width: 300px;
   height: 30px;
@@ -62,3 +74,121 @@
   text-align: left;
   color: #383838;
 }
+
+.connector_green_link {
+  margin-top: 20px;
+  width: 38px;
+  height: 0;
+  box-shadow: 0 0 6px 0 rgba(0, 193, 82, 0.6);
+  border-top: solid 1.5px #00914c;
+}
+
+.connector_green_circle {
+  margin-top: 15px;
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 6px 0 rgba(0, 168, 52, 0.44);
+  border: solid 1.5px #00914c;
+  border-radius: 50%;
+  background-color: var(--white);
+}
+
+.botresponses_box_before {
+  width: 300px;
+  height: 45px;
+  border-radius: 5px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #dcf8c6;
+}
+
+.botresponses_text {
+  margin-top: 12px;
+  width: 90px;
+  height: 20px;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--primary-text);
+}
+
+.botresponses_box_after {
+  width: 300px;
+  border-radius: 7px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #dcf8c6;
+}
+
+.botresponses_messages_area_full{
+  width: 280px;
+  margin: 0px 10px 10px 10px;
+  background-color: #ebfddd;
+  border: 1px solid grey;
+}
+
+.botresponses_messages_area{
+  background-color: #ebfddd;
+  border-color: transparent;
+}
+
+.options_text {
+  width: 80px;
+  height: 15px;;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.23;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--primary-text);
+}
+
+.options_text_lite {
+  width: 82px;
+  height: 14px;
+  font-size: 12px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.33;
+  letter-spacing: normal;
+  text-align: left;
+  color: #434343;
+}
+.options_button_circle {
+  width: 30px;
+  height: 30px;
+  border: solid 1px #959595;
+  background-color: #dcf8c6;
+  border-radius: 50%;
+}
+
+.options_text_bold {
+  width: 176px;
+  height: 17px;
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.21;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--primary-text);
+}
+
+.botresponses_exit_area{
+  background-color: #ebfddd;
+  font-size: 13px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.23;
+  letter-spacing: normal;
+  text-align: left;
+  border-color: 1px solid grey;
+}
+  
