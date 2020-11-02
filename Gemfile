@@ -28,6 +28,7 @@ gem 'devise', '~> 4.2'
 gem 'hirb', '~> 0.7.3'
 gem 'devise-bootstrap-views', '~> 1.1'
 gem 'jquery-rails'
+gem 'acts_as_tree', '~> 2.9', '>= 2.9.1'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false

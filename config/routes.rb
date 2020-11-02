@@ -22,5 +22,8 @@ Rails.application.routes.draw do
   delete 'triggerphrase/delete/:id/:botid' , to: 'active#triggerphrasedelete' , as: 'triggerphrasedelete'
   #nodes
   post 'nodes/create/:botid/:parentid/:nodetype' , to: 'nodes#create' , as: 'nodescreate'
+  delete 'nodes/destroy/:id' , to: 'nodes#destroy' , as: 'nodes_destroy'
+  post 'nodes/message_create' , to: 'nodes#message_create' , as: 'nodes_message_create'
+
 end
 
