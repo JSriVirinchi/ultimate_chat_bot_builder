@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   post 'nodes/create/:botid/:parentid/:nodetype' , to: 'nodes#create' , as: 'nodescreate'
   delete 'nodes/destroy/:id' , to: 'nodes#destroy' , as: 'nodes_destroy'
   post 'nodes/message_create' , to: 'nodes#message_create' , as: 'nodes_message_create'
-
+  delete 'nodes/message_delete/:msg_id/:bot_id/:node_id', to: 'nodes#message_delete', as: 'nodes_message_delete'
+  put 'nodes/update_options/:bot_id/:node_id', to: 'nodes#update', as: 'nodes_update_options'
+  get 'nodes/expand/:bot_id/:node_id', to: 'nodes#expand', as: 'nodes_expand'
 end
 

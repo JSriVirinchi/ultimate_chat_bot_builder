@@ -8,6 +8,15 @@ class NodesController < ApplicationController
 	  	end
 	end
 
+	def update
+		@bot = Bot.find(params[:bot_id])
+		@node = Node.find(params[:node_id])
+		@node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_bot_message])
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
 	def destroy
 		@node = Node.find(params[:id])
 		@node.destroy
@@ -20,6 +29,24 @@ class NodesController < ApplicationController
 		@bot = Bot.find(params[:message][:bot_id])
 		@node = Node.find(params[:message][:node_id])
 		@message = Message.create(params.require(:message).permit(:text_messages, :node_type, :bot_id, :node_id))
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
+	def message_delete
+		@bot = Bot.find(params[:bot_id])
+		@node = Node.find(params[:node_id])
+		@message = Message.find(params[:msg_id])
+		@message.destroy
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
+	def expand
+		@bot = Bot.find(params[:bot_id])
+		@node = Node.find(params[:node_id])
 		respond_to do |format|
 		    format.js
 	  	end

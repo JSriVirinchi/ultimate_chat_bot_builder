@@ -1,11 +1,25 @@
+<% tag = 0%>
 <% if Node.where(bot_id: @bot.id, parent_id: 0).first%>
 	<% if Message.where(bot_id: @bot.id, node_id: @node.id)%>
 		<% for message in Message.where(bot_id: @bot.id, node_id: @node.id)%>
-			<div class="">
-				<div class="previous_messages", style="width: 280px;">
-					<%= message.text_messages%>
-				</div>
+			<% tag = tag + 1%>
+			<div class="previous_messages", style="width: 280px;">
+				<div class="row">
+					<div class="col-10">
+						<%= message.text_messages%>
+					</div>
+					<div class="col-2">
+						<% if delete_button == true%>
+						<%= link_to image_tag('dustbin.png', size: "10"), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, class: "mr-2"%>
+						<% end %>
+					</div>
+				</div>	
 			</div>
 		<% end %>
+		<% if delete_button == false && tag==0%>
+		 	<div class="ml-3">
+		 		No custom messages are added here. Click the expanded icon to see full options.
+		 	</div>
+		<% end %>	
 	<% end %>
 <% end %>
