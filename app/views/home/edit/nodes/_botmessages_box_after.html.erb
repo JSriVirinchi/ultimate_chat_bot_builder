@@ -16,12 +16,14 @@
 	<div class="card_divider mb-2"></div>
 
 	<!-- added messages -->
-		
+	<div id="botmessages_previous">
+		<%= render 'home/edit/nodes/botmessages_previous'%>
+	</div>
 	<!-- text area -->
-	<%= form_with scope: :message, url: nodes_message_create_path, method: :post,  local: true do |f| %>
+	<%= form_with scope: :message, url: nodes_message_create_path, method: :post,  remote: true do |f| %>
 	<div class="text-center mx-auto">
 		<div class="text-center botresponses_messages_area_full">
-			<%= text_area(:message, :text_messages, cols: 30, rows: 4, class: 'botresponses_messages_area')%>
+			<%= text_area(:message, :text_messages, cols: 30, rows: 4, class: 'botresponses_messages_area', value: "", id: "botresponses_messages_area_text_area", remote: true)%>
 			<%= f.text_field :node_type, value: "bot", class: "hide"%>
 			<%= f.text_field :bot_id, value: @bot.id , class: "hide"%>
 			<% if Node.where(bot_id: @bot.id, parent_id: 0).first%>

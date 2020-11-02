@@ -189,6 +189,13 @@
   line-height: 1.23;
   letter-spacing: normal;
   text-align: left;
-  border-color: 1px solid grey;
+  border: 1px solid grey;
 }
   
+.previous_messages{ 
+  margin-bottom: 5px;
+  margin-left: 10px;
+  padding: 10px;
+  border: 1px solid grey;
+  background-color: #ebfddd;
+}  

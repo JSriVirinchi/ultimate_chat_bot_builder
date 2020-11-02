@@ -17,6 +17,8 @@ class NodesController < ApplicationController
 	end
 
 	def message_create
+		@bot = Bot.find(params[:message][:bot_id])
+		@node = Node.find(params[:message][:node_id])
 		@message = Message.create(params.require(:message).permit(:text_messages, :node_type, :bot_id, :node_id))
 		respond_to do |format|
 		    format.js
