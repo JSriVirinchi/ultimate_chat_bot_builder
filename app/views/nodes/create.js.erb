@@ -2,3 +2,13 @@
 document.getElementById('botmessages_box_after_partial').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_after' %>";
 document.getElementById('botresponses_box_before').classList.add('hide');
 document.getElementById('botresponses_box_after').classList.remove('hide');
+
+document.getElementById('exit_bot').onclick = function() {
+	document.getElementById('exit_message').classList.remove('hide');
+}
+document.getElementById('add_a_node').onclick = function() {
+	document.getElementById('exit_message').classList.add('hide');
+}
+document.getElementById('transfer_to_agent').onclick = function() {
+ 	document.getElementById('exit_message').classList.add('hide');
+}

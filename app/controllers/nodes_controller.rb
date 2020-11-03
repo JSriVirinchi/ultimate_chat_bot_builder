@@ -20,6 +20,7 @@ class NodesController < ApplicationController
 	def destroy
 		@node = Node.find(params[:id])
 		@node.destroy
+		@node= nil;
 		respond_to do |format|
 		    format.js
 	  	end

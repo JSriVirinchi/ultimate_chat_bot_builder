@@ -1,0 +1,49 @@
+<div class="row mb-2">
+	<div class="connector_black_link"></div>
+	<div class="usermessage_white_box">
+		<div class="row">
+			<div class="col-1 text-center mt-2 ml-2">
+				<%= image_tag('greenflash.JPG', size: "14", class: "rounded-circle")%>
+			</div>
+			<div class="col-4 mt-2", style="padding-right: 5px;">
+				Add node
+			</div>
+			<div class="col-6 mt-2", style="padding-left: 5px;">
+				<%= form_with scope: :number_of_nodes, url: root_path, method: :put, local: true do |f| %>
+			    <span class=" text-center">
+				  	<%= link_to "-", root_path %>
+						<%= f.text_field :number, class: "number_of_nodes_field text-center", value: 1,style: "width:30px;", local: true%>
+						<%= link_to "+", root_path %>
+					</span>
+				  <span class="text-center ml-4">
+						<%= f.submit value: "Add", class: "usermessage_add_button", local: true%>
+					</span>
+			  <% end %>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<div class="row">
+	<div class="connector_black_link"></div>
+	<div class="usermessage_error_message">
+		<div class="row">
+			<div class="col-1 text-center mt-2 ml-2">
+				<%= image_tag('redflash.JPG', size: "14", class: "rounded-circle")%>
+			</div>
+			<div class="col-6 mt-2", style="padding-right: 5px;">
+				Error Response
+			</div>
+			<div class="col-4 mt-2", style="padding-left: 5px;">
+				<%= form_with scope: :error_message, url: root_path, method: :put, local: true do |f| %>
+				  <span class="text-center ml-4">
+						<%= f.submit value: "Define", class: "usermessage_error_button", local: true%>
+					</span>
+			  <% end %>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

@@ -2,8 +2,37 @@
 	<%= render 'home/edit/nodes/triggerphrasesmain'%>
 	<div class="connector_green_circle "></div>
 	<div class="connector_green_link"></div>
+
 	<div id="botmessagesmain_partial">
 		<%= render 'home/edit/nodes/botmessagesmain'%>	
 	</div>
+
+	<div class="row", id="usermessagemain_partial_with_connector", style="margin-left: 0px;">
+		<%= render 'home/edit/nodes/usermessagesmain_with_connector'%>	
+	</div>
+	
 </div>
 
+<script type="text/javascript">
+	//this part not in the script tag, its in html tag
+		//	<!-- <canvas id="connector_black_curved_link" class="connector_black_curved_link"></canvas>
+		//<canvas id="connector_black_curved_link_1" class="connector_black_curved_link"></canvas> -->
+	//this part ended	
+
+	// const canvas = document.getElementById('connector_black_curved_link');
+	// const canvas_1 = document.getElementById('connector_black_curved_link_1');
+	// const ctx = canvas.getContext('2d');
+	// const ctx_1 = canvas_1.getContext('2d');
+
+	// ctx.lineWidth = 2;
+	// ctx.beginPath();
+	// ctx.moveTo(0, 0);
+	// ctx.bezierCurveTo(300,15, 0,50, 300,65);
+	// ctx.stroke();
+
+	// ctx_1.lineWidth = 5;
+	// ctx_1.beginPath();
+	// ctx_1.moveTo(0, 0);
+	// ctx_1.bezierCurveTo(300,15, 0,120, 300,165);
+	// ctx_1.stroke();
+</script>

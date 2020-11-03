@@ -2,8 +2,10 @@
 <div id="botmessages_box_after_partial">
 	<%= render 'home/edit/nodes/botmessages_box_after'%>
 </div>
-	
-<%= render 'home/edit/nodes/botmessages_box_compressed'%>
+<div id="botmessages_box_compressed_partial">
+	<%= render 'home/edit/nodes/botmessages_box_compressed'%>	
+</div>	
+
 
 <script type="text/javascript">
 	<% @node = Node.where(bot_id: @bot.id, parent_id: 0).first%>
@@ -15,5 +17,4 @@
 			document.getElementById('botresponses_box_compressed').classList.remove('hide');
 		<% end %> 
 	<% end %>
-
 </script>

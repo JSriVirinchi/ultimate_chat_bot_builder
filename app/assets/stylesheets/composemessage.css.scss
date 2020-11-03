@@ -83,6 +83,27 @@
   border-top: solid 1.5px #00914c;
 }
 
+.connector_black_link {
+  position: relative;
+  z-index:1;
+  margin-top: 20px;
+  width: 19px;
+  height: 0;
+  box-shadow: 0 0 6px 0 grey;
+  border-top: solid 1.5px grey;
+}
+
+.connector_black_link_vertical {
+  position: relative;
+  z-index:1;
+  margin-top: 20px;
+  margin-right: 0px;
+  width: 0px;
+  height: 70px;
+  box-shadow: 0 0 6px 0 grey;
+  border-right: solid 1.5px grey;
+}
+
 .connector_green_circle {
   margin-top: 15px;
   width: 12px;
@@ -91,6 +112,27 @@
   border: solid 1.5px #00914c;
   border-radius: 50%;
   background-color: var(--white);
+}
+
+.connector_black_circle {
+  position: relative;
+  z-index:1;
+  margin-top: 15px;
+  width: 12px;
+  height: 12px;
+  box-shadow: 0 0 6px 0 grey;
+  border: solid 1.5px black;
+  border-radius: 50%;
+  background-color: var(--white);
+}
+
+.connector_black_curved_link{
+  position: absolute;
+  width:38px;
+  height:150px;
+  left: 660px;
+  top:  18px;
+  z-index:2; 
 }
 
 .botresponses_box_before {
@@ -199,3 +241,43 @@
   border: 1px solid grey;
   background-color: #ebfddd;
 }  
+
+.usermessage_white_box {
+  width: 300px;
+  height: 44px;
+  border-radius: 3px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: var(--white);
+}
+
+.usermessage_add_button {
+  width: 59px;
+  height: 26px;
+  border-radius: 4px;
+  border: solid 1px #adadad;
+  background-color: white;
+  margin-left: 0px;
+}
+
+.number_of_nodes_field{
+  border-bottom: solid .5px grey;
+  border-top: solid 1px  transparent;
+  border-left: solid 1px  transparent;
+  border-right: solid 1px  transparent;
+}
+
+.usermessage_error_message {
+  width: 300px;
+  height: 44px;
+  border-radius: 3px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffd6d6;
+}
+
+.usermessage_error_button {
+  width: 59px;
+  height: 26px;
+  border-radius: 4px;
+  border: solid 1px #525252;
+  background-color: #ffd6d6;
+}
