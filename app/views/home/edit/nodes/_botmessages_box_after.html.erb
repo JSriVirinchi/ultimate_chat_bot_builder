@@ -73,7 +73,7 @@
 	
 	<!-- set next action divider-->
 	<div class="row">
-		<div class="col-4 options_text_lite ml-3 mt-2 mb-2">
+		<div class="col-5 options_text_lite text-center ml-1 mt-2 mb-2">
 			Set next Action
 		</div>
 		<div class="card_divider_three col-6 mt-3 mb-2"></div>
@@ -127,14 +127,14 @@
 			document.getElementById("exit_bot").checked = true;
 		<% end %>
 
-	 document.getElementById('exit_bot').onclick = function() {
-	 	document.getElementById('exit_message').classList.remove('hide');
-	 }
-	 document.getElementById('add_a_node').onclick = function() {
-	 	document.getElementById('exit_message').classList.add('hide');
-	 }
-	 document.getElementById('transfer_to_agent').onclick = function() {
-	 	document.getElementById('exit_message').classList.add('hide');
-	 }
+		 document.getElementById('exit_bot').onclick = function() {
+		 	document.getElementById('exit_message').classList.remove('hide');
+		 }
+		 document.getElementById('add_a_node').onclick = function() {
+		 	document.getElementById('exit_message').classList.add('hide');
+		 }
+		 document.getElementById('transfer_to_agent').onclick = function() {
+		 	document.getElementById('exit_message').classList.add('hide');
+		 }
 	 <% end %>
 </script>

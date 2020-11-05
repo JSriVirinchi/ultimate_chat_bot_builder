@@ -15,9 +15,11 @@
     <button class="dropdown-toggle botsettings_dropdown_border" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: solid 1px grey; width: 130px;">
       Select Bot
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="height: 110px; overflow: auto;">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="height: 115px; overflow: auto;">
       <% for bot in @userbots%>
+      <% if bot.id != @bot.id%>      
        <%= link_to bot.name, botsettings_path(bot.id), class:"dropdown-item"%>
+      <% end %>
       <% end %>
     </div>
   </div>
