@@ -76,6 +76,23 @@ class NodesController < ApplicationController
 		    format.js
 	  	end
 	end
+
+	def usermessage_node_delete
+	 	@node = Node.find(params[:id])
+	 	@parent_id = @node.parent_id
+	 	@node.destroy
+	 	@node = Node.find(@parent_id)
+	 	@number_of_children = 0 
+
+	 	for i in @node.children
+	 		@number_of_children = @number_of_children + 1
+	 	end
+
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
 	# private
 	# def node_array
 	# 	@length = 0;

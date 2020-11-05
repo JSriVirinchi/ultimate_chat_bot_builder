@@ -1,0 +1,8 @@
+// console.log('deleted');
+// console.log("<%= @node.id%>");
+// console.log("<%= @number_of_children%>");
+document.getElementById('usermessages_define_node_partial').innerHTML = "<%= j render 'home/edit/nodes/usermessages_define_node_with_forloop'%>";
+height = document.getElementById('connector_black_link_vertical').style.height;
+height = parseInt(height);
+height = height - 52;
+document.getElementById('connector_black_link_vertical').style.height =  height + "px";
