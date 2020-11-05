@@ -98,7 +98,7 @@
 			<% if @node.exit_message%>
 			<%= text_area(:set_next_action, :exit_bot_message, cols: 40, rows: 3, class: 'botresponses_exit_area p-2', value: @node.exit_message)%>
 			<% else %>
-			<%= text_area(:set_next_action, :exit_bot_message, cols: 40, rows: 3, class: 'botresponses_exit_area p-2', value: "Thank You for having a conversation.")%>
+			<%= text_area(:set_next_action, :exit_bot_message, cols: 40, rows: 3, class: 'botresponses_exit_area p-2', value: "Thank you. Its a great pleasure to have a conversation with you. ")%>
 			<% end %>
 		</div>
 

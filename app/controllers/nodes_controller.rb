@@ -52,4 +52,36 @@ class NodesController < ApplicationController
 		    format.js
 	  	end
 	end
+
+	def increment
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
+	def decrement
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
+	def add_number_of_nodes
+		@bot = Bot.find(params[:botid])
+		number = (params[:number_of_nodes][:number]).to_i
+		for i in (1..number)
+			@node = Node.create(node_type: params[:nodetype], bot_id: params[:botid], parent_id: params[:parentid])
+		end
+		@node = Node.find(params[:parentid]) 
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+	# private
+	# def node_array
+	# 	@length = 0;
+	# 	Node.where(bot_id: @bot.id, parent_id: 0;).first.walk_tree do |node, level|
+	# 	  @length = length + 1;
+	# 	end
+	# 	@NodeArray[1000];
+	# end
 end

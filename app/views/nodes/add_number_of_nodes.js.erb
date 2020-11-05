@@ -1,0 +1,10 @@
+nodes_number = document.getElementById('add_number_of_nodes').value;
+nodes_number = parseInt(nodes_number);
+document.getElementById('usermessages_define_node_partial').innerHTML = "<%= j render 'home/edit/nodes/usermessages_define_node_with_forloop'%>";
+height = document.getElementById('connector_black_link_vertical').style.height;
+height = parseInt(height);
+var i;
+for (i=0; i< nodes_number; i++){
+	height = height + 52;
+}
+document.getElementById('connector_black_link_vertical').style.height =  height + "px";

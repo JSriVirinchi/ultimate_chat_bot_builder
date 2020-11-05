@@ -91,6 +91,7 @@
   height: 0;
   box-shadow: 0 0 6px 0 grey;
   border-top: solid 1.5px grey;
+  border-radius:5px;
 }
 
 .connector_black_link_vertical {
@@ -102,6 +103,7 @@
   height: 70px;
   box-shadow: 0 0 6px 0 grey;
   border-right: solid 1.5px grey;
+  border-radius:5px;
 }
 
 .connector_green_circle {
@@ -281,3 +283,71 @@
   border: solid 1px #525252;
   background-color: #ffd6d6;
 }
+
+//Expanded child node
+
+.usermessage_expanded_white_box {
+    width: 300px;
+    border-radius: 3px;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+    background-color: var(--white);
+}
+
+  
+.Node-text-font{
+    height: 14px;
+    // font-family: HelveticaNeue;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #8e8e8e;
+}
+
+//Node name form
+.form__input{
+  width: 269px;
+  border:0px solid #f7f2ed;
+  border-radius: 0;
+  border-bottom: 1px solid #bababa;
+  background-color: white;
+  outline:none;
+  transition: all .5s ease;
+  margin-top: 0px;
+  line-height: 1;
+  height: 25px;
+}
+
+.user_message_text {
+    width: 52px;
+    height: 32px;
+    border-radius: 5px;
+    border: solid 1px #d0d0d0;
+    background-color: var(--white);
+}
+
+//form submit button 
+
+.submit-text{
+    border: none;
+    background-color: white;
+    margin-left: 40px;
+    margin-top: -9px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #3b445b;
+    font-size: 14px;
+}
+
+.submit-text-line {
+    width: 9px;
+    height: 0;
+    border: solid 1px #bababa;
+  }

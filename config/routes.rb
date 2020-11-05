@@ -27,5 +27,8 @@ Rails.application.routes.draw do
   delete 'nodes/message_delete/:msg_id/:bot_id/:node_id', to: 'nodes#message_delete', as: 'nodes_message_delete'
   put 'nodes/update_options/:bot_id/:node_id', to: 'nodes#update', as: 'nodes_update_options'
   get 'nodes/expand/:bot_id/:node_id', to: 'nodes#expand', as: 'nodes_expand'
+  get 'nodes/number_of_nodes_increment', to: 'nodes#increment', as: 'number_of_nodes_increment'
+  get 'nodes/number_of_nodes_decrement', to: 'nodes#decrement', as: 'number_of_nodes_decrement'
+  post 'nodes/add_numberof_nodes/:botid/:parentid/:nodetype', to: 'nodes#add_number_of_nodes', as: 'add_number_of_nodes'
 end
 

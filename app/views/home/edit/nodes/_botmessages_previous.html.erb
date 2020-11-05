@@ -16,10 +16,24 @@
 				</div>	
 			</div>
 		<% end %>
+
 		<% if delete_button == false && tag==0%>
-		 	<div class="ml-3">
+		 	<div class="ml-2 mb-4 Initial-Message-from-Customer">
 		 		No custom messages are added here. Click the expanded icon to see full options.
 		 	</div>
+		 	<% if @node.set_next_action == "exit_bot"%>
+		 		<div class="card_divider"></div>
+		 		<div class="ml-1 mb-2 text-center Initial-Message-from-Customer">
+			 		This exit message is added by default.
+			 	</div>			 	
+			 	<div class="previous_messages mt-2", style="width: 280px;">
+					<div class="row">
+						<div class="col-12">
+							<%= @node.exit_message%>
+						</div>					
+					</div>	
+				</div>
+		 	<% end %>
 		<% end %>	
 	<% end %>
 <% end %>

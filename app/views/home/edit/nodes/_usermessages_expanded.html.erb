@@ -1,0 +1,53 @@
+<div class = "usermessage_expanded_white_box ml-5">
+    <div class = "row", style="height: 40px;" >
+	    <div class = "col-7 ml-3 mt-3 mb-3">
+           Trigger 1
+		</div>
+		<div class = "col-4 text-right mt-3">
+            <%= link_to image_tag('dustbin.png', size: "17"), root_path %>
+		</div>
+    </div>  
+
+	<div class = "card_divider mt-1"></div>
+
+	<div class = "Node-text-font mt-4 ml-3">
+		Node name
+	</div>
+	<div id = "nodename" class = " mt-1" >
+		<%= form_with scope: :child, url: root_path, method: :put,  remote: true do |f| %>
+			<% if @node%>
+				<%= f.text_field :name, class: "text-left form__input ml-3", value:  @node.name  %>
+			<% end %>
+			<div class = "Node-text-font mt-1 ml-3">				
+				Expected input type
+			</div>
+			<div style= "width: 200px;" class = "ml-3 mt-3"><%= f.select :type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px;", class: "mt-2"} %>
+		
+		    <br><br>
+			<div class = "mt-2" >
+				<%= form_with scope: :messages, url: root_path, method: :put,  remote: true do |f| %>
+					<div class = "row">
+						<div class = "col-10">
+							<%= f.text_field :text_message, class: "text-left form__input", placeholder:  "Add trigger words", style: "width: 270px;"  %>
+						</div>
+						<div class = "col-1 mb-4">
+							<%= f.submit "Add", class: "submit-text" %>
+							
+						</div>
+					</div>
+				<% end %>
+			</div>	
+			<div class="row mb-2">
+				<div class="Node-text-font ml-3">
+					Advanced Settings
+				</div>
+				<div class="col-3">
+					<%= link_to image_tag('downarrow.png', size: "10", class: "rounded-circle"), root_path %>
+				</div>
+			</div>
+			<div class="mb-2 text-center">
+                <%= f.submit value: "Save", class: "btn btn-outline-secondary mb-3", style: "width: 270px;"%>
+            </div>
+		<% end %>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="row mb-2">
+	<div class="connector_black_link"></div>
+	<div class="usermessage_white_box">
+		<div class="row">
+			<div class="col-1 text-center mt-2 ml-2">
+				<%= image_tag('greenflash.JPG', size: "14", class: "rounded-circle")%>
+			</div>
+			<div class="col-4 mt-2", style="padding-right: 5px;">
+				Add node
+			</div>
+			<div class="col-6 mt-2 ml-2", style="padding-left: 5px;">
+				<%= form_with scope: :number_of_nodes, url: root_path, method: :put, local: true do |f| %>
+			    <span class=" text-right ml-5">
+				  	<%= link_to image_tag('dustbin.png', size: "10"), root_path%>
+				</span>
+				<span class="text-center ml-3">
+					<%= f.submit value: "Define", class: "usermessage_add_button", local: true%>
+				</span>
+			  <% end %>
+			</div>
+		</div>
+	</div>	
+</div>

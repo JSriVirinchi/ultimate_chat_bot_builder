@@ -1,3 +1,7 @@
+<div id="usermessages_define_node_partial">
+	<%= render 'home/edit/nodes/usermessages_define_node_with_forloop'%>
+</div>
+
 <div class="row mb-2">
 	<div class="connector_black_link"></div>
 	<div class="usermessage_white_box">
@@ -9,16 +13,16 @@
 				Add node
 			</div>
 			<div class="col-6 mt-2", style="padding-left: 5px;">
-				<%= form_with scope: :number_of_nodes, url: root_path, method: :put, local: true do |f| %>
+				<%= form_with scope: :number_of_nodes, url: add_number_of_nodes_path(@bot.id,@node.id, "user"), method: :post, remote: true do |f| %>
 			    <span class=" text-center">
-				  	<%= link_to "-", root_path %>
-						<%= f.text_field :number, class: "number_of_nodes_field text-center", value: 1,style: "width:30px;", local: true%>
-						<%= link_to "+", root_path %>
-					</span>
-				  <span class="text-center ml-4">
-						<%= f.submit value: "Add", class: "usermessage_add_button", local: true%>
-					</span>
-			  <% end %>
+				  	<%= link_to "-", number_of_nodes_decrement_path, class: "custom_link", remote: true %>
+					<%= f.text_field :number, id: "add_number_of_nodes", class: "number_of_nodes_field text-center", value: 1 ,style: "width:30px;", local: true%>
+					<%= link_to "+", number_of_nodes_increment_path, class: "custom_link", remote: true %>
+				</span>
+				<span class="text-center ml-4">
+					<%= f.submit "Add" ,value: "Add", class: "usermessage_add_button", remote: true%>
+				</span>
+			  	<% end %>
 			</div>
 		</div>
 	</div>	
@@ -34,7 +38,7 @@
 			<div class="col-6 mt-2", style="padding-right: 5px;">
 				Error Response
 			</div>
-			<div class="col-4 mt-2", style="padding-left: 5px;">
+			<div class="col-4 mt-2 ml-2", style="padding-left: 5px;">
 				<%= form_with scope: :error_message, url: root_path, method: :put, local: true do |f| %>
 				  <span class="text-center ml-4">
 						<%= f.submit value: "Define", class: "usermessage_error_button", local: true%>
