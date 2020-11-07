@@ -93,6 +93,13 @@ class NodesController < ApplicationController
 	  	end
 	end
 
+	def define_nodes
+		@id = params[:id]
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
 	# private
 	# def node_array
 	# 	@length = 0;
