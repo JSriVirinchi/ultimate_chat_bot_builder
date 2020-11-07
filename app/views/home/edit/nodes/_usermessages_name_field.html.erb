@@ -1,0 +1,6 @@
+<% if child.name%>
+	<%= truncate(child.name, length: 15)%>
+<% else %>	
+	Trigger Phrase
+<% end %>
+<%= link_to image_tag('editiconblack.png', size: "12"), usermessage_name_edit_path(child.id), remote: true%>

@@ -309,7 +309,6 @@
 
 //Node name form
 .form__input{
-  width: 269px;
   border:0px solid #f7f2ed;
   border-radius: 0;
   border-bottom: 1px solid #bababa;
@@ -347,7 +346,12 @@
 }
 
 .submit-text-line {
-    width: 9px;
-    height: 0;
-    border: solid 1px #bababa;
-  }
+  width: 9px;
+  height: 0;
+  border: solid 1px #bababa;
+}
+
+.usermessage_trigger_phrases{
+  background-color: rgb(240,240,240);
+  
+}

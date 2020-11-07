@@ -1,49 +1,53 @@
 <% expanded_define_id = "expanded_define_nodes_id_" + child.id.to_s %>
+<% usermessage_name_edit_name = "usermessage_name_edit_name_" + child.id.to_s%>
+<% usermessage_name_edit_form = "usermessage_name_edit_form_" + child.id.to_s%>
 <div class="row mb-2 hide" id= <%= expanded_define_id%> >
 	<div class="connector_black_link"></div>
 	<div class = "usermessage_expanded_white_box">
-		<div class = "row", style="height: 40px;" >
-		    <div class = "col-7 ml-3 mt-3 mb-3">
-	           Trigger 1
+		<div class = "row", style="height: 35px;" >
+			<div class = "col-9 ml-3 mt-2 mb-3" id= <%= usermessage_name_edit_name%>>
+				<%= render 'home/edit/nodes/usermessages_name_field', child: child%>	
 			</div>
-			<div class = "col-4 text-right mt-3">
+			<div class="col-9 ml-3 mt-2 mb-3 hide" id= <%= usermessage_name_edit_form %> >
+				<%= form_with scope: :name_edit, url: usermessage_name_update_path(child.id), method: :put, remote: true do |f|%>					
+					<%if child.name %>
+						<%= f.text_field :name, value: child.name ,class: "form__input", style: "width: 120px;"%>
+					<% else %>	
+						<%= f.text_field :name, class: "form__input", placeholder: "Trigger Phrase", style: "width: 120px;"%>
+					<% end %>						
+					<%= f.submit "Update", class: "btn btn-sm btn-outline-secondary"%>
+				<% end %>				
+			</div>
+			<div class = "col-2 text-right mt-2">
 	            <%= link_to image_tag('dustbin.png', size: "17"), root_path %>
 			</div>
 	    </div>  
 
 		<div class="row card_divider mt-2 ml-0"></div>
-
-		<div class="row Node-text-font mt-2 mb-2 ml-3">
-			Node name
+		<div class="row ml-3 mt-3 Node-text-font  p-2 usermessage_trigger_phrases", style="height: 100px; width: 270px; overflow: auto;">
+			No trigger phrases are added yet to this node.
 		</div>
+		<%= form_with scope: :messages, url: root_path, method: :put,  remote: true do |f| %>
+		<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >			
+			<div class="col-7">
+				<%= f.text_field :text_message, class: "text-left form__input p-2 mt-1 usermessage_trigger_phrases", placeholder:  "Add trigger words"%>
+			</div>					
+			<div class = "col-1 mb-2 mt-1">
+				<%= f.submit "Add", class: "submit-text usermessage_trigger_phrases" %>					
+			</div>			
+		</div>
+		<% end %>
 
-		<%= form_with scope: :child, url: root_path, method: :put,  remote: true do |f| %>
-			<% if @node%>
-				<%= f.text_field :name, class: "text-left form__input ml-3", value:  @node.name  %>
-			<% else %>
-				<%= f.text_field :name, class: "text-left form__input ml-3", placeholder: "Enter the node's name" %>
-			<% end %>
-
+		<%= form_with scope: :child_options, url: usermessage_options_form_path(child.id), method: :put,  remote: true do |f| %>
+			
 			<div class= " row Node-text-font mt-3 ml-3">				
 				Expected input type
 			</div>
 			<div class=" row ml-3 mt-3" >
-				<%= f.select :type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2"} %>
+				<%= f.select :user_input_type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2"} %>
 			</div>
-			<div class="ml-3 mt-3 Node-text-font", style="height: 50px;">
-				No trigger phrases are added yet to this node.
-			</div>
-			<div class="row mt-3" >
-				<%= form_with scope: :messages, url: root_path, method: :put,  remote: true do |form| %>
-					<div class="col-7 ml-3">
-						<%= form.text_field :text_message, class: "text-left form__input p-2", placeholder:  "Add trigger words"%>
-					</div>					
-					<div class = "col-1 mb-4">
-						<%= form.submit "Add", class: "submit-text" %>						
-					</div>
-				<% end %>
-			</div>	
-			<div class="row mb-3 ml-0">
+				
+			<div class="row mb-3 ml-0 mt-2">
 				<div class="Node-text-font ml-3 mt-1">
 					Advanced Settings
 				</div>
@@ -52,7 +56,7 @@
 				</div>
 			</div>
 			<div class="mb-2 text-center">
-                <%= f.submit value: "Save", class: "btn btn-outline-secondary mb-3", style: "width: 270px;"%>
+                <%= f.submit "Save", value: "Save", class: "btn btn-outline-secondary mb-3", style: "width: 270px;"%>
             </div>
 		<% end %>
 	</div>

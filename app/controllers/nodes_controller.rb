@@ -100,6 +100,30 @@ class NodesController < ApplicationController
 	  	end
 	end
 
+	def usermessage_options_form
+		@child = Node.find(params[:id])
+		@child.update(name: params[:child_options][:name], user_input_type: params[:child_options][:user_input_type])
+		respond_to do |format|
+		    format.js
+	 	end
+	end
+
+	def usermessage_name_edit
+		@id = params[:id]
+		respond_to do |format|
+		    format.js
+	 	end
+	end
+
+	def usermessage_name_update
+		@id = params[:id]
+		@child = Node.find(params[:id])
+		@child.update(name: params[:name_edit][:name])
+		respond_to do |format|
+		    format.js
+	 	end
+	end
+
 	# private
 	# def node_array
 	# 	@length = 0;
