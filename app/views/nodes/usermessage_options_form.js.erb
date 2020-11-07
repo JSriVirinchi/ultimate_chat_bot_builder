@@ -1,1 +1,13 @@
-console.log('options');
+//console.log('options');
+<% expanded_define_id = "expanded_define_nodes_id_" + @id.to_s %>
+<% compressed_define_id = "compressed_define_nodes_id_" + @id.to_s %>
+<% compressed_define_name_id = "compressed_define_nodes_name_id_" + @id.to_s %>
+<% @child = Node.find(@id)%>
+document.getElementById('<%= expanded_define_id%>').classList.add('hide');
+document.getElementById('<%= compressed_define_id%>').classList.remove('hide');
+document.getElementById('<%= compressed_define_name_id%>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_compressed_name', child: @child%>";
+
+height = document.getElementById('connector_black_link_vertical').style.height;
+height = parseInt(height);
+height = height - 297;
+document.getElementById('connector_black_link_vertical').style.height =  height + "px";

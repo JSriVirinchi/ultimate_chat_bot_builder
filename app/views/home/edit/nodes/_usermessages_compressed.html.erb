@@ -1,0 +1,22 @@
+<% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
+<% compressed_define_name_id = "compressed_define_nodes_name_id_" + child.id.to_s %>
+<div class="row mb-2 hide" id= <%= compressed_define_id%> >
+	<div class="connector_black_link"></div>
+	<div class="usermessage_before">
+		<div class="row Initial-Message-from-Customer", style="font-size: 15px;">
+			<div class="col-9" id= <%= compressed_define_name_id%>>
+				<%= render 'home/edit/nodes/usermessages_compressed_name', child: child%>	
+			</div>
+			<div class="col-1">
+				<%= link_to image_tag('dustbin.png', size: "15"), usermessage_node_delete_path(child.id, "compressed"), method: :delete, remote: true, data: { confirm: "Are you sure that you want to delete this node? This will delete all the children nodes attached to it. You can edit the current node, if you wanted to."}%>
+			</div>
+			<div class="col-1">	
+				<%= link_to image_tag('expand.png', size: "14"), usermessage_expand_path(child.id),  remote: true, class: ""%>
+			</div>			
+		</div>
+		<div class="card_divider mb-2"></div>
+		<div class="row triggerphrases_partial ml-3">
+			Hi
+		</div>
+	</div>
+</div>

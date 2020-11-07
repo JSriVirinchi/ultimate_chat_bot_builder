@@ -1,0 +1,9 @@
+<% expanded_define_id = "expanded_define_nodes_id_" + @id.to_s %>
+<% compressed_define_id = "compressed_define_nodes_id_" + @id.to_s %>
+document.getElementById('<%= expanded_define_id%>').classList.remove('hide');
+document.getElementById('<%= compressed_define_id%>').classList.add('hide');
+
+height = document.getElementById('connector_black_link_vertical').style.height;
+height = parseInt(height);
+height = height + 297;
+document.getElementById('connector_black_link_vertical').style.height =  height + "px";

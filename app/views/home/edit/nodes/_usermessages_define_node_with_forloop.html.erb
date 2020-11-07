@@ -1,4 +1,16 @@
 <% for child in @node.children%>
 	<%= render 'home/edit/nodes/usermessages_define_node', child: child%>
+	<%= render 'home/edit/nodes/usermessages_compressed', child: child%>	
 	<%= render 'home/edit/nodes/usermessages_expanded', child: child%>
 <% end %>
+
+<script type="text/javascript">	
+	<% for child in @node.children%>
+		<% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
+		<% define_id = "define_nodes_id_" + child.id.to_s %>
+		<%if child.name != nil || child.user_input_type != nil%>
+			document.getElementById('<%= compressed_define_id%>').classList.remove('hide');
+			document.getElementById('<%= define_id%>').classList.add('hide');
+		<%end%>
+	<%end%>
+</script>

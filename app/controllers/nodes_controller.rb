@@ -79,6 +79,15 @@ class NodesController < ApplicationController
 
 	def usermessage_node_delete
 	 	@node = Node.find(params[:id])
+	 	position = params[:position]
+	 	if position == "expanded"
+	 		@height_diff = 405;
+	 	elsif position == "define"
+	 		@height_diff = 52; 
+	 	elsif position == "compressed"
+	 		@height_diff = 108;
+	 	end
+	 	
 	 	@parent_id = @node.parent_id
 	 	@node.destroy
 	 	@node = Node.find(@parent_id)
@@ -101,8 +110,9 @@ class NodesController < ApplicationController
 	end
 
 	def usermessage_options_form
+		@id = params[:id]
 		@child = Node.find(params[:id])
-		@child.update(name: params[:child_options][:name], user_input_type: params[:child_options][:user_input_type])
+		@child.update(user_input_type: params[:child_options][:user_input_type])
 		respond_to do |format|
 		    format.js
 	 	end
@@ -124,12 +134,10 @@ class NodesController < ApplicationController
 	 	end
 	end
 
-	# private
-	# def node_array
-	# 	@length = 0;
-	# 	Node.where(bot_id: @bot.id, parent_id: 0;).first.walk_tree do |node, level|
-	# 	  @length = length + 1;
-	# 	end
-	# 	@NodeArray[1000];
-	# end
+	def usermessage_expand
+		@id = params[:id]
+		respond_to do |format|
+		    format.js
+	 	end
+	end
 end

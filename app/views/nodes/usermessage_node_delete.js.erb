@@ -1,8 +1,16 @@
-// console.log('deleted');
-// console.log("<%= @node.id%>");
-// console.log("<%= @number_of_children%>");
 document.getElementById('usermessages_define_node_partial').innerHTML = "<%= j render 'home/edit/nodes/usermessages_define_node_with_forloop'%>";
 height = document.getElementById('connector_black_link_vertical').style.height;
 height = parseInt(height);
-height = height - 52;
+height_diff = "<%= @height_diff%>";
+height_diff = parseInt(height_diff);
+height = height - height_diff;
 document.getElementById('connector_black_link_vertical').style.height =  height + "px";
+
+<% for child in @node.children%>
+	<% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
+	<% define_id = "define_nodes_id_" + child.id.to_s %>
+	<%if child.name != nil || child.user_input_type != nil%>
+		document.getElementById('<%= compressed_define_id%>').classList.remove('hide');
+		document.getElementById('<%= define_id%>').classList.add('hide');
+	<%end%>
+<%end%>

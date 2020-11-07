@@ -1,11 +1,14 @@
 <% if @node%>
 <% if @node.set_next_action == "add_a_node"%>
 
-<% number_of_child_nodes = 0%>
+<% height = 53%>
 <% for i in @node.children%>
-	<% number_of_child_nodes = number_of_child_nodes + 1; %>
+	<% if i.name == nil && i.user_input_type == nil%>
+		<% height = height + 52%>
+	<%else%>
+		<%height = height + 108%>
+	<%end %>	
 <% end %>
-<% height = 53 + number_of_child_nodes * 52%>
 <% height = height.to_s + "px"%>
 
 <div class="row">

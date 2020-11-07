@@ -30,10 +30,11 @@ Rails.application.routes.draw do
   get 'nodes/number_of_nodes_increment', to: 'nodes#increment', as: 'number_of_nodes_increment'
   get 'nodes/number_of_nodes_decrement', to: 'nodes#decrement', as: 'number_of_nodes_decrement'
   post 'nodes/add_numberof_nodes/:botid/:parentid/:nodetype', to: 'nodes#add_number_of_nodes', as: 'add_number_of_nodes'
-  delete 'nodes/usermessage_node_delete/:id', to: 'nodes#usermessage_node_delete', as: 'usermessage_node_delete'
+  delete 'nodes/usermessage_node_delete/:id/:position', to: 'nodes#usermessage_node_delete', as: 'usermessage_node_delete'
   get 'nodes/define_nodes/:id', to: 'nodes#define_nodes', as: 'define_nodes'
   put 'nodes/usermessage_options_form/:id', to: 'nodes#usermessage_options_form', as: 'usermessage_options_form'
   get 'nodes/usermessage_name_edit/:id', to: 'nodes#usermessage_name_edit', as: 'usermessage_name_edit'
   put 'nodes/usermessage_name_update/:id', to: 'nodes#usermessage_name_update', as: 'usermessage_name_update'
+  get 'nodes/usermessage/expand/:id', to: 'nodes#usermessage_expand', as: 'usermessage_expand'
 end
 
