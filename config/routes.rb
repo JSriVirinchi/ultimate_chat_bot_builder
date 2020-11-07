@@ -31,5 +31,6 @@ Rails.application.routes.draw do
   get 'nodes/number_of_nodes_decrement', to: 'nodes#decrement', as: 'number_of_nodes_decrement'
   post 'nodes/add_numberof_nodes/:botid/:parentid/:nodetype', to: 'nodes#add_number_of_nodes', as: 'add_number_of_nodes'
   delete 'nodes/usermessage_node_delete/:id', to: 'nodes#usermessage_node_delete', as: 'usermessage_node_delete'
+  get 'nodes/define_nodes/:id', to: 'nodes#define_nodes', as: 'define_nodes'
 end
 
