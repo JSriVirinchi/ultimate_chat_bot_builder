@@ -79,12 +79,12 @@ class NodesController < ApplicationController
 
 	def usermessage_node_delete
 	 	@node = Node.find(params[:id])
-	 	position = params[:position]
-	 	if position == "expanded"
+	 	@position = params[:position]
+	 	if @position == "expanded"
 	 		@height_diff = 405;
-	 	elsif position == "define"
+	 	elsif @position == "define"
 	 		@height_diff = 52; 
-	 	elsif position == "compressed"
+	 	elsif @position == "compressed"
 	 		@height_diff = 108;
 	 	end
 	 	

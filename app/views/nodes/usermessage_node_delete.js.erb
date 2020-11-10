@@ -1,9 +1,19 @@
 document.getElementById('usermessages_define_node_partial').innerHTML = "<%= j render 'home/edit/nodes/usermessages_define_node_with_forloop'%>";
 height = document.getElementById('connector_black_link_vertical').style.height;
 height = parseInt(height);
-height_diff = "<%= @height_diff%>";
-height_diff = parseInt(height_diff);
-height = height - height_diff;
+
+<% height = 53%>
+<% for i in @node.children%>
+	<% if i.name == nil && i.user_input_type == nil%>
+		<% height = height + 52%>
+	<%else%>
+		<%height = height + 108%>
+	<%end %>	
+<% end %>
+<% height = height.to_s + "px"%>
+height = "<%= height%>";
+height = parseInt(height);
+
 document.getElementById('connector_black_link_vertical').style.height =  height + "px";
 
 <% for child in @node.children%>
@@ -14,3 +24,5 @@ document.getElementById('connector_black_link_vertical').style.height =  height 
 		document.getElementById('<%= define_id%>').classList.add('hide');
 	<%end%>
 <%end%>
+
+
