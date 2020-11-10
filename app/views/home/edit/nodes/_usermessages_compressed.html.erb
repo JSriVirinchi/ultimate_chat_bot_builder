@@ -1,5 +1,7 @@
 <% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
 <% compressed_define_name_id = "compressed_define_nodes_name_id_" + child.id.to_s %>
+<% compressed_define_name_id = "compressed_define_nodes_name_id_" + child.id.to_s %>
+<% usermessage_message_compressed_partial_id = "usermessage_message_compressed_partial_id_" + child.id.to_s%>
 <div class="row mb-2 hide" id= <%= compressed_define_id%> >
 	<div class="connector_black_link"></div>
 	<div class="usermessage_before">
@@ -15,8 +17,10 @@
 			</div>			
 		</div>
 		<div class="card_divider mb-2"></div>
-		<div class="row triggerphrases_partial ml-3">
-			There are no user messages added.
+		<div class="row triggerphrases_partial ml-3", style="overflow-y: auto;overflow-x: hidden; height: 50px; width: 280px;" >
+			<div id= <%= usermessage_message_compressed_partial_id%>>
+				<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: false%>
+			</div>			
 		</div>
 	</div>
 </div>

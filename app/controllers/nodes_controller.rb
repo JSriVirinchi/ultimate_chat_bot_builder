@@ -102,6 +102,7 @@ class NodesController < ApplicationController
 	  	end
 	end
 
+
 	def define_nodes
 		@id = params[:id]
 		respond_to do |format|
@@ -139,5 +140,23 @@ class NodesController < ApplicationController
 		respond_to do |format|
 		    format.js
 	 	end
+	end
+
+	def usermessage_messages_create
+		@child = Node.find(params[:messages][:node_id])
+		@message = Message.create(params.require(:messages).permit(:text_messages, :node_type, :bot_id, :node_id))
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
+	def usermessage_message_delete
+		@bot = Bot.find(params[:bot_id])
+		@child = Node.find(params[:node_id])
+		@message = Message.find(params[:msg_id])
+		@message.destroy
+		respond_to do |format|
+		    format.js
+	  	end
 	end
 end

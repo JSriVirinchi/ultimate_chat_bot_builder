@@ -1,6 +1,8 @@
 <% expanded_define_id = "expanded_define_nodes_id_" + child.id.to_s %>
 <% usermessage_name_edit_name = "usermessage_name_edit_name_" + child.id.to_s%>
 <% usermessage_name_edit_form = "usermessage_name_edit_form_" + child.id.to_s%>
+<% usermessage_message_id = "usermessage_message_id_" + child.id.to_s%>
+<% usermessage_message_partial_id = "usermessage_message_partial_id_" + child.id.to_s%>
 <div class="row mb-2 hide" id= <%= expanded_define_id%> >
 	<div class="connector_black_link"></div>
 	<div class = "usermessage_expanded_white_box">
@@ -24,13 +26,17 @@
 	    </div>  
 
 		<div class="row card_divider mt-2 ml-0"></div>
-		<div class="row ml-3 mt-3 Node-text-font  p-2 usermessage_trigger_phrases", style="height: 100px; width: 270px; overflow: auto;">
-			No trigger phrases are added yet to this node.
+		<div class="row ml-3 mt-3 Node-text-font  p-2 usermessage_trigger_phrases", style="height: 100px; width: 270px; overflow-y: auto; overflow-x: hidden;">
+			<div id= <%= usermessage_message_partial_id%> >				
+				<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true%>
+			</div>
 		</div>
-		<%= form_with scope: :messages, url: root_path, method: :put,  remote: true do |f| %>
-		<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >			
+		<%= form_with scope: :messages, url: usermessage_messages_create_path, method: :post,  remote: true do |f| %>		
+		<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >	   <%= f.text_field :bot_id, class: "hide", value: child.bot_id%>
+			<%= f.text_field :node_id, class: "hide", value: child.id%>	
+			<%= f.text_field :node_type, class: "hide", value: "user"%>	
 			<div class="col-7">
-				<%= f.text_field :text_message, class: "text-left form__input p-2 mt-1 usermessage_trigger_phrases", placeholder:  "Add trigger words"%>
+				<%= f.text_field :text_messages, class: "text-left form__input p-2 mt-1 usermessage_trigger_phrases", placeholder:  "Add trigger words", id: usermessage_message_id%>
 			</div>					
 			<div class = "col-1 mb-2 mt-1">
 				<%= f.submit "Add", class: "submit-text usermessage_trigger_phrases" %>					

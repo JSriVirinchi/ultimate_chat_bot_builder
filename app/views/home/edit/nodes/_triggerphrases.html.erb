@@ -1,5 +1,5 @@
 <% triggerphrase_tag = 0%>
-<div class="container" style="height: 55px; width: 300px; overflow-y: auto; overflow-x: hidden;">
+<div class="container" style="height: 50px; width: 300px; overflow-y: auto; overflow-x: hidden;">
 	<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
 	<% triggerphrase_tag = triggerphrase_tag + 1%>
 		<span class="triggerphrase ml-1 mr-1 mt-4 mb-2">
