@@ -11,7 +11,7 @@ class NodesController < ApplicationController
 	def update
 		@bot = Bot.find(params[:bot_id])
 		@node = Node.find(params[:node_id])
-		@node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_bot_message])
+		@node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_bot_message], transfer_to_agent_message: params[:set_next_action][:transfer_to_agent_message])
 		respond_to do |format|
 		    format.js
 	  	end
@@ -173,6 +173,25 @@ class NodesController < ApplicationController
 		  else
 		  	@node.update(toggle_exit_message: true)
 		    @toggle_exit_message_state = true
+		    respond_to do |format|
+			   format.js
+		  	end
+		  end
+	end
+
+	def toggle_transfer_to_agent_message
+		@node = Node.find(params[:id])
+		@bot_id= @node.bot_id
+		@bot = Bot.find(@bot_id)
+		  if @node.toggle_transfer_to_agent_message == true
+		    @node.update(toggle_transfer_to_agent_message: false)
+		    @toggle_transfer_to_agent_message_state = false
+		    respond_to do |format|
+			   format.js
+		  	end
+		  else
+		  	@node.update(toggle_transfer_to_agent_message: true)
+		    @toggle_transfer_to_agent_message_state = true
 		    respond_to do |format|
 			   format.js
 		  	end

@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get 'nodes/usermessage/expand/:id', to: 'nodes#usermessage_expand', as: 'usermessage_expand'
   post 'nodes/usermessage/messages_create', to: 'nodes#usermessage_messages_create', as: 'usermessage_messages_create'
   delete 'nodes/usermessage_message_delete/:msg_id/:bot_id/:node_id', to: 'nodes#usermessage_message_delete', as: 'usermessage_message_delete'
-  put 'nodes/:id', to: 'nodes#toggle_exit_message', as: 'toggle_exit_message'
+  put 'nodes/toggle_exit_message/:id', to: 'nodes#toggle_exit_message', as: 'toggle_exit_message'
+  put 'nodes/toggle_transfer_to_agent_message/:id', to: 'nodes#toggle_transfer_to_agent_message', as: 'toggle_transfer_to_agent_message'
 end
 
