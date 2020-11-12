@@ -16,12 +16,40 @@
 				</div>	
 			</div>
 		<% end %>
+		<%if delete_button == false && tag !=0 && @node.set_next_action == "exit_bot"%>
+			<div class="mb-2 Initial-Message-from-Customer">
+		 		<span class="mr-2 ml-3">
+					Include the default exit message					
+				</span>
+				<label class="switch my-auto">
+				  <% if @node.toggle_exit_message == true%>
+				    <input type="checkbox" checked data-remote="true" class="slider round" data-method="put" data-url= <%= toggle_exit_message_path(@node.id)%>>
+				  <% else %>
+				  	<input type="checkbox" data-remote="true" class="slider round" data-method="put" data-url= <%= toggle_exit_message_path(@node.id)%>>
+				  <% end %>
+				  <span class="slider round"></span>
+				</label>
+		 	</div>
+		 	<%if @node.toggle_exit_message == true%>
+		 	<div>
+		 		<div class="card_divider"></div> 	
+			 	<div class="previous_messages mt-2", style="width: 280px;">
+					<div class="row">
+						<div class="col-12">
+							<%= @node.exit_message%>
+						</div>					
+					</div>	
+				</div>
+		 	</div>
+		 	<%end%>
+		<%end%>
 
 		<% if delete_button == false && tag==0%>
 		 	<div class="ml-2 mb-4 Initial-Message-from-Customer">
 		 		No custom messages are added here. Click the expanded icon to see full options.
 		 	</div>
 		 	<% if @node.set_next_action == "exit_bot"%>
+		 	<div>
 		 		<div class="card_divider"></div>
 		 		<div class="ml-1 mb-2 text-center Initial-Message-from-Customer">
 			 		This exit message is added by default.
@@ -33,7 +61,9 @@
 						</div>					
 					</div>	
 				</div>
+		 	</div>		 		
 		 	<% end %>
 		<% end %>
 	<% end %>
 <% end %>
+

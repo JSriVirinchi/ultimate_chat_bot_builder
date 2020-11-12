@@ -5,31 +5,31 @@
 	<!-- main content -->
 	<div class="row mt-4">
     <!-- left content -->
-    <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil && @bot.starttime==nil && @bot.endtime==nil && @bot.startdate == nil && @bot.enddate== nil && @bot.rebootconv==nil && @bot.days==nil && @bot.active==nil)%>
-		<div class="col-4 rowheight_three bg-white botsettings_border">
+  
+		<div class="col-4 rowheight_three bg-white botsettings_border hide" id="botsettings_startsetup">
       <%= render 'home/edit/botsettings_startsetup'%>
 		</div>
-    <% else%>
-      <div class="col-4 rowheight_three bg-white botsettings_border">
-        <%= render 'home/edit/botsettings_startsetup_edit'%>
-      </div>
-    <% end %>
+    <div class="col-4 rowheight_three bg-white botsettings_border" id="botsettings_startsetup_edit">
+       <%= render 'home/edit/botsettings_startsetup_edit'%>
+    </div>
     <!-- actual form -->
-		  <div class="col-8 rowheight_three" id="actualform">
-        <%= render 'home/edit/botsettings_main'%>
-      </div>
+		<div class="col-8 rowheight_three" id="actualform">
+      <%= render 'home/edit/botsettings_main'%>
+    </div>
 	</div>
 </div>
 
 <script type="text/javascript">
       // show form
       <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil && @bot.starttime==nil && @bot.endtime==nil && @bot.startdate == nil && @bot.enddate== nil && @bot.rebootconv==nil && @bot.days==nil && @bot.active==nil)%>
-      setTimeout(function(){
-       document.getElementById('actualform').classList.add('hide');
-      }, 1);
-        
+       document.getElementById('botsettings_startsetup').classList.remove('hide');        
+       document.getElementById('botsettings_startsetup_edit').classList.add('hide');        
+       document.getElementById('actualform').classList.add('hide');        
       <% end %>
+      
       document.getElementById('startsetup').onclick = function() {
         document.getElementById('actualform').classList.remove('hide');
+        document.getElementById('botsettings_startsetup').classList.add('hide');
+        document.getElementById('botsettings_startsetup_edit').classList.remove('hide');
       }
 </script>

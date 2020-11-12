@@ -159,4 +159,23 @@ class NodesController < ApplicationController
 		    format.js
 	  	end
 	end
+
+	def toggle_exit_message
+		@node = Node.find(params[:id])
+		@bot_id= @node.bot_id
+		@bot = Bot.find(@bot_id)
+		  if @node.toggle_exit_message == true
+		    @node.update(toggle_exit_message: false)
+		    @toggle_exit_message_state = false
+		    respond_to do |format|
+			   format.js
+		  	end
+		  else
+		  	@node.update(toggle_exit_message: true)
+		    @toggle_exit_message_state = true
+		    respond_to do |format|
+			   format.js
+		  	end
+		  end
+	end
 end
