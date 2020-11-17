@@ -2,20 +2,25 @@
 <% botmessages_box_after_partial = "botmessages_box_after_partial_" + (@parent_id).to_s %>
 <% botresponses_box_before = "botresponses_box_before_" + (@parent_id).to_s %>
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
+<% add_a_node = "add_a_node_" + (@node.id).to_s%>
+<% transfer_to_agent = "transfer_to_agent_" + (@node.id).to_s%>
+<% exit_bot = "exit_bot_" + (@node.id).to_s%>
+<% transfer_to_agent_message = "transfer_to_agent_message_" + (@node.id).to_s%>
+<% exit_message = "exit_message_" + (@node.id).to_s%>
 
 document.getElementById('<%= botmessages_box_after_partial%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_after' , parent_id: @parent_id%>";
 document.getElementById('<%= botresponses_box_before %>').classList.add('hide');
 document.getElementById('<%= botresponses_box_after%>').classList.remove('hide');
 
-document.getElementById('exit_bot').onclick = function() {
-	document.getElementById('exit_message').classList.remove('hide');
-	document.getElementById('transfer_to_agent_message').classList.add('hide');
+document.getElementById('<%= exit_bot %>').onclick = function() {
+	document.getElementById('<%= exit_message %>').classList.remove('hide');
+	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
 }
-document.getElementById('add_a_node').onclick = function() {
-	document.getElementById('exit_message').classList.add('hide');
-	document.getElementById('transfer_to_agent_message').classList.add('hide');
+document.getElementById('<%= add_a_node %>').onclick = function() {
+	document.getElementById('<%= exit_message %>').classList.add('hide');
+	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
 }
-document.getElementById('transfer_to_agent').onclick = function() {
- 	document.getElementById('exit_message').classList.add('hide');
- 	document.getElementById('transfer_to_agent_message').classList.remove('hide');
+document.getElementById('<%= transfer_to_agent %>').onclick = function() {
+ 	document.getElementById('<%= exit_message %>').classList.add('hide');
+ 	document.getElementById('<%= transfer_to_agent_message %>').classList.remove('hide');
 }
