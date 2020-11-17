@@ -1,4 +1,5 @@
 <% botmessagesmain_partial = "botmessagesmain_partial_" + (parent_id).to_s%>
+<% usermessagemain_partial_with_connector = "usermessagemain_partial_with_connector_" + (parent_id).to_s%>
 <div class="row" , id="width_setting_row" , style= "width:2500px;">
 	<%= render 'home/edit/nodes/triggerphrasesmain'%>
 	<div class="connector_green_circle "></div>
@@ -8,7 +9,7 @@
 		<%= render 'home/edit/nodes/botmessagesmain', parent_id: parent_id%>	
 	</div>
 
-	<div class="ml-3", id="usermessagemain_partial_with_connector", style="margin-left: 0px;">
+	<div class="ml-3", id="<%= usermessagemain_partial_with_connector %>", style="margin-left: 0px;">
 		<%= render 'home/edit/nodes/usermessagesmain_with_connector'%>	
 	</div>
 </div>

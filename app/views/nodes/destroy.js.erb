@@ -1,9 +1,10 @@
-//console.log('chatrapati');
+//console.log('yay');
 <% botresponses_box_before = "botresponses_box_before_" + (@parent_id).to_s %>
 <% botresponses_box_after = "botresponses_box_after_" + (@node_for_id.id).to_s %>
 <% botresponses_box_compressed = "botresponses_box_compressed_" + (@node_for_id.id).to_s%>
+<% usermessagemain_partial_with_connector = "usermessagemain_partial_with_connector_" + (@parent_id).to_s%>
 
 document.getElementById('<%= botresponses_box_before %>').classList.remove('hide');
 document.getElementById('<%= botresponses_box_after %>').classList.add('hide');
 document.getElementById('<%= botresponses_box_compressed %>').classList.add('hide');
-document.getElementById('usermessagemain_partial_with_connector').innerHTML = "<%= j render 'home/edit/nodes/usermessagesmain_with_connector'%>";
+document.getElementById('<%= usermessagemain_partial_with_connector %>').innerHTML = "<%= j render 'home/edit/nodes/usermessagesmain_with_connector'%>";

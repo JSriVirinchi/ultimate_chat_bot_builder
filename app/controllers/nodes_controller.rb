@@ -59,12 +59,14 @@ class NodesController < ApplicationController
 	end
 
 	def increment
+		@node = Node.find(params[:node_id])
 		respond_to do |format|
 		    format.js
 	  	end
 	end
 
 	def decrement
+		@node = Node.find(params[:node_id])
 		respond_to do |format|
 		    format.js
 	  	end

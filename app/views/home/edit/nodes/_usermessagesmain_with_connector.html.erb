@@ -1,6 +1,7 @@
 <% if @node%>
 	<% if @node.set_next_action == "add_a_node"%>
 		<% connector_black_link_vertical = "connector_black_link_vertical_" + (@node.id).to_s%>
+		<% usermessagemain_partial = "usermessagemain_partial" + (@node.id).to_s%>
 		<% height = 53%>
 		<% for i in @node.children%>
 			<% if i.name == nil && i.user_input_type == nil%>
@@ -16,7 +17,7 @@
 			<div class="connector_black_link"></div>
 			<div class="connector_black_link_vertical", id="<%= connector_black_link_vertical %>" style="margin-right: 15px; height:<%= height%>;"></div>	
 
-			<div id="usermessagemain_partial">
+			<div id="<%= usermessagemain_partial %>">
 				<%= render 'home/edit/nodes/usermessagesmain'%>
 			</div>
 		</div>

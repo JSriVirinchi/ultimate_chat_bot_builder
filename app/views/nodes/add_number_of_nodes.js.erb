@@ -1,14 +1,12 @@
 <% connector_black_link_vertical = "connector_black_link_vertical_" + (@node.id).to_s%>
-nodes_number = document.getElementById('add_number_of_nodes').value;
+<% usermessages_define_node_partial = "usermessages_define_node_partial_" + (@node.id).to_s%>
+<% add_number_of_nodes = "add_number_of_nodes_" + (@node.id).to_s%>
+
+nodes_number = document.getElementById('<%= add_number_of_nodes %>').value;
 nodes_number = parseInt(nodes_number);
 
-document.getElementById('usermessages_define_node_partial').innerHTML = "<%= j render 'home/edit/nodes/usermessages_define_node_with_forloop' %>";
-// height = document.getElementById('connector_black_link_vertical').style.height;
-// height = parseInt(height);
-// var i;
-// for (i=0; i< nodes_number; i++){
-// 	height = height + 52;
-// }
+document.getElementById('<%= usermessages_define_node_partial %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_define_node_with_forloop' %>";
+
 <% height = 53%>
 <% for i in @node.children%>
 	<% if i.name == nil && i.user_input_type == nil%>

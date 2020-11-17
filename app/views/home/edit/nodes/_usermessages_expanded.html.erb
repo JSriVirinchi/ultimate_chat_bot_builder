@@ -32,7 +32,8 @@
 			</div>
 		</div>
 		<%= form_with scope: :messages, url: usermessage_messages_create_path, method: :post,  remote: true do |f| %>		
-		<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >	   <%= f.text_field :bot_id, class: "hide", value: child.bot_id%>
+		<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >	   
+			<%= f.text_field :bot_id, class: "hide", value: child.bot_id%>
 			<%= f.text_field :node_id, class: "hide", value: child.id%>	
 			<%= f.text_field :node_type, class: "hide", value: "user"%>	
 			<div class="col-7">
