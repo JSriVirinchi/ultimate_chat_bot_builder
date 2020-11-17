@@ -20,6 +20,22 @@
 			<div id="<%= usermessagemain_partial %>">
 				<%= render 'home/edit/nodes/usermessagesmain'%>
 			</div>
+			<div>
+				<div>
+					<% for children in @node.children%>
+						<% if children %>
+							<div class="row">
+								<div class="connector_green_circle ", style="margin-left: 30px;"></div>
+								<div class="connector_green_link", style="margin-right: 15px; "></div>
+								<div class="row", style="margin-bottom: 5px;">
+									<%= render 'home/edit/botresponse_and_usermessage_loop', parent_id: children.id %>
+								</div>							
+							</div>							
+						<%end%>
+					<%end%>
+				</div>			
+			</div>
 		</div>
 	<% end %>
+	
 <% end %>
