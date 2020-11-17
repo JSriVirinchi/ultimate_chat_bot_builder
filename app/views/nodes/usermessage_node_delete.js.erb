@@ -1,5 +1,7 @@
+<% connector_black_link_vertical = "connector_black_link_vertical_" + (@node.id).to_s%>
+
 document.getElementById('usermessages_define_node_partial').innerHTML = "<%= j render 'home/edit/nodes/usermessages_define_node_with_forloop'%>";
-height = document.getElementById('connector_black_link_vertical').style.height;
+height = document.getElementById('<%= connector_black_link_vertical %>').style.height;
 height = parseInt(height);
 
 <% height = 53%>
@@ -14,7 +16,7 @@ height = parseInt(height);
 height = "<%= height%>";
 height = parseInt(height);
 
-document.getElementById('connector_black_link_vertical').style.height =  height + "px";
+document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
 
 <% for child in @node.children%>
 	<% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>

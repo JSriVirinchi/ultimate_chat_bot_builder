@@ -1,3 +1,4 @@
+<% connector_black_link_vertical = "connector_black_link_vertical_" + (@node.id).to_s%>
 <% id = @id%>
 <% define_id = "define_nodes_id_" + id.to_s %>
 <% expanded_define_id = "expanded_define_nodes_id_" + id.to_s %>
@@ -6,7 +7,7 @@
 document.getElementById('<%= define_id%>').classList.add('hide');
 document.getElementById('<%= expanded_define_id%>').classList.remove('hide');
 
-height = document.getElementById('connector_black_link_vertical').style.height;
+height = document.getElementById('<%= connector_black_link_vertical %>').style.height;
 height = parseInt(height);
 height = height + 353;
-document.getElementById('connector_black_link_vertical').style.height =  height + "px";
+document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";

@@ -1,10 +1,12 @@
 <% botmessages_box_after_partial = "botmessages_box_after_partial_" + (parent_id).to_s %>
+<% botmessages_box_compressed_partial = "botmessages_box_compressed_partial_" + (parent_id).to_s %>
+
 <%= render 'home/edit/nodes/botmessages_box_before', parent_id: parent_id%>
 <div id="<%= botmessages_box_after_partial %>">
 	<%= render 'home/edit/nodes/botmessages_box_after', parent_id: parent_id%>
 </div>
-<div id="botmessages_box_compressed_partial">
-	<%= render 'home/edit/nodes/botmessages_box_compressed'%>	
+<div id="<%= botmessages_box_compressed_partial %>">
+	<%= render 'home/edit/nodes/botmessages_box_compressed', parent_id: parent_id%>	
 </div>	
 
 <script type="text/javascript">
@@ -12,11 +14,12 @@
 	<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 	<% botresponses_box_before = "botresponses_box_before_" + (parent_id).to_s %>
 	<% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
+	<% botresponses_box_compressed = "botresponses_box_compressed_" + (@node.id).to_s%>
 		document.getElementById('<%= botresponses_box_before %>').classList.add('hide');
 		document.getElementById('<%= botresponses_box_after%>').classList.remove('hide');
 		<% if @node.set_next_action%>
 			document.getElementById('<%= botresponses_box_after%>').classList.add('hide');
-			document.getElementById('botresponses_box_compressed').classList.remove('hide');
+			document.getElementById('<%= botresponses_box_compressed%>').classList.remove('hide');
 		<% end %> 
 	<% end %>
 </script>

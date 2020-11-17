@@ -1,4 +1,5 @@
 //console.log('expanded');
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
-document.getElementById('botresponses_box_compressed').classList.add('hide');
+<% botresponses_box_compressed = "botresponses_box_compressed_" + (@node.id).to_s%>
+document.getElementById('<%= botresponses_box_compressed %>').classList.add('hide');
 document.getElementById('<%= botresponses_box_after%>').classList.remove('hide');

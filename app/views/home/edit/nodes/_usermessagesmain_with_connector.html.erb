@@ -1,24 +1,24 @@
 <% if @node%>
-<% if @node.set_next_action == "add_a_node"%>
+	<% if @node.set_next_action == "add_a_node"%>
+		<% connector_black_link_vertical = "connector_black_link_vertical_" + (@node.id).to_s%>
+		<% height = 53%>
+		<% for i in @node.children%>
+			<% if i.name == nil && i.user_input_type == nil%>
+				<% height = height + 52%>
+			<%else%>
+				<%height = height + 108%>
+			<%end %>	
+		<% end %>
+		<% height = height.to_s + "px"%>
 
-<% height = 53%>
-<% for i in @node.children%>
-	<% if i.name == nil && i.user_input_type == nil%>
-		<% height = height + 52%>
-	<%else%>
-		<%height = height + 108%>
-	<%end %>	
-<% end %>
-<% height = height.to_s + "px"%>
+		<div class="row">
+			<div class="connector_black_circle"></div>
+			<div class="connector_black_link"></div>
+			<div class="connector_black_link_vertical", id="<%= connector_black_link_vertical %>" style="margin-right: 15px; height:<%= height%>;"></div>	
 
-<div class="row">
-	<div class="connector_black_circle"></div>
-	<div class="connector_black_link"></div>
-	<div class="connector_black_link_vertical", id="connector_black_link_vertical" style="margin-right: 15px; height:<%= height%>;"></div>	
-
-	<div id="usermessagemain_partial">
-		<%= render 'home/edit/nodes/usermessagesmain'%>
-	</div>
-</div>
-<% end %>
+			<div id="usermessagemain_partial">
+				<%= render 'home/edit/nodes/usermessagesmain'%>
+			</div>
+		</div>
+	<% end %>
 <% end %>

@@ -1,12 +1,17 @@
-<% @node = Node.where(bot_id: @bot.id, parent_id: 0).first%>
-<div class="botresponses_box_after hide  mb-4" id="botresponses_box_compressed">
+<% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+<%if @node%>
+	<% botresponses_box_compressed = "botresponses_box_compressed_" + (@node.id).to_s%>
+	<% botmessages_previous_compressed = "botmessages_previous_compressed_" + (@node.id).to_s%>
+<%end%>
+
+<div class="botresponses_box_after hide  mb-4" id="<%= botresponses_box_compressed %>">
 	<div class="row">
 		<div class="col-9 row mb-2">
 			<%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle mr-3 ml-4 mt-2")%>
 			<div class="botresponses_text">Bot Response</div>
 		</div>
 		<div class="col-3 text-center">
-			<% if Node.where(bot_id: @bot.id, parent_id: 0).first%>
+			<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 			<%= link_to image_tag('dustbin.png', size: "15", class: "mt-2 mr-2"), nodes_destroy_path(@node.id), method: :delete , remote: true, data: { confirm: "Are you sure that you want to delete this node? This will delete all the children nodes attached to it. You can edit the current node, if you wanted to."}%>
 			<%= link_to image_tag('expand.png', size: "15", class: "mt-2"), nodes_expand_path(@bot.id, @node.id), remote: true%>
 			<% end %>
@@ -16,7 +21,7 @@
 	<div class="card_divider mb-2"></div>
 
 	<!-- added messages -->
-	<div class="mb-4 pb-2" id="botmessages_previous_compressed">
-		<%= render 'home/edit/nodes/botmessages_previous', delete_button: false%>
+	<div class="mb-4 pb-2" id="<%= botmessages_previous_compressed %>">
+		<%= render 'home/edit/nodes/botmessages_previous', delete_button: false, parent_id: parent_id%>
 	</div>
 </div>

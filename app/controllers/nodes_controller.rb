@@ -11,6 +11,7 @@ class NodesController < ApplicationController
 	def update
 		@bot = Bot.find(params[:bot_id])
 		@node = Node.find(params[:node_id])
+		@parent_id = @node.parent_id
 		@node.update(set_next_action: params[:set_next_action][:set_next_action], exit_message: params[:set_next_action][:exit_bot_message], transfer_to_agent_message: params[:set_next_action][:transfer_to_agent_message])
 		respond_to do |format|
 		    format.js
@@ -109,6 +110,8 @@ class NodesController < ApplicationController
 
 	def define_nodes
 		@id = params[:id]
+		@child = Node.find(@id)
+		@node = Node.find(@child.parent_id)
 		respond_to do |format|
 		    format.js
 	  	end
@@ -117,6 +120,7 @@ class NodesController < ApplicationController
 	def usermessage_options_form
 		@id = params[:id]
 		@child = Node.find(params[:id])
+		@node = Node.find(@child.parent_id)
 		@child.update(user_input_type: params[:child_options][:user_input_type])
 		respond_to do |format|
 		    format.js
@@ -141,6 +145,8 @@ class NodesController < ApplicationController
 
 	def usermessage_expand
 		@id = params[:id]
+		@child = Node.find(@id)
+		@node = Node.find(@child.parent_id)
 		respond_to do |format|
 		    format.js
 	 	end
@@ -166,6 +172,7 @@ class NodesController < ApplicationController
 
 	def toggle_exit_message
 		@node = Node.find(params[:id])
+		@parent_id = @node.parent_id
 		@bot_id= @node.bot_id
 		@bot = Bot.find(@bot_id)
 		  if @node.toggle_exit_message == true
@@ -185,6 +192,7 @@ class NodesController < ApplicationController
 
 	def toggle_transfer_to_agent_message
 		@node = Node.find(params[:id])
+		@parent_id = @node.parent_id
 		@bot_id= @node.bot_id
 		@bot = Bot.find(@bot_id)
 		  if @node.toggle_transfer_to_agent_message == true

@@ -1,6 +1,7 @@
 <!-- declaring ids -->
 <% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 
+
 <%if @node%> 
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
 <% botmessages_previous = "botmessages_previous_" + (@node.id).to_s %>
@@ -10,6 +11,8 @@
 <% exit_bot = "exit_bot_" + (@node.id).to_s%>
 <% transfer_to_agent_message = "transfer_to_agent_message_" + (@node.id).to_s%>
 <% exit_message = "exit_message_" + (@node.id).to_s%>
+<% dropdownMenuLink_transfer = "dropdownMenuLink_transfer_" + (@node.id).to_s%>
+<% dropdownMenuLink_transfer1 = "dropdownMenuLink_transfer1_" + (@node.id).to_s%>
 <%end%>
 
 <!-- content -->
@@ -30,7 +33,7 @@
 
 	<!-- added messages -->
 	<div id="<%= botmessages_previous%>">
-		<%= render 'home/edit/nodes/botmessages_previous', delete_button: true %>
+		<%= render 'home/edit/nodes/botmessages_previous', delete_button: true, parent_id: parent_id %>
 	</div>
 	<!-- text area -->
 	<%= form_with scope: :message, url: nodes_message_create_path, method: :post,  remote: true do |f| %>
@@ -107,11 +110,11 @@
 		<div class="mb-2 text-center hide" id="<%= transfer_to_agent_message %>">
 			<% if @node.transfer_to_agent_message%>
 			<div class="dropdown show mb-2 ml-3">
-			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink_transfer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
+			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="<%= dropdownMenuLink_transfer%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
 			    Select Transfering group
 			  </a>
 
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_transfer", style="width: 210px;">
+			  <div class="dropdown-menu" aria-labelledby="<%= dropdownMenuLink_transfer%>", style="width: 210px;">
 			    <a class="dropdown-item" href="#">Group-1</a>
 			    <a class="dropdown-item" href="#">Group-2</a>
 			    <a class="dropdown-item" href="#">Group-3</a>
@@ -122,11 +125,11 @@
 			</div>
 			<% else %>
 			<div class="dropdown show mb-2 ml-3">
-			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink_transfer1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
+			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="<%= dropdownMenuLink_transfer1%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
 			    Select Transfering group
 			  </a>
 
-			  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink_transfer1", style="width: 210px;">
+			  <div class="dropdown-menu" aria-labelledby="<%= dropdownMenuLink_transfer1%>", style="width: 210px;">
 			    <a class="dropdown-item" href="#">Group-1</a>
 			    <a class="dropdown-item" href="#">Group-2</a>
 			    <a class="dropdown-item" href="#">Group-3</a>

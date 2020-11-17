@@ -1,3 +1,4 @@
+<% connector_black_link_vertical = "connector_black_link_vertical_" + (@node.id).to_s%>
 nodes_number = document.getElementById('add_number_of_nodes').value;
 nodes_number = parseInt(nodes_number);
 
@@ -21,7 +22,7 @@ height = "<%= height%>";
 
 height = parseInt(height);
 
-document.getElementById('connector_black_link_vertical').style.height =  height + "px";
+document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
 <% for child in @node.children%>
 	<% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
 	<% define_id = "define_nodes_id_" + child.id.to_s %>
