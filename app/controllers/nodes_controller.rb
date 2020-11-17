@@ -2,7 +2,7 @@ class NodesController < ApplicationController
 	def create
 		@bot = Bot.find(params[:botid])
 		@node = Node.create(node_type: params[:nodetype], bot_id: params[:botid], parent_id: params[:parentid])
-		# redirect_to composemessage_path(@bot.id)
+		@parent_id = params[:parentid]
 		respond_to do |format|
 		    format.js
 	  	end
@@ -19,6 +19,8 @@ class NodesController < ApplicationController
 
 	def destroy
 		@node = Node.find(params[:id])
+		@node_for_id = Node.find(params[:id])
+		@parent_id = @node.parent_id
 		@node.destroy
 		@node= nil;
 		respond_to do |format|
@@ -29,6 +31,7 @@ class NodesController < ApplicationController
 	def message_create
 		@bot = Bot.find(params[:message][:bot_id])
 		@node = Node.find(params[:message][:node_id])
+		@parent_id = @node.parent_id
 		@message = Message.create(params.require(:message).permit(:text_messages, :node_type, :bot_id, :node_id))
 		respond_to do |format|
 		    format.js
@@ -38,6 +41,7 @@ class NodesController < ApplicationController
 	def message_delete
 		@bot = Bot.find(params[:bot_id])
 		@node = Node.find(params[:node_id])
+		@parent_id = @node.parent_id
 		@message = Message.find(params[:msg_id])
 		@message.destroy
 		respond_to do |format|
