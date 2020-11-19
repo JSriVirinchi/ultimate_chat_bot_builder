@@ -320,6 +320,18 @@
   height: 25px;
 }
 
+.form__input_two{
+  border:0px solid #f7f2ed;
+  border-radius: 0;
+  border-bottom: 1px solid #bababa;
+  background-color: rgb(220,248,198);
+  outline:none;
+  transition: all .5s ease;
+  margin-top: 0px;
+  line-height: 1;
+  height: 25px;
+}
+
 .user_message_text {
     width: 52px;
     height: 32px;
@@ -353,5 +365,40 @@
 
 .usermessage_trigger_phrases{
   background-color: rgb(240,240,240);
-  
+}
+
+.error_node_expanded_white {
+  width: 300px;
+  margin: 12px 0 0 15px;
+  border-radius: 0 0 5px 5px;
+  padding: 15px 10px 15px 20px;
+  background-color: #ffffff;
+}
+
+.error_message_text {
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.14;
+  letter-spacing: normal;
+  text-align: left;
+  color: #333333;
+}
+
+.error_node_message_text_area{
+  border: 1px solid rgb(204,204,204);
+  border-radius: 5px;
+}
+
+.error_node_message_text_area_text {
+  padding: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-align: left;
+  color: rgb(102,102,102);
 }

@@ -145,6 +145,22 @@ class NodesController < ApplicationController
 	 	end
 	end
 
+	def botmessage_name_edit
+		@id = params[:id]
+		respond_to do |format|
+		    format.js
+	 	end
+	end
+
+	def botmessage_name_update
+		@id = params[:id]
+		@node = Node.find(params[:id])
+		@node.update(name: params[:name_edit][:name])
+		respond_to do |format|
+		    format.js
+	 	end
+	end
+
 	def usermessage_expand
 		@id = params[:id]
 		@child = Node.find(@id)

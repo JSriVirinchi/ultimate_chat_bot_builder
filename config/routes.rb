@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   put 'nodes/usermessage_options_form/:id', to: 'nodes#usermessage_options_form', as: 'usermessage_options_form'
   get 'nodes/usermessage_name_edit/:id', to: 'nodes#usermessage_name_edit', as: 'usermessage_name_edit'
   put 'nodes/usermessage_name_update/:id', to: 'nodes#usermessage_name_update', as: 'usermessage_name_update'
+  get 'nodes/botmessage_name_edit/:id', to: 'nodes#botmessage_name_edit', as: 'botmessage_name_edit'
+  put 'nodes/botmessage_name_update/:id', to: 'nodes#botmessage_name_update', as: 'botmessage_name_update'
   get 'nodes/usermessage/expand/:id', to: 'nodes#usermessage_expand', as: 'usermessage_expand'
   post 'nodes/usermessage/messages_create', to: 'nodes#usermessage_messages_create', as: 'usermessage_messages_create'
   delete 'nodes/usermessage_message_delete/:msg_id/:bot_id/:node_id', to: 'nodes#usermessage_message_delete', as: 'usermessage_message_delete'

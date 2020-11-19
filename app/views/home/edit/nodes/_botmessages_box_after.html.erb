@@ -1,7 +1,6 @@
 <!-- declaring ids -->
 <% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 
-
 <%if @node%> 
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
 <% botmessages_previous = "botmessages_previous_" + (@node.id).to_s %>
@@ -13,18 +12,36 @@
 <% exit_message = "exit_message_" + (@node.id).to_s%>
 <% dropdownMenuLink_transfer = "dropdownMenuLink_transfer_" + (@node.id).to_s%>
 <% dropdownMenuLink_transfer1 = "dropdownMenuLink_transfer1_" + (@node.id).to_s%>
+<% botmessage_name_edit_name = "botmessage_name_edit_name_" + (@node.id).to_s %>
+<% botmessage_name_edit_form = "botmessage_name_edit_form_" + (@node.id).to_s %>
 <%end%>
 
 <!-- content -->
 <div class="botresponses_box_after hide mb-4" id="<%= botresponses_box_after %>">
 	<div class="row">
 		<div class="col-10 row mb-2">
-			<%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle mr-3 ml-4 mt-2")%>
-			<div class="botresponses_text">Bot Response</div>
+			<div class="col-2 mr-2">
+				<%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle ml-2 mt-2")%>
+			</div>
+			<%if @node%>
+				<div class="botresponses_text col-9" id= <%= botmessage_name_edit_name%>>
+					<%= render 'home/edit/nodes/botmessages_name_field', node: @node, edit_tag: true%>
+				</div>
+				<div class="col-9 mt-2 hide" id= <%= botmessage_name_edit_form %> >
+					<%= form_with scope: :name_edit, url: botmessage_name_update_path(@node.id), method: :put, remote: true do |f|%>					
+						<%if @node.name %>
+							<%= f.text_field :name, value: @node.name ,class: "form__input_two", style: "width: 85px;"%>
+						<% else %>	
+							<%= f.text_field :name, class: "form__input_two", placeholder: "Bot Response", style: "width: 85px;"%>
+						<% end %>						
+						<%= f.submit "Update", class: "btn btn-sm btn-outline-secondary"%>
+					<% end %>				
+				</div>
+			<%end%>
 		</div>
 		<div class="col-2 text-center">
 			<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
-			<%= link_to image_tag('dustbin.png', size: "15", class: "mt-2 mr-2"), nodes_destroy_path(@node.id), method: :delete , remote: true, data: { confirm: "Are you sure that you want to delete this node? This will delete all the children nodes attached to it. You can edit the current node, if you wanted to."}%>
+			<%= link_to image_tag('dustbin.png', size: "15", class: "mt-2 ml-3 mr-2"), nodes_destroy_path(@node.id), method: :delete , remote: true, data: { confirm: "Are you sure that you want to delete this node? This will delete all the children nodes attached to it. You can edit the current node, if you wanted to."}%>
 			<% end %>
 		</div>
 	</div>

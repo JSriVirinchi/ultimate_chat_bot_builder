@@ -2,13 +2,20 @@
 <%if @node%>
 	<% botresponses_box_compressed = "botresponses_box_compressed_" + (@node.id).to_s%>
 	<% botmessages_previous_compressed = "botmessages_previous_compressed_" + (@node.id).to_s%>
+	<% botmessage_compressed_name = "botmessage_compressed_name_" + (@node.id).to_s%>
 <%end%>
 
 <div class="botresponses_box_after hide  mb-4" id="<%= botresponses_box_compressed %>">
 	<div class="row">
 		<div class="col-9 row mb-2">
-			<%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle mr-3 ml-4 mt-2")%>
-			<div class="botresponses_text">Bot Response</div>
+			<div class="col-2 mr-2">
+				<%= image_tag('chatbot.JPG', size: "25", class: "rounded-circle mr-1 ml-2 mt-2")%>
+			</div>
+			<%if @node%>			
+				<div class="botresponses_text col-8 ml-1" id= <%= botmessage_compressed_name%>>
+					<%= render 'home/edit/nodes/botmessages_name_field', node: @node, edit_tag: false%>
+				</div>
+			<% end %>
 		</div>
 		<div class="col-3 text-center">
 			<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
@@ -19,7 +26,6 @@
 	</div>
 
 	<div class="card_divider mb-2"></div>
-
 	<!-- added messages -->
 	<div class="mb-4 pb-2" id="<%= botmessages_previous_compressed %>">
 		<%= render 'home/edit/nodes/botmessages_previous', delete_button: false, parent_id: parent_id%>

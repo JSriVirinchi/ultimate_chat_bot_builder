@@ -11,7 +11,7 @@
 					</div>
 					<div class="col-2">
 						<% if delete_button == true%>
-						<%= link_to image_tag('dustbin.png', size: "10"), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, class: "mr-2"%>
+						<%= link_to image_tag('dustbin.png', size: "10", class: "ml-1"), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, class: "mr-2"%>
 						<% end %>
 					</div>
 				</div>	

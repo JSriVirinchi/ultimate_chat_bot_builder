@@ -3,12 +3,13 @@
 <% botresponses_box_compressed = "botresponses_box_compressed_" + (@node.id).to_s%>
 <% botmessages_previous_compressed = "botmessages_previous_compressed_" + (@node.id).to_s%>
 <% usermessagemain_partial_with_connector = "usermessagemain_partial_with_connector_" + (@parent_id).to_s%>
+<% botmessage_compressed_name = "botmessage_compressed_name_" + (@node.id).to_s%>
 
 document.getElementById('<%= botmessages_box_compressed_partial%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_compressed', parent_id: @parent_id%>";
 document.getElementById('<%= botresponses_box_after%>').classList.add('hide');
 document.getElementById('<%= botresponses_box_compressed %>').classList.remove('hide');
 document.getElementById('<%= botmessages_previous_compressed %>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_previous', delete_button: false, parent_id: @parent_id%>";
-document.getElementById('<%= usermessagemain_partial_with_connector %>').innerHTML = "<%= j render 'home/edit/nodes/usermessagesmain_with_connector'%>";
+document.getElementById('<%= botmessage_compressed_name%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_name_field', node: @node, edit_tag: false%>";
 
 <% for child in @node.children%>
 	<% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
@@ -18,3 +19,6 @@ document.getElementById('<%= usermessagemain_partial_with_connector %>').innerHT
 		document.getElementById('<%= define_id%>').classList.add('hide');
 	<%end%>
 <%end%>
+
+document.getElementById('<%= usermessagemain_partial_with_connector %>').innerHTML = "<%= j render 'home/edit/nodes/usermessagesmain_with_connector'%>";
+

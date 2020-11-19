@@ -1,0 +1,8 @@
+<% if node.name%>
+	<%= truncate(node.name, length: 15)%>
+<% else %>	
+	Bot Response
+<% end %>
+<% if edit_tag%>
+	<%= link_to image_tag('editiconblack.png', size: "12"), botmessage_name_edit_path(@node.id), remote: true%>
+<%end%>

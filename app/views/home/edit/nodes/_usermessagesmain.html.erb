@@ -32,22 +32,8 @@
 
 <div class="row">
 	<div class="connector_black_link"></div>
-	<div class="usermessage_error_message">
-		<div class="row">
-			<div class="col-1 text-center mt-2 ml-2">
-				<%= image_tag('redflash.JPG', size: "14", class: "rounded-circle")%>
-			</div>
-			<div class="col-6 mt-2", style="padding-right: 5px;">
-				Error Response
-			</div>
-			<div class="col-4 mt-2 ml-2", style="padding-left: 5px;">
-				<%= form_with scope: :error_message, url: root_path, method: :put, local: true do |f| %>
-				  <span class="text-center ml-4">
-						<%= f.submit value: "Define", class: "usermessage_error_button", local: true%>
-					</span>
-			  <% end %>
-			</div>
-		</div>
+	<div>
+		<%= render 'home/edit/nodes/usermessages_error_node'%>
 	</div>
 </div>
 
