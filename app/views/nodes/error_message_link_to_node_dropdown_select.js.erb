@@ -1,0 +1,3 @@
+<% error_link_to_node_select_node_button = "error_link_to_node_select_node_button_" + (@node.id).to_s%>
+document.getElementById('<%= error_link_to_node_select_node_button%>').innerHTML = "<%= truncate(@linked_name, length: 30)%>";
+

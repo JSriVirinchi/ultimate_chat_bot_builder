@@ -239,17 +239,37 @@ class NodesController < ApplicationController
 	end
 
 	def error_node_save
-		@node = Node.find(params[:id])
-		if Message.where(node_type: "error", node_id: @node.id).first
-			@message = Message.where(node_type: "error", node_id: @node.id).first
+		@child = Node.find(params[:id])
+		@parent = Node.find(@child.parent_id)
+		@node = @parent
+		if Message.where(node_type: "error", node_id: @child.id).first
+			@message = Message.where(node_type: "error", node_id: @child.id).first
 			@message.update(error_node: params[:error_node][:error_node],
 					error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-					error_node_exit_message: params[:error_node][:error_node_exit_message])
+					error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
 		else
-			@message = Message.create(node_type: "error", bot_id: @node.bot_id, node_id: @node.id, error_node: params[:error_node][:error_node],
+			@message = Message.create(node_type: "error", bot_id: @child.bot_id, node_id: @child.id, error_node: params[:error_node][:error_node],
 					error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-					error_node_exit_message: params[:error_node][:error_node_exit_message])
+					error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
 		end
+		respond_to do |format|
+		   format.js
+	  	end
+	end
+
+
+	def error_message_expand_icon
+		@node = Node.find(params[:node_id])
+		respond_to do |format|
+		   format.js
+	  	end
+	end
+
+	def error_message_link_to_node_dropdown_select
+		@node = Node.find(params[:node_id])
+		@linked_name = params[:name]
+		@message = Message.where(node_type: "error", node_id: @node.id).first
+		@message.update(error_node_link_to_node: params[:name])
 		respond_to do |format|
 		   format.js
 	  	end

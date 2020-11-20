@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_101115) do
+ActiveRecord::Schema.define(version: 2020_11_20_065910) do
 
   create_table "bots", force: :cascade do |t|
     t.string "name"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2020_11_19_101115) do
     t.string "error_node_link_to_node"
     t.text "error_node_link_to_message"
     t.text "error_node_exit_message"
+    t.string "error_node_transfer_to_agent"
+    t.text "error_node_transfer_to_agent_message"
   end
 
   create_table "nodes", force: :cascade do |t|

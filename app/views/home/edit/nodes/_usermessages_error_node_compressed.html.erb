@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-1 text-center mt-2 ml-2">
+		<%= image_tag('redflash.JPG', size: "14", class: "rounded-circle")%>
+	</div>
+	<div class="col-8 mt-2", style="padding-right: 5px;">
+		Error Response
+	</div>
+	<div class="col-2">
+		<%= link_to image_tag('expand.png', size: "15", class: "mt-2"), error_message_expand_icon_path(@node.id), remote: true%>
+	</div>
+
+	<% if Node.where(node_type: "error", parent_id: @node.id).first%>
+	<% @error_node = Node.where(node_type: "error", parent_id: @node.id).first%>
+		<div class="error_node_expanded_white">
+			<% number = 0%>
+			<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
+				<% number = number + 1%>
+				<div class="mb-2">
+					<%if number == 1%>
+						<%= number%>st			 
+					<%elsif number == 2%>
+						<%= number%>nd			 
+					<%elsif number == 3%>
+						<%= number%>rd
+					<%else%>	
+						<%= number%>th		
+					<%end%>
+					error attempt 
+				</div>
+				<div class="error_node_message_text_area error_node_message_text_area_text p-2">
+					<div style="font-size: 12px; color: rgb(200,200,200);">
+						<%if message.error_node == "error_message"%>
+							Send Error Message
+						<%elsif message.error_node == "transfer_to_agent"%>
+							Transfer to agent group : <b>Group - 1</b>
+						<%elsif message.error_node == "link_to_node"%>
+							Link to another node : Node name
+						<%elsif message.error_node == "exit_message"%>
+							Exit conversation
+						<%end%>
+					</div>
+					<div>
+						<%if message.error_node == "error_message"%>
+							<%= message.error_node_message%>
+						<%elsif message.error_node == "transfer_to_agent"%>
+							<%= message.error_node_transfer_to_agent_message%>
+						<%elsif message.error_node == "link_to_node"%>
+							<%= message.error_node_link_to_message%>
+						<%elsif message.error_node == "exit_message"%>
+							<%= message.error_node_exit_message%>
+						<%end%>
+					</div>
+				</div>
+			<%end%>
+		</div>
+	<%else%>
+		<div>
+			No error messages.
+		</div>	
+	<% end %>
+</div>
+

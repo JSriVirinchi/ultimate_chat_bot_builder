@@ -1,0 +1,18 @@
+<div class="row">
+	<div class="col-1 text-center mt-2 ml-2">
+		<%= image_tag('redflash.JPG', size: "14", class: "rounded-circle")%>
+	</div>
+	<div class="col-6 mt-2", style="padding-right: 5px;">
+		Error Response
+	</div>
+	<div class="col-4 mt-2 ml-2", style="padding-left: 5px;">
+		<%= form_with scope: :error_message_define, url: error_message_define_node_path, method: :post, remote: true do |f| %>
+			<%= f.text_field :node_type, value: "error", class: "hide"%>
+			<%= f.text_field :bot_id, value: @bot.id, class: "hide"%>
+			<%= f.text_field :parent_id, value: @node.id, class: "hide"%>
+	        <span class="text-center ml-4">
+				<%= f.submit "Define", value: "Define", class: "usermessage_error_button", local: true%>
+		    </span>
+	    <% end %>
+	</div>
+</div>

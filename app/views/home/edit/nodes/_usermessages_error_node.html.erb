@@ -1,36 +1,30 @@
 <% error_message_define = "error_message_define_" + (@node.id).to_s%>
 <% error_message_expanded = "error_message_expanded_" + (@node.id).to_s%>
+<% error_message_compressed = "error_message_compressed_" + (@node.id).to_s%>
 
 <div class="usermessage_error_message" id= <%= error_message_define%>>
-	<div class="row">
-		<div class="col-1 text-center mt-2 ml-2">
-			<%= image_tag('redflash.JPG', size: "14", class: "rounded-circle")%>
-		</div>
-		<div class="col-6 mt-2", style="padding-right: 5px;">
-			Error Response
-		</div>
-		<div class="col-4 mt-2 ml-2", style="padding-left: 5px;">
-			<%= form_with scope: :error_message_define, url: error_message_define_node_path, method: :post, remote: true do |f| %>
-				<%= f.text_field :node_type, value: "error", class: "hide"%>
-				<%= f.text_field :bot_id, value: @bot.id, class: "hide"%>
-				<%= f.text_field :parent_id, value: @node.id, class: "hide"%>
-		        <span class="text-center ml-4">
-					<%= f.submit "Define", value: "Define", class: "usermessage_error_button", local: true%>
-			    </span>
-		    <% end %>
-		</div>
-	</div>
+	<%= render 'home/edit/nodes/usermessages_error_define_node'%>
 </div>
-<div class="usermessage_error_message hide" id= <%= error_message_expanded %>>	
+<div class="usermessage_error_message hide" style="margin-bottom: 330px;" id= <%= error_message_expanded %>>	
 	<%= render 'home/edit/nodes/usermessages_error_node_expanded'%>
 </div>
+<div class="usermessage_error_message hide" style="margin-bottom: 170px;" id= <%= error_message_compressed %>>	
+	<%= render 'home/edit/nodes/usermessages_error_node_compressed'%>
+</div>
+
 
 <script type="text/javascript">
 	<% error_message_define = "error_message_define_" + (@node.id).to_s%>
 	<% error_message_expanded = "error_message_expanded_" + (@node.id).to_s%>
+	<% error_message_compressed = "error_message_compressed_" + (@node.id).to_s%>
 
 	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
 		document.getElementById('<%= error_message_define %>').classList.add('hide');
 		document.getElementById('<%= error_message_expanded %>').classList.remove('hide');
+		<% error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
+		<% if Message.where(node_id: error_node.id).first%>
+			document.getElementById('<%= error_message_expanded %>').classList.add('hide');
+			document.getElementById('<%= error_message_compressed %>').classList.remove('hide');
+		<%end%>
 	<%end%>
 </script>
