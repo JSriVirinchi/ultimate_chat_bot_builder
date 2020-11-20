@@ -1,7 +1,9 @@
 <% for child in @node.children%>
+<%if child.node_type == "user" %>
 	<%= render 'home/edit/nodes/usermessages_define_node', child: child%>
 	<%= render 'home/edit/nodes/usermessages_compressed', child: child%>	
 	<%= render 'home/edit/nodes/usermessages_expanded', child: child%>
+<% end %>
 <% end %>
 
 <script type="text/javascript">	

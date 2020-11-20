@@ -1,4 +1,7 @@
-<div class="usermessage_error_message hide">
+<% error_message_define = "error_message_define_" + (@node.id).to_s%>
+<% error_message_expanded = "error_message_expanded_" + (@node.id).to_s%>
+
+<div class="usermessage_error_message" id= <%= error_message_define%>>
 	<div class="row">
 		<div class="col-1 text-center mt-2 ml-2">
 			<%= image_tag('redflash.JPG', size: "14", class: "rounded-circle")%>
@@ -7,60 +10,27 @@
 			Error Response
 		</div>
 		<div class="col-4 mt-2 ml-2", style="padding-left: 5px;">
-			<%= form_with scope: :error_message, url: root_path, method: :put, local: true do |f| %>
+			<%= form_with scope: :error_message_define, url: error_message_define_node_path, method: :post, remote: true do |f| %>
+				<%= f.text_field :node_type, value: "error", class: "hide"%>
+				<%= f.text_field :bot_id, value: @bot.id, class: "hide"%>
+				<%= f.text_field :parent_id, value: @node.id, class: "hide"%>
 		        <span class="text-center ml-4">
-					<%= f.submit value: "Define", class: "usermessage_error_button", local: true%>
+					<%= f.submit "Define", value: "Define", class: "usermessage_error_button", local: true%>
 			    </span>
 		    <% end %>
 		</div>
 	</div>
 </div>
-<div class="usermessage_error_message">	
-	<div class="row">
-		<div class="col-1 text-center mt-2 ml-2">
-			<%= image_tag('redflash.JPG', size: "14", class: "rounded-circle")%>
-		</div>
-		<div class="col-6 mt-2", style="padding-right: 5px;">
-			Error Response
-		</div>
-		<div class="error_node_expanded_white">
-			<div class= "mb-2">
-				Fist error message
-			</div>
-			<%= form_with scope: :error_node, url: root_path, method: :put,  remote: true do |f| %>
-				<div class="mt-1">
-					<%= f.radio_button :error_node , "error_message", id:"a" %>
-					<%= f.label :error_node , "Send error message", value: "error_message" , class: "ml-2 error_message_text"%>
-				</div>
-				<div class="ml-3 mt-2 mb-2">
-					<%= text_area(:error_node, :error_node_message, cols: 32, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "I did not understand what you have said. Please rephrase it.")%>
-				</div>
-				<div class="mt-1">
-					<%= f.radio_button :error_node , "link_to_node", id: "b" %>
-					<%= f.label :error_node , "Link to another node", value: "link_to_node" , class: "ml-2 error_message_text"%>
-				</div>
-
-				<div class="dropdown show mb-2 ml-3">
-				  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropid" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 240px; background-color: transparent; color: grey; border-color: grey;">
-				    Select Node
-				  </a>
-				  <div class="dropdown-menu" aria-labelledby="dropid", style="width: 240px;">
-				  	<% for node in Node.where(bot_id: @bot.id, node_type: "bot")%>
-				  		<a class="dropdown-item" href= <%= root_path %> ><%= truncate(node.name, length: 30)%></a>
-				    <%end%>				    
-				  </div>
-				</div>
-				<div class="ml-3 mt-2 mb-2">
-					<%= text_area(:error_node, :link_to_node_message, cols: 32, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Ok. Lets start from the beginning")%>
-				</div>
-				<div class="mt-1">
-					<%= f.radio_button :error_node , "exit", id: "c" %>
-					<%= f.label :error_node , "Exit conversation", value: "exit" , class: "ml-2 error_message_text"%>
-				</div>
-				<div class="ml-3 mt-2 mb-2">
-					<%= text_area(:error_node, :error_exit_node_message, cols: 32, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Sorry, I still did not get what you said. Exiting the conversation.")%>
-				</div>
-			<% end %>
-		</div>
-	</div>
+<div class="usermessage_error_message hide" id= <%= error_message_expanded %>>	
+	<%= render 'home/edit/nodes/usermessages_error_node_expanded'%>
 </div>
+
+<script type="text/javascript">
+	<% error_message_define = "error_message_define_" + (@node.id).to_s%>
+	<% error_message_expanded = "error_message_expanded_" + (@node.id).to_s%>
+
+	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
+		document.getElementById('<%= error_message_define %>').classList.add('hide');
+		document.getElementById('<%= error_message_expanded %>').classList.remove('hide');
+	<%end%>
+</script>

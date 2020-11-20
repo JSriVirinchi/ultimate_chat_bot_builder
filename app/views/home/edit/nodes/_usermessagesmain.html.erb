@@ -1,5 +1,7 @@
 <% usermessages_define_node_partial = "usermessages_define_node_partial_" + (@node.id).to_s%>
 <% add_number_of_nodes = "add_number_of_nodes_" + (@node.id).to_s%>
+<% usermessages_error_node_main = "usermessages_error_node_main_" + (@node.id).to_s%>
+
 <div id="<%= usermessages_define_node_partial %>">
 	<%= render 'home/edit/nodes/usermessages_define_node_with_forloop'%>
 </div>
@@ -32,7 +34,7 @@
 
 <div class="row">
 	<div class="connector_black_link"></div>
-	<div>
+	<div id= <%= usermessages_error_node_main%>>
 		<%= render 'home/edit/nodes/usermessages_error_node'%>
 	</div>
 </div>

@@ -7,11 +7,13 @@ height = parseInt(height);
 
 <% height = 53%>
 <% for i in @node.children%>
+<%if i.node_type == "user"%>
 	<% if i.name == nil && i.user_input_type == nil%>
 		<% height = height + 52%>
 	<%else%>
 		<%height = height + 108%>
 	<%end %>	
+<% end %>
 <% end %>
 <% height = height.to_s + "px"%>
 height = "<%= height%>";

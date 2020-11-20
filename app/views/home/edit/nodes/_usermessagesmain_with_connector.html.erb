@@ -4,11 +4,13 @@
 		<% usermessagemain_partial = "usermessagemain_partial" + (@node.id).to_s%>
 		<% height = 53%>
 		<% for i in @node.children%>
+		<%if i.node_type == "user"%>
 			<% if i.name == nil && i.user_input_type == nil%>
 				<% height = height + 52%>
 			<%else%>
 				<%height = height + 108%>
 			<%end %>	
+		<% end %>
 		<% end %>
 		<% height = height.to_s + "px"%>
 
@@ -23,7 +25,7 @@
 			<div>
 				<div>
 					<% for children in @node.children%>
-						<% if children %>
+						<% if children.node_type == "user" %>
 							<div class="row">
 								<div class="connector_green_circle ", style="margin-left: 30px;"></div>
 								<div class="connector_green_link", style="margin-right: 15px; "></div>
