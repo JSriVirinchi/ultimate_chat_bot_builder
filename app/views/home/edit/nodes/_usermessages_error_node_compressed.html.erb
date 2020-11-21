@@ -11,16 +11,17 @@
 
 	<% if Node.where(node_type: "error", parent_id: @node.id).first%>
 	<% @error_node = Node.where(node_type: "error", parent_id: @node.id).first%>
+	<% error_message_link_to_group_name = "error_message_link_to_group_name_" + (@error_node.id).to_s%>
 		<div class="error_node_expanded_white">
 			<% number = 0%>
 			<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
 				<% number = number + 1%>
 				<div class="mb-2">
-					<%if number == 1%>
+					<%if (number)%10 == 1 && number != 11%>
 						<%= number%>st			 
-					<%elsif number == 2%>
+					<%elsif (number)%10 == 2  && number != 12%>
 						<%= number%>nd			 
-					<%elsif number == 3%>
+					<%elsif (number)%10 == 3  && number != 13%>
 						<%= number%>rd
 					<%else%>	
 						<%= number%>th		
@@ -34,7 +35,14 @@
 						<%elsif message.error_node == "transfer_to_agent"%>
 							Transfer to agent group : <b>Group - 1</b>
 						<%elsif message.error_node == "link_to_node"%>
-							Link to another node : Node name
+							Link to another node : 
+							<b id= <%= error_message_link_to_group_name%>>
+								<%if message.error_node_link_to_node%>
+									<%= message.error_node_link_to_node%>
+								<%else%>
+									<span style="color: red;">Please select a node</span>
+								<%end%>
+							</b>
 						<%elsif message.error_node == "exit_message"%>
 							Exit conversation
 						<%end%>
@@ -53,10 +61,6 @@
 				</div>
 			<%end%>
 		</div>
-	<%else%>
-		<div>
-			No error messages.
-		</div>	
 	<% end %>
 </div>
 

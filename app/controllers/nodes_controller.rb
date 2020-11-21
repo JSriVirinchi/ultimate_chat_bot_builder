@@ -242,19 +242,21 @@ class NodesController < ApplicationController
 		@child = Node.find(params[:id])
 		@parent = Node.find(@child.parent_id)
 		@node = @parent
-		if Message.where(node_type: "error", node_id: @child.id).first
-			@message = Message.where(node_type: "error", node_id: @child.id).first
-			@message.update(error_node: params[:error_node][:error_node],
-					error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-					error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
-		else
-			@message = Message.create(node_type: "error", bot_id: @child.bot_id, node_id: @child.id, error_node: params[:error_node][:error_node],
-					error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-					error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
+		if params[:commit] == "Save"
+			if Message.where(node_type: "error", node_id: @child.id).first
+				@message = Message.where(node_type: "error", node_id: @child.id).first
+				@message.update(error_node: params[:error_node][:error_node],
+						error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
+						error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
+			else
+				@message = Message.create(node_type: "error", bot_id: @child.bot_id, node_id: @child.id, error_node: params[:error_node][:error_node],
+						error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
+						error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
+			end
+			respond_to do |format|
+			   format.js
+		  	end
 		end
-		respond_to do |format|
-		   format.js
-	  	end
 	end
 
 
