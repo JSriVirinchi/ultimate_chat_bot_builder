@@ -7,12 +7,16 @@
 	</div>
 	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
 		<% @error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first %>
+		<% error_node_form_out_loop = "error_node_form_out_loop_" + (@error_node.id).to_s%>
+		<% add_another_error_attempt = "add_another_error_attempt_" + (@error_node.id).to_s%>
 		
 		<div class="error_node_expanded_white">
 			<% number = 0%>
+			<% warning = false%>
 			<!-- looping all error cards and its forms -->
 			<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
 				<% number = number + 1%>
+				<% error_node_form_in_loop = "error_node_form_in_loop_" + (@error_node.id).to_s + "_" + (message.id).to_s%>				
 				<!-- error number -->
 				<div class="mb-2 row">
 					<div class="col-8">
@@ -26,14 +30,22 @@
 							<%= number%>th		
 						<%end%>
 						error attempt 
+						<%if warning%>
+							<span>
+								<%= image_tag('warning.png', size: "20", class: " ")%>
+							</span>
+						<%end%>
+						<%if message.error_node != "error_message"%>
+							<% warning = true%>
+						<%end%>
 					</div>
 					<div class="col-4">
-						<%= link_to image_tag('editiconblack.png', size: "14", class: " mr-2"), root_path %>
+						<%= link_to image_tag('editiconblack.png', size: "14", class: " mr-2"), error_node_editing_message_path(message.id), remote: true %>
 						<%= link_to image_tag('dustbin.png', size: "14", class: "ml-2"), error_message_attempt_delete_path(message.id), method: :delete, remote: true %>
 					</div>
 				</div>
 				<!-- error card -->
-				<div class="error_node_message_text_area error_node_message_text_area_text p-2">
+				<div class="error_node_message_text_area error_node_message_text_area_text p-2 mb-2">
 					<div style="font-size: 12px; color: rgb(200,200,200);">
 						<%if message.error_node == "error_message"%>
 							Send Error Message
@@ -66,7 +78,7 @@
 					</div>
 				<!-- error card end -->
 				</div>
-				<div class="error_message_node_form_showing_off">					
+				<div class="error_message_node_form_showing_off hide mt-2" id= <%=error_node_form_in_loop %>>					
 					<%= render 'home/edit/nodes/usermessages_error_node_expanded_form', message: message%>
 				</div>
 			<!-- end of looping cards and forms -->
@@ -79,7 +91,7 @@
 				</div>
 			<%end%>
 			<!-- form for adding new messages -->
-			<div class="error_message_node_form_showing_off" >
+			<div class="error_message_node_form_showing_off mt-2 hide" id= <%= error_node_form_out_loop%>>
 				<% number = number + 1%>
 				<div class="mb-2" >
 					<%if (number)%10 == 1 && number != 11%>
@@ -92,17 +104,30 @@
 						<%= number%>th		
 					<%end%>
 					error attempt 
-				</div>					
-				<%= render 'home/edit/nodes/usermessages_error_node_expanded_form', message: "default"%>
+				</div>
+				<div>
+					<%= render 'home/edit/nodes/usermessages_error_node_expanded_form', message: "default"%>
+				</div>
 			</div>
 
 			<!-- save and add another error attempt to collpase exapnded and add new error message -->
 			<div class="text-center mt-2">
-				<%= link_to " + Add another error attempt", root_path, class: "add_another_error_attempt"%>
-				<%= link_to "Save", root_path, class: "btn btn-sm btn-outline-secondary  mt-2", style: "color: grey; width: 240px;"%>
+				<%= link_to " + Add another error attempt", error_node_add_another_error_attempt_path(@error_node.id), class: "add_another_error_attempt", id: add_another_error_attempt, remote: true %>
+				<%= link_to "Save", error_node_save_path(@error_node.id), class: "btn btn-sm btn-outline-secondary  mt-2", style: "color: grey; width: 240px;", remote: true%>
 			</div>
 		<!-- end of the white part in expanded -->
 		</div>
 
 	<%end%>
 </div>
+
+<script type="text/javascript">
+	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>	
+		<% @error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first %>
+		<%if Message.where(node_type: "error", node_id: @error_node.id).first%>
+		<%else%>
+			document.getElementById('<%= error_node_form_out_loop%>').classList.remove('hide');
+			document.getElementById('<%= add_another_error_attempt%>').classList.add('hide');
+		<%end%>
+	<%end%>	
+</script>

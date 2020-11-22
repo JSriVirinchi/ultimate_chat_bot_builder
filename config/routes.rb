@@ -46,5 +46,8 @@ Rails.application.routes.draw do
   post 'nodes/error_node_message_save/:id/:message_id', to: 'nodes#error_node_message_save', as: 'error_node_message_save'
   get 'nodes/usermessage/error_message_expand_icon/:node_id', to: 'nodes#error_message_expand_icon', as: 'error_message_expand_icon'
   delete 'nodes/usermessage/error_message_attempt_delete/:message_id', to: 'nodes#error_message_attempt_delete', as: 'error_message_attempt_delete'
+  get 'nodes/usermessage/error_node_save/:node_id', to: 'nodes#error_node_save', as: 'error_node_save'
+  get 'nodes/usermessage/add_another_error_attempt/:node_id', to: 'nodes#error_node_add_another_error_attempt', as: 'error_node_add_another_error_attempt'
+  get 'nodes/usermessage/error_node_editing_message/:message_id', to: 'nodes#error_node_editing_message', as: 'error_node_editing_message'
 end
 

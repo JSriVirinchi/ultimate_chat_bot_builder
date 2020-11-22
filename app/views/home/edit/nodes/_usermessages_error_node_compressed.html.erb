@@ -14,8 +14,10 @@
 	<% error_message_link_to_group_name = "error_message_link_to_group_name_" + (@error_node.id).to_s%>
 		<div class="error_node_expanded_white">
 			<% number = 0%>
+			<% warning = false%>
 			<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
-				<% number = number + 1%>
+			<% number = number + 1%>
+			<% if warning == false%>
 				<div class="mb-2">
 					<%if (number)%10 == 1 && number != 11%>
 						<%= number%>st			 
@@ -27,8 +29,11 @@
 						<%= number%>th		
 					<%end%>
 					error attempt 
+					<%if message.error_node != "error_message"%>
+						<% warning = true%>
+					<%end%>
 				</div>
-				<div class="error_node_message_text_area error_node_message_text_area_text p-2">
+				<div class="error_node_message_text_area error_node_message_text_area_text p-2 mb-2">
 					<div style="font-size: 12px; color: rgb(200,200,200);">
 						<%if message.error_node == "error_message"%>
 							Send Error Message
@@ -58,6 +63,12 @@
 							<%= message.error_node_exit_message%>
 						<%end%>
 					</div>
+				</div>
+			<%end%>
+			<%end%>
+			<%if number == 0%>
+				<div>
+					No messages are added here. Click the expand icon to create.
 				</div>
 			<%end%>
 		</div>

@@ -275,4 +275,29 @@ class NodesController < ApplicationController
 		   format.js
 	  	end
 	end
+
+	def error_node_save
+		@error_node = Node.find(params[:node_id])
+		@parent = Node.find(@error_node.parent_id)
+		@node = @parent
+		@bot = Bot.find(@node.bot_id)
+		respond_to do |format|
+		   format.js
+	  	end
+	end
+
+	def error_node_add_another_error_attempt
+		@error_node = Node.find(params[:node_id])
+		respond_to do |format|
+		   format.js
+	  	end
+	end
+
+	def  error_node_editing_message
+		@message = Message.find(params[:message_id])
+		@error_node = Node.find(@message.node_id)
+		respond_to do |format|
+		   format.js
+	  	end
+	end
 end
