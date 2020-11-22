@@ -1,0 +1,2 @@
+<% error_message_expanded = "error_message_expanded_" + (@node.id).to_s%>
+document.getElementById('<%= error_message_expanded%>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_error_node_expanded'%>";

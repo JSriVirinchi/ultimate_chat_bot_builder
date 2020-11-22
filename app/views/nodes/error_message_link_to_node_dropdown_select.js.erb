@@ -1,5 +1,0 @@
-<% error_link_to_node_select_node_button = "error_link_to_node_select_node_button_" + (@node.id).to_s%>
-<% error_message_link_to_group_name = "error_message_link_to_group_name_" + (@node.id).to_s%>
-document.getElementById('<%= error_link_to_node_select_node_button%>').innerHTML = "<%= truncate(@linked_name, length: 30)%>";
-document.getElementById('<%= error_message_link_to_group_name%>').innerHTML = "<%= @linked_name%>";
-

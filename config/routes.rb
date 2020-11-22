@@ -43,8 +43,8 @@ Rails.application.routes.draw do
   put 'nodes/toggle_exit_message/:id', to: 'nodes#toggle_exit_message', as: 'toggle_exit_message'
   put 'nodes/toggle_transfer_to_agent_message/:id', to: 'nodes#toggle_transfer_to_agent_message', as: 'toggle_transfer_to_agent_message'
   post 'nodes/error_message_define_node', to: 'nodes#error_message_define_node', as: 'error_message_define_node'
-  post 'nodes/error_node_save/:id', to: 'nodes#error_node_save', as: 'error_node_save'
+  post 'nodes/error_node_message_save/:id/:message_id', to: 'nodes#error_node_message_save', as: 'error_node_message_save'
   get 'nodes/usermessage/error_message_expand_icon/:node_id', to: 'nodes#error_message_expand_icon', as: 'error_message_expand_icon'
-  put 'nodes/usermessage/error_message_link_to_node_dropdown/:name/:node_id', to: 'nodes#error_message_link_to_node_dropdown_select', as: 'error_message_link_to_node_dropdown_select'
+  delete 'nodes/usermessage/error_message_attempt_delete/:message_id', to: 'nodes#error_message_attempt_delete', as: 'error_message_attempt_delete'
 end
 

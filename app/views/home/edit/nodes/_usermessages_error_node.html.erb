@@ -18,13 +18,10 @@
 	<% error_message_expanded = "error_message_expanded_" + (@node.id).to_s%>
 	<% error_message_compressed = "error_message_compressed_" + (@node.id).to_s%>
 
-	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
-		document.getElementById('<%= error_message_define %>').classList.add('hide');
-		document.getElementById('<%= error_message_expanded %>').classList.remove('hide');
+	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>		
 		<% error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
-		<% if Message.where(node_id: error_node.id).first%>
-			document.getElementById('<%= error_message_expanded %>').classList.add('hide');
-			document.getElementById('<%= error_message_compressed %>').classList.remove('hide');
-		<%end%>
+		document.getElementById('<%= error_message_define %>').classList.add('hide');
+		document.getElementById('<%= error_message_expanded %>').classList.add('hide');
+		document.getElementById('<%= error_message_compressed %>').classList.remove('hide');
 	<%end%>
 </script>

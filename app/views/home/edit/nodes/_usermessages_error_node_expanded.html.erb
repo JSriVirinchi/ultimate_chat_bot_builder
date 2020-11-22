@@ -6,236 +6,103 @@
 		Error Response
 	</div>
 	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
-	<% @error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first %>
-	<% error_message_link_to_group_name = "error_message_link_to_group_name_" + (@error_node.id).to_s%>
-	<% number = 0%>
-	<div class="error_node_expanded_white">
-		<!-- previous messages -->
-		<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
-			<% number = number + 1%>
-			<div class="mb-2">
-				<%if (number)%10 == 1 && number != 11%>
-					<%= number%>st			 
-				<%elsif (number)%10 == 2  && number != 12%>
-					<%= number%>nd			 
-				<%elsif (number)%10 == 3  && number != 13%>
-					<%= number%>rd
-				<%else%>	
-					<%= number%>th		
-				<%end%>
-				error attempt 
-			</div>
-			<div class="error_node_message_text_area error_node_message_text_area_text p-2">
-				<div style="font-size: 12px; color: rgb(200,200,200);">
-					<%if message.error_node == "error_message"%>
-						Send Error Message
-					<%elsif message.error_node == "transfer_to_agent"%>
-						Transfer to agent group : <b>Group - 1</b>
-					<%elsif message.error_node == "link_to_node"%>
-						Link to another node : 
-						<b id= <%= error_message_link_to_group_name%>>
-							<%if message.error_node_link_to_node%>
-								<%= message.error_node_link_to_node%>
-							<%else%>
-								<span style="color: red;">Please select a node</span>
-							<%end%>
-						</b>
-					<%elsif message.error_node == "exit_message"%>
-						Exit conversation
-					<%end%>
-				</div>
-				<div>
-					<%if message.error_node == "error_message"%>
-						<%= message.error_node_message%>
-					<%elsif message.error_node == "transfer_to_agent"%>
-						<%= message.error_node_transfer_to_agent_message%>
-					<%elsif message.error_node == "link_to_node"%>
-						<%= message.error_node_link_to_message%>
-					<%elsif message.error_node == "exit_message"%>
-						<%= message.error_node_exit_message%>
-					<%end%>
-				</div>
-			</div>
-		<%end%>
-		<!-- new reminder -->
-
-		<div class="mb-2 mt-2">
-			<% number = number + 1%>
-			<%if (number)%10 == 1 && number != 11%>
-				<%= number%>st			 
-			<%elsif (number)%10 == 2  && number != 12%>
-				<%= number%>nd			 
-			<%elsif (number)%10 == 3  && number != 13%>
-				<%= number%>rd
-			<%else%>	
-				<%= number%>th		
-			<%end%>
-			error attempt 
-		</div>
+		<% @error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first %>
 		
+		<div class="error_node_expanded_white">
+			<% number = 0%>
+			<!-- looping all error cards and its forms -->
+			<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
+				<% number = number + 1%>
+				<!-- error number -->
+				<div class="mb-2 row">
+					<div class="col-8">
+						<%if (number)%10 == 1 && number != 11%>
+							<%= number%>st			 
+						<%elsif (number)%10 == 2  && number != 12%>
+							<%= number%>nd			 
+						<%elsif (number)%10 == 3  && number != 13%>
+							<%= number%>rd
+						<%else%>	
+							<%= number%>th		
+						<%end%>
+						error attempt 
+					</div>
+					<div class="col-4">
+						<%= link_to image_tag('editiconblack.png', size: "14", class: " mr-2"), root_path %>
+						<%= link_to image_tag('dustbin.png', size: "14", class: "ml-2"), error_message_attempt_delete_path(message.id), method: :delete, remote: true %>
+					</div>
+				</div>
+				<!-- error card -->
+				<div class="error_node_message_text_area error_node_message_text_area_text p-2">
+					<div style="font-size: 12px; color: rgb(200,200,200);">
+						<%if message.error_node == "error_message"%>
+							Send Error Message
+						<%elsif message.error_node == "transfer_to_agent"%>
+							Transfer to agent group : <b>Group - 1</b>
+						<%elsif message.error_node == "link_to_node"%>
+							Link to another node : 
+							<b>
+								<%if message.error_node_link_to_node%>
+									<%= message.error_node_link_to_node%>
+								<%else%>
+									<span style="color: red;">Please select a node</span>
+								<%end%>
+							</b>
+						<%elsif message.error_node == "exit_message"%>
+							Exit conversation
+						<%end%>
+					</div>
 
-			<% error_message = "error_message_" + (@error_node.id).to_s%>			
-			<% transfer_to_agent = "transfer_to_agent_" + (@error_node.id).to_s%>			
-			<% link_to_node = "link_to_node_" + (@error_node.id).to_s%>			
-			<% exit_message = "exit_message_" + (@error_node.id).to_s %>
-			
-			<% error_message_text_area = "error_message_text_area_" + (@error_node.id).to_s%>
-			<% transfer_to_agent_text_and_dropdown = "transfer_to_agent_text_and_dropdown_" + (@error_node.id).to_s%>
-			<% link_to_node_text_and_dropdown = "link_to_node_text_and_dropdown" + (@error_node.id).to_s%>
-			<% exit_message_text_area = "exit_message_text_area" + (@error_node.id).to_s %>
-			<% transfer_to_agent_text_and_dropdown_id = "transfer_to_agent_text_and_dropdown_id_" + (@error_node.id).to_s%>
-			<% link_to_node_text_and_dropdown_id = "link_to_node_text_and_dropdown_id_" + (@error_node.id).to_s %>
-			<% error_link_to_node_select_node_button = "error_link_to_node_select_node_button_" + (@error_node.id).to_s%>
+					<div>
+						<%if message.error_node == "error_message"%>
+							<%= message.error_node_message%>
+						<%elsif message.error_node == "transfer_to_agent"%>
+							<%= message.error_node_transfer_to_agent_message%>
+						<%elsif message.error_node == "link_to_node"%>
+							<%= message.error_node_link_to_message%>
+						<%elsif message.error_node == "exit_message"%>
+							<%= message.error_node_exit_message%>
+						<%end%>
+					</div>
+				<!-- error card end -->
+				</div>
+				<div class="error_message_node_form_showing_off">					
+					<%= render 'home/edit/nodes/usermessages_error_node_expanded_form', message: message%>
+				</div>
+			<!-- end of looping cards and forms -->
+			<%end%>
 
-			<%= form_with scope: :error_node, url: error_node_save_path(@error_node.id), method: :post,  remote: true do |f| %>
-			<!-- error message -->
-				<div class="mt-1">
-					<%= f.radio_button :error_node , "error_message", id: error_message, checked: "checked" %>
-					<%= f.label :error_node , "Send error message", value: "error_message" , class: "ml-2 error_message_text"%>
+			<!-- no messages, when loop is nil -->
+			<%if number == 0%>
+				<div class="text-center">
+					No error messages added					
 				</div>
-				<div class="ml-3 mt-2 mb-2" id= <%= error_message_text_area%>>
-					<%= text_area(:error_node, :error_node_message, cols: 32, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "I did not understand what you have said. Please rephrase it.")%>
-				</div>
-			<!-- transfer to agent -->
-				<div class="mt-1">
-					<%= f.radio_button :error_node , "transfer_to_agent", id: transfer_to_agent %>
-					<%= f.label :error_node , "Transfer to an agent", value: "transfer_to_agent" , class: "ml-2 error_message_text"%>
-				</div>
-				<div class="hide" id= <%= transfer_to_agent_text_and_dropdown%>>
-					<div class="dropdown show mb-2 ml-3">
-					  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 240px; background-color: transparent; color: grey; border-color: grey;" id= <%= transfer_to_agent_text_and_dropdown_id%>>
-					    Transfer to group
-					  </a>
-					  <div class="dropdown-menu" aria-labelledby=<%= transfer_to_agent_text_and_dropdown_id%>, style="width: 240px;">					  	
-					  	<a class="dropdown-item" href= <%= root_path %> >Group -1</a>
-					  	<a class="dropdown-item" href= <%= root_path %> >Group -2</a>
-					  	<a class="dropdown-item" href= <%= root_path %> >Group -3</a>					    			    
-					  </div>
-					</div>
-					<div class="ml-3 mt-2 mb-2">
-						<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 32, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Transferring to an agent group")%>
-					</div>
-				</div>
-			<!-- link to node -->
-				<div class="mt-1">
-					<%= f.radio_button :error_node , "link_to_node", id: link_to_node %>
-					<%= f.label :error_node , "Link to another node", value: "link_to_node" , class: "ml-2 error_message_text"%>
-				</div>
-				<div class="hide" id= <%= link_to_node_text_and_dropdown%>>
-					<div class="dropdown show mb-2 ml-3">
-					  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id= <%= link_to_node_text_and_dropdown_id %>, data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 240px; background-color: transparent; color: grey; border-color: grey;">
-					    <span id= <%= error_link_to_node_select_node_button%>>Select Node</span>
-					  </a>
-					  <div class="dropdown-menu" aria-labelledby=<%= link_to_node_text_and_dropdown_id %>, style="width: 240px;">
-					  	<% node_name_tag = 0%>
-					  	<% for node in Node.where(bot_id: @bot.id, node_type: "bot")%>
-					  		<%if node.name != nil%>	
-					  		<%= link_to truncate(node.name, length: 30), error_message_link_to_node_dropdown_select_path(node.name, @error_node.id), class: "dropdown-item", remote: true, method: :put %>						  		
-					  			<% node_name_tag = node_name_tag + 1%>
-					  		<%end%>	
-					    <%end%>			
-					    <% if node_name_tag == 0%>
-					    	<div class="text-center" style="color: red; font-size: 10px;">
-					    		Please name the node to select here
-					    	</div>
-					    <% end %>	    
-					  </div>
-					</div>
-					<div class="ml-3 mt-2 mb-2">
-						<%= text_area(:error_node, :error_node_link_to_message, cols: 32, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Ok. Lets start from the beginning")%>
-					</div>
-				</div>
-			<!-- exit message -->
-				<div class="mt-1">
-					<%= f.radio_button :error_node , "exit_message", id: exit_message %>
-					<%= f.label :error_node , "Exit conversation", value: "exit_message" , class: "ml-2 error_message_text"%>
-				</div>
-				<div class="ml-3 mt-2 mb-2 hide" id= <%= exit_message_text_area%>>
-					<%= text_area(:error_node, :error_node_exit_message, cols: 32, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Sorry, I did not get what you said. Exiting the conversation.")%>
-				</div>
+			<%end%>
+			<!-- form for adding new messages -->
+			<div class="error_message_node_form_showing_off" >
+				<% number = number + 1%>
+				<div class="mb-2" >
+					<%if (number)%10 == 1 && number != 11%>
+						<%= number%>st			 
+					<%elsif (number)%10 == 2  && number != 12%>
+						<%= number%>nd			 
+					<%elsif (number)%10 == 3  && number != 13%>
+						<%= number%>rd
+					<%else%>	
+						<%= number%>th		
+					<%end%>
+					error attempt 
+				</div>					
+				<%= render 'home/edit/nodes/usermessages_error_node_expanded_form', message: "default"%>
+			</div>
 
-				<div>
-					<%= f.submit " + Add another error attempt", class: "add_another_error_attempt"%>
-				</div>
-				<div>
-					<%= f.submit "Save", class: "btn btn-sm btn-outline-secondary ml-3 mt-2", style: "color: grey; width: 240px;"%>
-				</div>
-			<% end %>
-	</div>
+			<!-- save and add another error attempt to collpase exapnded and add new error message -->
+			<div class="text-center mt-2">
+				<%= link_to " + Add another error attempt", root_path, class: "add_another_error_attempt"%>
+				<%= link_to "Save", root_path, class: "btn btn-sm btn-outline-secondary  mt-2", style: "color: grey; width: 240px;"%>
+			</div>
+		<!-- end of the white part in expanded -->
+		</div>
+
 	<%end%>
 </div>
-
-<script type="text/javascript">
-	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>
-	<%if Message.where(bot_id: @bot.id, node_id: @error_node.id, node_type: "error").first%>
-		<% @error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first %>
-		<% @message = Message.where(bot_id: @bot.id, node_id: @error_node.id, node_type: "error").first %>
-		<%if @message.error_node == "error_message"%>
-			document.getElementById('<%= error_message %>').checked = true;
-			document.getElementById('<%= transfer_to_agent %>').checked = false;
-			document.getElementById('<%= link_to_node %>').checked = false;
-			document.getElementById('<%= exit_message%>').checked = false;
-
-			document.getElementById('<%= error_message_text_area%>').classList.remove('hide');
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.add('hide');
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.add('hide');
-		<%elsif @message.error_node == "transfer_to_agent"%>
-			document.getElementById('<%= error_message %>').checked = false;
-			document.getElementById('<%= transfer_to_agent %>').checked = true;
-			document.getElementById('<%= link_to_node %>').checked = false;
-			document.getElementById('<%= exit_message%>').checked = false;
-
-			document.getElementById('<%= error_message_text_area%>').classList.add('hide');
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.remove('hide');			
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.add('hide');
-		<%elsif @message.error_node == "link_to_node"%>
-			document.getElementById('<%= error_message %>').checked = false;
-			document.getElementById('<%= transfer_to_agent %>').checked = false;
-			document.getElementById('<%= link_to_node %>').checked = true;
-			document.getElementById('<%= exit_message%>').checked = false;
-
-			document.getElementById('<%= error_message_text_area%>').classList.add('hide');
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.add('hide');
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.remove('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.add('hide');	
-		<%elsif @message.error_node == "exit_message"%>
-			document.getElementById('<%= error_message %>').checked = false;
-			document.getElementById('<%= transfer_to_agent %>').checked = false;
-			document.getElementById('<%= link_to_node %>').checked = false;
-			document.getElementById('<%= exit_message%>').checked = true;
-
-			document.getElementById('<%= error_message_text_area%>').classList.add('hide');
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.remove('hide');
-		<%end%>
-
-		document.getElementById('<%= error_message %>').onclick = function() {
-			document.getElementById('<%= error_message_text_area%>').classList.remove('hide');
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.add('hide');
-		}
-		document.getElementById('<%= transfer_to_agent %>').onclick = function() {
-			document.getElementById('<%= error_message_text_area%>').classList.add('hide');
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.remove('hide');			
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.add('hide');
-		}
-		document.getElementById('<%= link_to_node %>').onclick = function() {
-			document.getElementById('<%= error_message_text_area%>').classList.add('hide');
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.remove('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.add('hide');
-		}
-		document.getElementById('<%= exit_message %>').onclick = function() {
-		 	document.getElementById('<%= error_message_text_area%>').classList.add('hide');
-			document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.add('hide');			
-			document.getElementById('<%= exit_message_text_area%>').classList.remove('hide');
-		}
-	<%end%>
-	<%end%>		
-</script>

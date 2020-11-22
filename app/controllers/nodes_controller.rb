@@ -238,27 +238,25 @@ class NodesController < ApplicationController
 	  	end
 	end
 
-	def error_node_save
-		@child = Node.find(params[:id])
-		@parent = Node.find(@child.parent_id)
+	def error_node_message_save
+		@error_node = Node.find(params[:id])
+		@parent = Node.find(@error_node.parent_id)
 		@node = @parent
-		if params[:commit] == "Save"
-			if Message.where(node_type: "error", node_id: @child.id).first
-				@message = Message.where(node_type: "error", node_id: @child.id).first
-				@message.update(error_node: params[:error_node][:error_node],
-						error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-						error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
-			else
-				@message = Message.create(node_type: "error", bot_id: @child.bot_id, node_id: @child.id, error_node: params[:error_node][:error_node],
-						error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-						error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
-			end
-			respond_to do |format|
-			   format.js
-		  	end
+		@bot = Bot.find(@node.bot_id)
+		if params[:message_id] == "default"
+			@message = Message.create(node_type: "error", bot_id: @error_node.bot_id, node_id: @error_node.id, error_node: params[:error_node][:error_node],
+				error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
+				error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
+		else
+			@message = Message.find(params[:message_id])
+			@message.update(error_node: params[:error_node][:error_node],
+				error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
+				error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
 		end
+		respond_to do |format|
+		   format.js
+	  	end
 	end
-
 
 	def error_message_expand_icon
 		@node = Node.find(params[:node_id])
@@ -267,11 +265,12 @@ class NodesController < ApplicationController
 	  	end
 	end
 
-	def error_message_link_to_node_dropdown_select
-		@node = Node.find(params[:node_id])
-		@linked_name = params[:name]
-		@message = Message.where(node_type: "error", node_id: @node.id).first
-		@message.update(error_node_link_to_node: params[:name])
+	def error_message_attempt_delete
+		@error_message = Message.find(params[:message_id])
+		@bot = Bot.find(@error_message.bot_id)
+		@error_node = Node.find(@error_message.node_id)
+		@node = Node.find(@error_node.parent_id)
+		@error_message.destroy
 		respond_to do |format|
 		   format.js
 	  	end
