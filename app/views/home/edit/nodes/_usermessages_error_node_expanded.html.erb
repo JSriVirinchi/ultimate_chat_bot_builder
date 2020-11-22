@@ -84,12 +84,7 @@
 			<!-- end of looping cards and forms -->
 			<%end%>
 
-			<!-- no messages, when loop is nil -->
-			<%if number == 0%>
-				<div class="text-center">
-					No error messages added					
-				</div>
-			<%end%>
+			
 			<!-- form for adding new messages -->
 			<div class="error_message_node_form_showing_off mt-2 hide" id= <%= error_node_form_out_loop%>>
 				<% number = number + 1%>

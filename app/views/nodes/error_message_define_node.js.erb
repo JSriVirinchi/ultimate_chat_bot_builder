@@ -14,9 +14,15 @@
 <% link_to_node_text_and_dropdown = "link_to_node_text_and_dropdown" + (@error_node.id).to_s + "_default"%>
 <% exit_message_text_area = "exit_message_text_area" + (@error_node.id).to_s + "_default" %>
 
+<% error_node_form_out_loop = "error_node_form_out_loop_" + (@error_node.id).to_s%>
+<% add_another_error_attempt = "add_another_error_attempt_" + (@error_node.id).to_s%>
+
 document.getElementById('<%= usermessagemain_partial %>').innerHTML = "<%= j render 'home/edit/nodes/usermessagesmain'%>";
 document.getElementById('<%= error_message_define %>').classList.add('hide');
 document.getElementById('<%= error_message_expanded %>').classList.remove('hide');
+
+document.getElementById('<%= error_node_form_out_loop%>').classList.remove('hide');
+document.getElementById('<%= add_another_error_attempt%>').classList.add('hide');
 
 document.getElementById('<%= error_message %>').onclick = function() {
 	document.getElementById('<%= error_message_text_area%>').classList.remove('hide');

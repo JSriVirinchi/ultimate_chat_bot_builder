@@ -27,7 +27,11 @@
 		<%= f.label :error_node , "Send error message", value: "error_message" , class: "ml-2 error_message_text"%>
 	</div>
 	<div class="ml-3 mt-2 mb-2" id= <%= error_message_text_area%>>
-		<%= text_area(:error_node, :error_node_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "I did not understand what you have said. Please rephrase it.")%>
+		<%if message != "default" && message.error_node_message%> 
+			<%= text_area(:error_node, :error_node_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_message)%>
+		<%else%>
+			<%= text_area(:error_node, :error_node_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "I did not understand what you have said. Please rephrase it.")%>
+		<%end%>
 	</div>
 <!-- transfer to agent -->
 	<div class="mt-1">
@@ -46,7 +50,11 @@
 		  </div>
 		</div>
 		<div class="ml-3 mt-2 mb-2">
-			<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Transferring to an agent group")%>
+			<%if message != "default" && message.error_node_transfer_to_agent_message%> 
+				<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_transfer_to_agent_message)%>
+			<%else%>
+				<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Transferring to an agent group")%>
+			<%end%>	
 		</div>
 	</div>
 <!-- link to node -->
@@ -75,7 +83,11 @@
 		  </div>
 		</div>
 		<div class="ml-3 mt-2 mb-2">
-			<%= text_area(:error_node, :error_node_link_to_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Ok. Lets start from the beginning")%>
+			<%if message != "default" && message.error_node_link_to_message%>
+				<%= text_area(:error_node, :error_node_link_to_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_link_to_message)%>
+			<%else%>
+				<%= text_area(:error_node, :error_node_link_to_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Ok. Lets start from the beginning")%>
+			<%end%>	
 		</div>
 	</div>
 <!-- exit message -->
@@ -84,7 +96,11 @@
 		<%= f.label :error_node , "Exit conversation", value: "exit_message" , class: "ml-2 error_message_text"%>
 	</div>
 	<div class="ml-3 mt-2 mb-2 hide" id= <%= exit_message_text_area%>>
-		<%= text_area(:error_node, :error_node_exit_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Sorry, I did not get what you said. Exiting the conversation.")%>
+		<%if message != "default" && message.error_node_exit_message%>
+			<%= text_area(:error_node, :error_node_exit_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_exit_message)%>
+		<%else%>
+			<%= text_area(:error_node, :error_node_exit_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Sorry, I did not get what you said. Exiting the conversation.")%>
+		<%end%>	
 	</div>
 
 	<div class="text-center">
