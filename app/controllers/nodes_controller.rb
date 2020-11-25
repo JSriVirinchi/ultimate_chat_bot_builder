@@ -300,4 +300,11 @@ class NodesController < ApplicationController
 		   format.js
 	  	end
 	end
+
+	def error_node_delete_icon_for_new_attempt
+		@error_node = Node.find(params[:error_node_id])
+		respond_to do |format|
+		   format.js
+	  	end
+	end
 end

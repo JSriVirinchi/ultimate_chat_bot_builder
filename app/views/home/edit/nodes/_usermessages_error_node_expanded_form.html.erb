@@ -20,10 +20,10 @@
 
 <!-- for for each error - actual form -->
 
-<%= form_with scope: :error_node, url: error_node_message_save_path(@error_node.id, message_id), method: :post,  remote: true do |f| %>
+<%= form_with scope: :error_node, url: error_node_message_save_path(@error_node.id, message_id), method: :post, id: "form", remote: true do |f| %>
 <!-- error message -->
 	<div class="mt-1">
-		<%= f.radio_button :error_node , "error_message", id: error_message, checked: "checked" %>
+		<%= f.radio_button :error_node , "error_message", id: error_message, checked: "checked"%>
 		<%= f.label :error_node , "Send error message", value: "error_message" , class: "ml-2 error_message_text"%>
 	</div>
 	<div class="ml-3 mt-2 mb-2" id= <%= error_message_text_area%>>
@@ -114,6 +114,7 @@
 <% end %>
 
 <script type="text/javascript">
+
 	<%if message != "default"%>
 	<%if message.error_node == "error_message"%>
 		document.getElementById('<%= error_message %>').checked = true;
@@ -157,6 +158,7 @@
 		document.getElementById('<%= exit_message_text_area%>').classList.remove('hide');
 	<%end%>
 	<%end%>
+
 	document.getElementById('<%= error_message %>').onclick = function() {
 		document.getElementById('<%= error_message_text_area%>').classList.remove('hide');
 		document.getElementById('<%= transfer_to_agent_text_and_dropdown%>').classList.add('hide');			

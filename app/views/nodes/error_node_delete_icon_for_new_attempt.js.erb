@@ -1,0 +1,4 @@
+<% error_node_form_out_loop = "error_node_form_out_loop_" + (@error_node.id).to_s%>
+<% add_another_error_attempt = "add_another_error_attempt_" + (@error_node.id).to_s%>
+document.getElementById('<%= error_node_form_out_loop%>').classList.add('hide');
+document.getElementById('<%= add_another_error_attempt%>').classList.remove('hide');

@@ -16,7 +16,9 @@
 			<!-- looping all error cards and its forms -->
 			<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
 				<% number = number + 1%>
-				<% error_node_form_in_loop = "error_node_form_in_loop_" + (@error_node.id).to_s + "_" + (message.id).to_s%>				
+				<% error_node_form_in_loop = "error_node_form_in_loop_" + (@error_node.id).to_s + "_" + (message.id).to_s%>
+				<% error_node_edit_icon_for_message = "error_node_edit_icon_for_message_" + (@error_node.id).to_s + "_" + (message.id).to_s %>
+				<% error_node_message_card_in_expanded = "error_node_message_card_in_expanded_" + (@error_node.id).to_s + "_" + (message.id).to_s%>				
 				<!-- error number -->
 				<div class="mb-2 row">
 					<div class="col-8">
@@ -30,8 +32,8 @@
 							<%= number%>th		
 						<%end%>
 						error attempt 
-						<%if warning%>
-							<span>
+						<%if warning%>						
+							<span class="tooltip-toggle" aria-label= "All the previous attempts should be only of the type 'Send Error Messages'">
 								<%= image_tag('warning.png', size: "20", class: " ")%>
 							</span>
 						<%end%>
@@ -39,13 +41,15 @@
 							<% warning = true%>
 						<%end%>
 					</div>
-					<div class="col-4">
-						<%= link_to image_tag('editiconblack.png', size: "14", class: " mr-2"), error_node_editing_message_path(message.id), remote: true %>
-						<%= link_to image_tag('dustbin.png', size: "14", class: "ml-2"), error_message_attempt_delete_path(message.id), method: :delete, remote: true %>
+					<div class="col-1">
+						<%= link_to image_tag('editiconblack.png', size: "14", class: ""), error_node_editing_message_path(message.id), remote: true, id: error_node_edit_icon_for_message%>
+					</div>	
+					<div class="col-1">	
+						<%= link_to image_tag('dustbin.png', size: "14", class: ""), error_message_attempt_delete_path(message.id), method: :delete, remote: true %>
 					</div>
 				</div>
 				<!-- error card -->
-				<div class="error_node_message_text_area error_node_message_text_area_text p-2 mb-2">
+				<div class="error_node_message_text_area error_node_message_text_area_text p-2 mb-2" id= <%= error_node_message_card_in_expanded %>>
 					<div style="font-size: 12px; color: rgb(200,200,200);">
 						<%if message.error_node == "error_message"%>
 							Send Error Message
@@ -86,9 +90,9 @@
 
 			
 			<!-- form for adding new messages -->
-			<div class="error_message_node_form_showing_off mt-2 hide" id= <%= error_node_form_out_loop%>>
+			<div class="hide" id= <%= error_node_form_out_loop%>>
 				<% number = number + 1%>
-				<div class="mb-2" >
+				<span class="mb-2" >
 					<%if (number)%10 == 1 && number != 11%>
 						<%= number%>st			 
 					<%elsif (number)%10 == 2  && number != 12%>
@@ -99,8 +103,13 @@
 						<%= number%>th		
 					<%end%>
 					error attempt 
-				</div>
-				<div>
+				</span>
+				<% if number != 1%>
+				<span class="" style="margin-left: 105px;">	
+					<%= link_to image_tag('dustbin.png', size: "14", class: ""), error_node_delete_icon_for_new_attempt_path(@error_node.id), remote: true %>
+				</span>
+				<%end%>
+				<div class="error_message_node_form_showing_off mt-2">
 					<%= render 'home/edit/nodes/usermessages_error_node_expanded_form', message: "default"%>
 				</div>
 			</div>
