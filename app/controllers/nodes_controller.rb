@@ -36,7 +36,17 @@ class NodesController < ApplicationController
 		@bot = Bot.find(params[:message][:bot_id])
 		@node = Node.find(params[:message][:node_id])
 		@parent_id = @node.parent_id
-		@message = Message.create(params.require(:message).permit(:text_messages, :node_type, :bot_id, :node_id))
+		@message = Message.create(params.require(:message).permit(:text_messages, :node_type, :bot_id, :node_id, :message_type))
+		respond_to do |format|
+		    format.js
+	  	end
+	end
+
+	def nodes_message_attach_media
+		@node = Node.find(params[:attach_message][:node_id])
+		@bot = Bot.find(@node.bot_id)
+		@parent_id = @node.parent_id
+		@message = Message.create(params.require(:attach_message).permit(:image, :node_id, :node_type, :bot_id, :message_type))
 		respond_to do |format|
 		    format.js
 	  	end

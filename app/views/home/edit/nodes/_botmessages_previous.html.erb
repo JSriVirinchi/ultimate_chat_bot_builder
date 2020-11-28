@@ -4,18 +4,39 @@
 	<!-- start for loop -->
 		<% for message in Message.where(bot_id: @bot.id, node_id: @node.id)%>
 			<% tag = tag + 1%>
-			<div class="previous_messages", style="width: 280px;">
-				<div class="row">
-					<div class="col-10">
-						<%= message.text_messages%>
-					</div>
-					<div class="col-2">
-						<% if delete_button == true%>
-						<%= link_to image_tag('dustbin.png', size: "10", class: "ml-1"), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, class: "mr-2"%>
-						<% end %>
-					</div>
-				</div>	
-			</div>
+			<%if message.message_type == "image"%>
+				<div class="mb-2 mt-2 ml-1", style="width: 280px;">
+					<div class="row">
+						<div class="col-5">
+							<%= image_tag('paper_clip_icon.png', size: "30")%>
+							<%= image_tag(message.image, style: "width: 40px; height: 40px; border-radius:5px;") %>
+						</div>
+						<div class="col-6 image_name" >	
+							<% attachment_image = ActiveStorage::Attachment.find(message.image.id).filename %>
+							<% attachment_image = attachment_image.to_s%>
+							<%= truncate(attachment_image, length: 20)%>
+						</div>
+						<div class="col-2">
+							<% if delete_button == true%>
+							<%= link_to image_tag('dustbin.png', size: "10", class: "ml-1"), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, class: "mr-2"%>
+							<% end %>
+						</div>
+					</div>	
+				</div>
+			<%else%>
+				<div class="previous_messages", style="width: 280px;">
+					<div class="row">
+						<div class="col-10">
+							<%= message.text_messages%>
+						</div>
+						<div class="col-2">
+							<% if delete_button == true%>
+							<%= link_to image_tag('dustbin.png', size: "10", class: "ml-1"), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, class: "mr-2"%>
+							<% end %>
+						</div>
+					</div>	
+				</div>
+			<%end%>
 		<% end %>
 	<!-- end for loop  -->
 	<!-- exit bot when at least a message is there -->

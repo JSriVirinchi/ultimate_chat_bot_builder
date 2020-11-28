@@ -50,5 +50,6 @@ Rails.application.routes.draw do
   get 'nodes/usermessage/add_another_error_attempt/:node_id', to: 'nodes#error_node_add_another_error_attempt', as: 'error_node_add_another_error_attempt'
   get 'nodes/usermessage/error_node_editing_message/:message_id', to: 'nodes#error_node_editing_message', as: 'error_node_editing_message'
   get 'nodes/usermessage/error_node_delete_icon_for_new_attempt/:error_node_id', to: 'nodes#error_node_delete_icon_for_new_attempt', as:'error_node_delete_icon_for_new_attempt'
+  post 'nodes/usermessage/nodes_message_attach_media', to: 'nodes#nodes_message_attach_media', as: 'nodes_message_attach_media'
 end
 
