@@ -53,3 +53,59 @@
     transition: all 0.75s ease;
   }
 }
+
+
+.tooltip-toggle-info {
+  cursor: pointer;
+  position: relative;
+  
+  //Tooltip text container
+  &::before {
+    position: absolute;
+    top: -70px;
+    left: -70px;
+    background-color: rgb(235,253,221);
+    border-radius: 5px;
+    border: 1px solid black;
+    color: white;
+    content: attr(aria-label); 
+    padding: 5px;
+    text-transform: none;
+    transition: all 0.5s ease;
+    width: 160px;
+  }
+
+  //Tooltip arrow
+  &::after {
+    position: absolute;
+    top: -4px;
+    left: 10px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #2B222A;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+    margin-left: -5px;
+    width: 0;
+  }
+  
+  //Setting up the transition
+  &::before,
+  &::after {
+    color: black;
+    font-size: 12px;
+    opacity: 0;
+    pointer-events: none;
+    text-align: center;
+  }
+  
+  //Triggering the transition
+  &:focus::before,
+  &:focus::after,
+  &:hover::before,
+  &:hover::after {
+    opacity: 1;
+    transition: all 0.75s ease;
+  }
+}

@@ -15,12 +15,19 @@
     <button class="dropdown-toggle botsettings_dropdown_border" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="border: solid 1px grey; width: 130px;">
       Select Bot
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="height: 115px; overflow: auto;">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="height: 115px; overflow: auto; width: 150px;">
+      <% bot_count = 0%>
       <% for bot in @userbots%>
-      <% if bot.id != @bot.id%>      
-       <%= link_to bot.name, botsettings_path(bot.id), class:"dropdown-item"%>
+      <% if bot.id != @bot.id%>  
+        <% bot_count = bot_count + 1%>
+        <%= link_to bot.name, botsettings_path(bot.id), class:"dropdown-item"%>
       <% end %>
       <% end %>
+      <%if bot_count == 0%>
+      <div class="p-2 text-center">
+        You currently do not have any other bots. 
+      </div>
+      <%end%>
     </div>
   </div>
 </div>

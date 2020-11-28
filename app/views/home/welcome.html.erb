@@ -21,6 +21,7 @@
 		<div class="col-7">
 			<div class="container mt-2">
 				<h5 class="mb-3">My Whatsapp bots</h5>
+				<% if Bot.where(user_id: current_user.id).count != 0%>
 				<div class="row mb-3 smallfont">
 					<div class="col-3 text-center">
 						Bot Name
@@ -35,8 +36,11 @@
 						Action
 					</div>
 				</div>
+				<%end%>
 				<div style="height: 323px; overflow: auto;">
-				<% for bot in Bot.all%>
+				<% number_of_bots = 0%>	
+				<% for bot in Bot.where(user_id: current_user.id)%>
+				<%number_of_bots = number_of_bots + 1 %>
 				<div class="row mt-3 mb-3 bg-white botlist smallfont">
 					<div class="col-3">
 						<%= bot.name %>
@@ -59,15 +63,7 @@
 						  	<input type="checkbox" data-remote="true" class="slider round" data-method="put" data-url= <%= bot_active_path(bot.id)%>>
 						  <% end %>
 						  <span class="slider round"></span>
-						</label>							
-						<!-- <input type="checkbox" checked>
-						<span class="slider round"></span> -->
-						
-						
-						<!-- <label class="switch my-auto">
-							<input type="checkbox" checked>
-							<span class="slider round"></span>
-						</label> -->
+						</label>		
 					</div>
 					<div class="col-3 text-center">
 						<%= link_to 'Edit', composemessage_path(bot.id), class: "btn btn-dark"%>
@@ -81,18 +77,23 @@
 							    } 
 							</style>
 							<div class="dropdown-menu" style="width: 50px;">
-							  <%= link_to 'Statistics', statistics_path(bot.id), class: "dropdown-item" %> 
+							  	<%= link_to 'Statistics', statistics_path(bot.id), class: "dropdown-item" %> 
 								<%= link_to 'Test the bot', testbot_path(bot.id), class: "dropdown-item"  %>
 								<%= link_to 'Clone', root_path, class: "dropdown-item"%>  
-                <%= link_to 'Delete', bot_path(bot.id), method: :delete, data: { confirm: "Are you sure about deleting this bot. This is an irreversible action!" }, class: "dropdown-item delete_link"%>    
+                				<%= link_to 'Delete', bot_path(bot.id), method: :delete, data: { confirm: "Are you sure about deleting this bot. This is an irreversible action!" }, class: "dropdown-item delete_link"%>    
 							</div>
 						</span>
-
 					</div>
 				</div>
 				<% end %>
-				</div>
+				
+				<%if number_of_bots == 0%>
+					<div class="border text-center p-5">
+						Please create the bots to see here.
+					</div>
+				<%end%>
 
+				</div>
 			</div>
 		</div>
 	</div>

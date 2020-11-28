@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_20_065910) do
+ActiveRecord::Schema.define(version: 2020_11_27_080609) do
 
   create_table "bots", force: :cascade do |t|
     t.string "name"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 2020_11_20_065910) do
     t.text "transfer_to_agent_message"
     t.string "group_transfer_to_agent"
     t.boolean "toggle_transfer_to_agent_message"
+    t.string "link_to_node"
+    t.text "link_to_node_message"
+    t.boolean "toggle_link_to_node"
   end
 
   create_table "triggerphrases", force: :cascade do |t|

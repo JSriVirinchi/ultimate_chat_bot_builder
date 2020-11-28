@@ -6,14 +6,18 @@
 <% botmessages_previous = "botmessages_previous_" + (@node.id).to_s %>
 <% botresponses_messages_area_text_area = "botresponses_messages_area_text_area_" + (@node.id).to_s%>
 <% add_a_node = "add_a_node_" + (@node.id).to_s%>
+<% link_to_node = "link_to_node_" + (@node.id).to_s%>
+<% link_to_node_label = "link_to_node_label_" + (@node.id).to_s%>
 <% transfer_to_agent = "transfer_to_agent_" + (@node.id).to_s%>
 <% exit_bot = "exit_bot_" + (@node.id).to_s%>
+<% link_to_node_message = "link_to_node_message_" + (@node.id).to_s%>
 <% transfer_to_agent_message = "transfer_to_agent_message_" + (@node.id).to_s%>
 <% exit_message = "exit_message_" + (@node.id).to_s%>
 <% dropdownMenuLink_transfer = "dropdownMenuLink_transfer_" + (@node.id).to_s%>
-<% dropdownMenuLink_transfer1 = "dropdownMenuLink_transfer1_" + (@node.id).to_s%>
+<% dropdownMenuLink_link_to_node = "dropdownMenuLink_link_to_node_" + (@node.id).to_s%>
 <% botmessage_name_edit_name = "botmessage_name_edit_name_" + (@node.id).to_s %>
 <% botmessage_name_edit_form = "botmessage_name_edit_form_" + (@node.id).to_s %>
+<% infoicon_for_link_to_node = "infoicon_for_link_to_node_" + (@node.id).to_s %>
 <%end%>
 
 <!-- content -->
@@ -116,50 +120,86 @@
 	<!-- set next action -->
 	<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 	<%= form_with scope: :set_next_action, url: nodes_update_options_path(@bot.id, @node.id), method: :put,  remote: true do |f| %>
+		<!-- add a node -->
 		<div class="mt-1 ml-4">
 			<%= f.radio_button :set_next_action , "add_a_node", id: add_a_node%>
 			<%= f.label :set_next_action , "Add a node", value: "add_a_node" , class: "ml-2 options_text_bold"%>
 		</div>
+
+		<!-- transfer to agent -->
 		<div class="mt-1 ml-4">
 			<%= f.radio_button :set_next_action , "transfer_to_agent", id: transfer_to_agent%>
 			<%= f.label :set_next_action , "Transfer to an agent", value: "transfer_to_agent" , class: "ml-2 options_text_bold"%>
 		</div>
-		<div class="mb-2 text-center hide" id="<%= transfer_to_agent_message %>">
-			<% if @node.transfer_to_agent_message%>
+		<div class="mb-2 text-center hide" id="<%= transfer_to_agent_message %>">			
 			<div class="dropdown show mb-2 ml-3">
 			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="<%= dropdownMenuLink_transfer%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
 			    Select Transfering group
 			  </a>
 
-			  <div class="dropdown-menu" aria-labelledby="<%= dropdownMenuLink_transfer%>", style="width: 210px;">
+			  <div class="dropdown-menu" aria-labelledby="<%= dropdownMenuLink_transfer%>", style="width: 210px; background-color: rgb(235,253,221);">
 			    <a class="dropdown-item" href="#">Group-1</a>
 			    <a class="dropdown-item" href="#">Group-2</a>
 			    <a class="dropdown-item" href="#">Group-3</a>
 			  </div>
 			</div>
 			<div class="ml-3">
-			<%= text_area(:set_next_action, :transfer_to_agent_message, cols: 30, rows: 3, class: 'botresponses_exit_area p-2', value: @node.transfer_to_agent_message)%>
+				<% if @node.transfer_to_agent_message%>
+					<%= text_area(:set_next_action, :transfer_to_agent_message, cols: 30, rows: 3, class: 'botresponses_exit_area p-2', value: @node.transfer_to_agent_message)%>
+				<% else %>
+					<%= text_area(:set_next_action, :transfer_to_agent_message, cols: 30, rows: 3, class: 'botresponses_exit_area p-2', value: "Thank you. Now, you will be transferred to our agent.")%>
+				<% end %>
 			</div>
-			<% else %>
-			<div class="dropdown show mb-2 ml-3">
-			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="<%= dropdownMenuLink_transfer1%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
-			    Select Transfering group
-			  </a>
-
-			  <div class="dropdown-menu" aria-labelledby="<%= dropdownMenuLink_transfer1%>", style="width: 210px;">
-			    <a class="dropdown-item" href="#">Group-1</a>
-			    <a class="dropdown-item" href="#">Group-2</a>
-			    <a class="dropdown-item" href="#">Group-3</a>
-			  </div>
-			</div>
-			<div class="ml-3">
-			<%= text_area(:set_next_action, :transfer_to_agent_message, cols: 30, rows: 3, class: 'botresponses_exit_area p-2', value: "Thank you. Now, you will be transferred to our agent.")%>
-			</div>
-			<% end %>
+					
 			<div class="text-center", style="font-size: 10px;">
 				(Transfer to agent Message)
 			</div>
 		</div>
+		<!-- link to node -->
+		<div class="mt-1 ml-4">
+			<%= f.radio_button :set_next_action , "link_to_node", id: link_to_node%>
+			<%= f.label :set_next_action , "Link to another node", value: "link_to_node" , class: "ml-2 options_text_bold", id: link_to_node_label%>
+			
+			<span class="tooltip-toggle-info hide" aria-label= "As this is the first node in the flow, one cannot link it with previous nodes" style="margin-left: -40px;" id= <%= infoicon_for_link_to_node%>>
+				<%= image_tag('infoicon.png', size: "16", class: " ")%>
+			</span>
+		</div>
+		<div class="mb-2 text-center hide" id="<%= link_to_node_message %>">			
+			<div class="dropdown show mb-2 ml-3">
+			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="<%= dropdownMenuLink_link_to_node%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
+			    Link to node
+			  </a>
+
+			  <div class="dropdown-menu" aria-labelledby="<%= dropdownMenuLink_transfer%>", style="width: 210px; background-color: rgb(235,253,221);">
+			    <% node_name_tag = 0%>
+			  	<% for node in Node.where(bot_id: @bot.id, node_type: "bot")%>
+			  		<%if node.name != nil && node.name != @node.name%>	
+			  			<a href="" class="dropdown-item"><%= truncate(node.name, length: 30)%></a>	
+			  			<% node_name_tag = node_name_tag + 1%>
+			  		<%end%>	
+			    <%end%>			
+			    <% if node_name_tag == 0%>
+			    	<div class="text-center" style="color: red; font-size: 10px;">
+			    		Please name the node to select here
+			    	</div>
+			    <% end %>	
+			  </div>
+
+			</div>
+			<div class="ml-3">
+				<% if @node.link_to_node_message%>
+					<%= text_area(:set_next_action, :link_to_node_message, cols: 30, rows: 3, class: 'botresponses_exit_area p-2', value: @node.link_to_node_message)%>
+				<% else %>
+					<%= text_area(:set_next_action, :link_to_node_message, cols: 30, rows: 3, class: 'botresponses_exit_area p-2', value: "Ok. Lets start from the beginning")%>
+				<% end %>
+			</div>
+					
+			<div class="text-center", style="font-size: 10px;">
+				(Link to node message)
+			</div>
+		</div>
+
+		<!-- exit bot -->
 		<div class="mt-1 ml-4 mb-2">
 			<%= f.radio_button :set_next_action , "exit_bot", id: exit_bot , checked: "checked"%>
 			<%= f.label :set_next_action , "Exit Conversation", value: "exit_bot" , class: "ml-2 options_text_bold"%>
@@ -185,37 +225,64 @@
 
 <script type="text/javascript">
 	<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+		<%if parent_id == 0%>
+			document.getElementById("<%= link_to_node %>").disabled= "disabled";
+			document.getElementById("<%= link_to_node_label %>").style.color = "grey";
+			document.getElementById("<%= infoicon_for_link_to_node %>").classList.remove('hide');
+		<%end%>
 		<% if @node.set_next_action == "add_a_node"%>
 			document.getElementById("<%= add_a_node %>").checked = true;
 			document.getElementById("<%= transfer_to_agent %>").checked = false;
+			document.getElementById("<%= link_to_node %>").checked = false;
 			document.getElementById("<%= exit_bot %>").checked = false;
 			document.getElementById('<%= exit_message %>').classList.add('hide');
 			document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+			document.getElementById('<%= link_to_node_message %>').classList.add('hide');
 		<% elsif @node.set_next_action == "transfer_to_agent"%>
 			document.getElementById("<%= add_a_node %>").checked = false;
 			document.getElementById("<%= transfer_to_agent %>").checked = true;
+			document.getElementById("<%= link_to_node %>").checked = false;
 			document.getElementById("<%= exit_bot %>").checked = false;
 			document.getElementById('<%= exit_message %>').classList.add('hide');
 			document.getElementById('<%= transfer_to_agent_message %>').classList.remove('hide');
+			document.getElementById('<%= link_to_node_message %>').classList.add('hide');
+		<% elsif @node.set_next_action == "link_to_node"%>
+			document.getElementById("<%= add_a_node %>").checked = false;
+			document.getElementById("<%= transfer_to_agent %>").checked = false;
+			document.getElementById("<%= link_to_node %>").checked = true;
+			document.getElementById("<%= exit_bot %>").checked = false;
+			document.getElementById('<%= exit_message %>').classList.add('hide');
+			document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+			document.getElementById('<%= link_to_node_message %>').classList.remove('hide');	
 		<% elsif @node.set_next_action == "exit_bot"%>
 			document.getElementById("<%= add_a_node %>").checked = false;
 			document.getElementById("<%= transfer_to_agent %>").checked = false;
+			document.getElementById("<%= link_to_node %>").checked = false;
 			document.getElementById("<%= exit_bot %>").checked = true;
 			document.getElementById('<%= exit_message %>').classList.remove('hide');
 			document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+			document.getElementById('<%= link_to_node_message %>').classList.add('hide');
 		<% end %>
 
 		 document.getElementById('<%= exit_bot %>').onclick = function() {
 		 	document.getElementById('<%= exit_message %>').classList.remove('hide');
 		 	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+		 	document.getElementById('<%= link_to_node_message %>').classList.add('hide');
 		 }
 		 document.getElementById('<%= add_a_node %>').onclick = function() {
 		 	document.getElementById('<%= exit_message %>').classList.add('hide');
 		 	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+		 	document.getElementById('<%= link_to_node_message %>').classList.add('hide');
 		 }
 		 document.getElementById('<%= transfer_to_agent %>').onclick = function() {
 		 	document.getElementById('<%= exit_message %>').classList.add('hide');
 		 	document.getElementById('<%= transfer_to_agent_message %>').classList.remove('hide');
+		 	document.getElementById('<%= link_to_node_message %>').classList.add('hide');
+		 }
+		 document.getElementById('<%= link_to_node %>').onclick = function() {
+		 	document.getElementById('<%= exit_message %>').classList.add('hide');
+		 	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+		 	document.getElementById('<%= link_to_node_message %>').classList.remove('hide');
 		 }
 	 <% end %>
 </script>

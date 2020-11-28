@@ -106,7 +106,21 @@
 							</div>					
 						</div>	
 					</div>
-			 	</div>		 		
+			 	</div>
+			<%elsif @node.set_next_action == "link_to_node"%> 
+				<div>
+			 		<div class="card_divider"></div>
+			 		<div class="ml-1 mb-2 text-center Initial-Message-from-Customer">
+				 		Default linking to node message.
+				 	</div>			 	
+				 	<div class="previous_messages mt-2", style="width: 280px;">
+						<div class="row">
+							<div class="col-12">
+								<%= @node.link_to_node_message%>
+							</div>					
+						</div>	
+					</div>
+			 	</div> 			 		
 		 	<% end %>
 		<% end %>
 	<!-- additional info for transfering agent group  -->
@@ -118,6 +132,15 @@
 			 	</div>			 	
 		 	</div>		 		
 		<%end%>
+		<%if delete_button == false && @node.set_next_action == "link_to_node"%>
+		 	<div>
+		 		<div class="card_divider mt-2"></div>
+		 		<div class="ml-1 mb-1 text-center Initial-Message-from-Customer">
+			 		Transfering to : <b>Node</b>
+			 	</div>			 	
+		 	</div>		 		
+		<%end%>
+	<!-- additional info over -->
 	<% end %>
 <% end %>
 

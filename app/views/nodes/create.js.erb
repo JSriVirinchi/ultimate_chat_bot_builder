@@ -4,23 +4,44 @@
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
 <% add_a_node = "add_a_node_" + (@node.id).to_s%>
 <% transfer_to_agent = "transfer_to_agent_" + (@node.id).to_s%>
+<% link_to_node = "link_to_node_" + (@node.id).to_s%>
+<% link_to_node_label = "link_to_node_label_" + (@node.id).to_s%>
+<% infoicon_for_link_to_node = "infoicon_for_link_to_node_" + (@node.id).to_s %>
 <% exit_bot = "exit_bot_" + (@node.id).to_s%>
 <% transfer_to_agent_message = "transfer_to_agent_message_" + (@node.id).to_s%>
+<% link_to_node_message = "link_to_node_message_" + (@node.id).to_s%>
 <% exit_message = "exit_message_" + (@node.id).to_s%>
+
 
 document.getElementById('<%= botmessages_box_after_partial%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_after' , parent_id: @parent_id%>";
 document.getElementById('<%= botresponses_box_before %>').classList.add('hide');
 document.getElementById('<%= botresponses_box_after%>').classList.remove('hide');
 
+<%if @node.parent_id == 0 %>
+	if (document.getElementById("<%= link_to_node %>")){
+		document.getElementById("<%= link_to_node %>").disabled= "disabled";
+		document.getElementById("<%= link_to_node_label %>").style.color = "grey";
+		document.getElementById("<%= infoicon_for_link_to_node %>").classList.remove('hide');	
+	}
+<%end%>
+
 document.getElementById('<%= exit_bot %>').onclick = function() {
 	document.getElementById('<%= exit_message %>').classList.remove('hide');
 	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+	document.getElementById('<%= link_to_node_message %>').classList.add('hide');
 }
 document.getElementById('<%= add_a_node %>').onclick = function() {
 	document.getElementById('<%= exit_message %>').classList.add('hide');
 	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+	document.getElementById('<%= link_to_node_message %>').classList.add('hide');
 }
 document.getElementById('<%= transfer_to_agent %>').onclick = function() {
- 	document.getElementById('<%= exit_message %>').classList.add('hide');
- 	document.getElementById('<%= transfer_to_agent_message %>').classList.remove('hide');
+	document.getElementById('<%= exit_message %>').classList.add('hide');
+	document.getElementById('<%= transfer_to_agent_message %>').classList.remove('hide');
+	document.getElementById('<%= link_to_node_message %>').classList.add('hide');
+}
+document.getElementById('<%= link_to_node %>').onclick = function() {
+	document.getElementById('<%= exit_message %>').classList.add('hide');
+	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
+	document.getElementById('<%= link_to_node_message %>').classList.remove('hide');
 }
