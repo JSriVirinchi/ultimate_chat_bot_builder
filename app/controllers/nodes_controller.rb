@@ -46,10 +46,16 @@ class NodesController < ApplicationController
 		@node = Node.find(params[:attach_message][:node_id])
 		@bot = Bot.find(@node.bot_id)
 		@parent_id = @node.parent_id
-		@message = Message.create(params.require(:attach_message).permit(:image, :node_id, :node_type, :bot_id, :message_type))
-		respond_to do |format|
-		    format.js
-	  	end
+		@message = Message.new(params.require(:attach_message).permit(:image, :node_id, :node_type, :bot_id, :message_type))
+		if @message.save
+			respond_to do |format|
+			    format.js 
+		  	end
+		else
+		 	respond_to do |format|
+			    format.js {flash.now[:alert] = "Upload only images"}
+		  	end
+		end  	
 	end
 
 	def message_delete

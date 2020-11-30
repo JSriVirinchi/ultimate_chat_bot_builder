@@ -21,6 +21,7 @@
 <% attach_message_image = "attach_message_image_" + (@node.id).to_s%>
 <% nodes_message_attach_media_form = "nodes_message_attach_media_form_" + (@node.id).to_s%>
 <% submit_button_for_attaching_image = "submit_button_for_attaching_image_" + (@node.id).to_s %>
+<% attaching_media_error_messages = "attaching_media_error_messages_" +  (@node.id).to_s%>
 <%end%>
 
 <!-- content -->
@@ -94,12 +95,15 @@
 		<div class="ml-2 ">
 			<%= link_to image_tag('addbutton.JPG', size: "25", class: "ml-1"), root_path %>
 		</div>
+		<div id= <%= attaching_media_error_messages%>>
+			<%= render 'layouts/attach_messages'%>	
+		</div>
 	</div>
+	
 	<div class="row mt-2 mb-2">
 		<div class="options_text ml-3 mb-2 mt-1 col-4">
 			Attach Media
 		</div>		
-
 		<div class="row" style="margin-left: -7px;">
 			<!-- for image -->
 			<div class="col-3">
@@ -119,7 +123,6 @@
 				<%= f.submit "Add", value: "Add", class: "hide", id: submit_button_for_attaching_image %>
 				<%end%>
 			</div>
-
 			<!-- for video -->
 			<div class="col-3">
 				<%= link_to image_tag('videoicon.JPG', size: "25", class: "ml-1"), root_path %>
