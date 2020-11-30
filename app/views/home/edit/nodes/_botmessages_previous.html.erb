@@ -5,7 +5,7 @@
 		<% for message in Message.where(bot_id: @bot.id, node_id: @node.id)%>
 			<% tag = tag + 1%>
 			<%if message.message_type == "image"%>
-				<div class="mb-2 mt-2 ml-1", style="width: 280px;">
+				<div class="mb-2 mt-2 p-1 border", style="width: 280px; margin-left: 11px;">
 					<div class="row">
 						<div class="col-5">
 							<%= image_tag('paper_clip_icon.png', size: "30")%>
@@ -18,7 +18,7 @@
 						</div>
 						<div class="col-2">
 							<% if delete_button == true%>
-							<%= link_to image_tag('dustbin.png', size: "10", class: "ml-1"), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, class: "mr-2"%>
+							<%= link_to image_tag('dustbin.png', size: "10", class: ""), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, style: "margin-left: 3px;"%>
 							<% end %>
 						</div>
 					</div>	

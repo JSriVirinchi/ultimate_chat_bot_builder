@@ -20,6 +20,7 @@
 <% infoicon_for_link_to_node = "infoicon_for_link_to_node_" + (@node.id).to_s %>
 <% attach_message_image = "attach_message_image_" + (@node.id).to_s%>
 <% nodes_message_attach_media_form = "nodes_message_attach_media_form_" + (@node.id).to_s%>
+<% submit_button_for_attaching_image = "submit_button_for_attaching_image_" + (@node.id).to_s %>
 <%end%>
 
 <!-- content -->
@@ -99,27 +100,35 @@
 			Attach Media
 		</div>		
 
-		<div class="ml-2 ">
+		<div class="row" style="margin-left: -7px;">
 			<!-- for image -->
-			<%= form_with scope: :attach_message, url: nodes_message_attach_media_path, method: :post, id: nodes_message_attach_media_form , remote: true do |f| %>
-			<%= f.text_field :node_type, value: "bot", class: "hide"%>
-			<%= f.text_field :bot_id, value: @bot.id , class: "hide"%>
-			<%= f.text_field :message_type, value: "image" , class: "hide"%>
-			<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
-			<%= f.text_field :node_id, value: @node.id, class: "hide"%>
-			<% end %>
-			<label for="<%= attach_message_image%>">
-				<%= image_tag('photoicon.JPG', size: "25", class: "ml-1", style: "cursor: pointer;") %>
-			</label>			
-			<%= f.file_field :image, id: attach_message_image, class: "hide", onchange: "image_upload();"%>
-			
-			<%= f.submit "Add", value: "Add", class: "btn btn-outline-secondary btn-sm mr-4", style: "height: 30px; margin-top: 5px; text-align: right;"%>
-			<%end%>
+			<div class="col-3">
+				<%= form_with scope: :attach_message, url: nodes_message_attach_media_path, method: :post, id: nodes_message_attach_media_form , remote: true do |f| %>
+				<%= f.text_field :node_type, value: "bot", class: "hide"%>
+				<%= f.text_field :bot_id, value: @bot.id , class: "hide"%>
+				<%= f.text_field :message_type, value: "image" , class: "hide"%>
+				<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+				<%= f.text_field :node_id, value: @node.id, class: "hide"%>
+				<% end %>
+
+				<label for="<%= attach_message_image%>">
+					<%= image_tag('photoicon.JPG', size: "25", class: "ml-1", style: "cursor: pointer;") %>
+				</label>			
+				<%= f.file_field :image, id: attach_message_image, class: "hide", onchange: "image_upload();"%>
+				
+				<%= f.submit "Add", value: "Add", class: "hide", id: submit_button_for_attaching_image %>
+				<%end%>
+			</div>
 
 			<!-- for video -->
-			<%= link_to image_tag('videoicon.JPG', size: "25", class: "ml-1"), root_path %>
+			<div class="col-3">
+				<%= link_to image_tag('videoicon.JPG', size: "25", class: "ml-1"), root_path %>
+			</div>
 			<!-- for pdf -->
-			<%= link_to image_tag('pdficon.JPG', size: "25", class: "ml-1"), root_path %>
+			<div class="col-3">
+				<%= link_to image_tag('pdficon.JPG', size: "25", class: "ml-1"), root_path %>	
+			</div>
+			
 		</div>
 		
 	</div>	
@@ -251,6 +260,7 @@
 <script type="text/javascript">
 	function image_upload(){
 		console.log('uploaded');
+		document.getElementById('<%= submit_button_for_attaching_image%>').click();
 	}
 
 
