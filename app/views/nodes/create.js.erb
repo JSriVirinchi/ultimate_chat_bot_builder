@@ -11,11 +11,21 @@
 <% transfer_to_agent_message = "transfer_to_agent_message_" + (@node.id).to_s%>
 <% link_to_node_message = "link_to_node_message_" + (@node.id).to_s%>
 <% exit_message = "exit_message_" + (@node.id).to_s%>
+<% previous_message_and_options_card_divider = "previous_message_and_options_card_divider_" +  (@node.id).to_s %>
+<% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
 
 
 document.getElementById('<%= botmessages_box_after_partial%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_after' , parent_id: @parent_id%>";
 document.getElementById('<%= botresponses_box_before %>').classList.add('hide');
 document.getElementById('<%= botresponses_box_after%>').classList.remove('hide');
+
+<%if @node.messages.first == nil%>
+	document.getElementById('<%= previous_message_and_options_card_divider%>').classList.add('hide');
+	document.getElementById('<%= text_area_form_hide_or_show %>').classList.remove('hide');
+<%else%>
+	document.getElementById('<%= previous_message_and_options_card_divider%>').classList.remove('hide');
+	document.getElementById('<%= text_area_form_hide_or_show %>').classList.add('hide');
+<%end%>
 
 <%if @node.parent_id == 0 %>
 	if (document.getElementById("<%= link_to_node %>")){

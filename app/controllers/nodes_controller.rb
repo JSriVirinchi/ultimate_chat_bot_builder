@@ -326,4 +326,11 @@ class NodesController < ApplicationController
 		   format.js
 	  	end
 	end
+
+	def add_a_new_text_message_button
+		@node = Node.find(params[:node_id])
+		respond_to do |format|
+		   format.js
+	  	end
+	end
 end
