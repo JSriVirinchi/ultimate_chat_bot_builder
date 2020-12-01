@@ -9,7 +9,7 @@
 					<div class="row">
 						<div class="col-5">
 							<%= image_tag('photo_preview_icon.png', size: "20", style:"margin-left:5px; margin-right: 10px;")%>
-							<%= image_tag(message.image, style: "width: 40px; height: 40px; border-radius:5px;") %>
+							<%= image_tag(url_for(message.image), style: "width: 40px; height: 40px; border-radius:5px;")%>
 						</div>
 						<div class="col-6 image_name" >	
 							<% attachment_image = ActiveStorage::Attachment.find(message.image.id).filename %>
@@ -46,8 +46,9 @@
 				<div class="mb-2 mt-2 p-1 border", style="width: 280px; margin-left: 11px;">
 					<div class="row">
 						<div class="col-5">
-							<%= image_tag('pdf_preview_icon.png', size: "20", style:"margin-right: 10px; margin-top: -20px; margin-left: 5px;")%>
-							<iframe src="<%= url_for(message.pdf)%>" width="40px" height="40px"></iframe>
+							<%= image_tag('docicon.png', size: "20", style:"margin-right: 10px; margin-top: 5px; margin-left: 5px;")%>
+							<%= image_tag('pdf_preview_icon.png', height: "40", width: "30", style:"margin-right: 10px; margin-top: 5px; margin-left: 5px;")%>
+							
 						</div>
 						<div class="col-6 image_name" >	
 							<% attachment_pdf = ActiveStorage::Attachment.find(message.pdf.id).filename %>
