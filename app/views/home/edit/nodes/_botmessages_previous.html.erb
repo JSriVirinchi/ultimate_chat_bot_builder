@@ -8,7 +8,7 @@
 				<div class="mb-2 mt-2 p-1 border", style="width: 280px; margin-left: 11px;">
 					<div class="row">
 						<div class="col-5">
-							<%= image_tag('paper_clip_icon.png', size: "30")%>
+							<%= image_tag('photo_preview_icon.png', size: "20", style:"margin-left:5px; margin-right: 10px;")%>
 							<%= image_tag(message.image, style: "width: 40px; height: 40px; border-radius:5px;") %>
 						</div>
 						<div class="col-6 image_name" >	
@@ -23,6 +23,44 @@
 						</div>
 					</div>
 				</div>
+			<%elsif message.message_type == "video"%>	
+				<div class="mb-2 mt-2 p-1 border", style="width: 280px; margin-left: 11px;">
+					<div class="row">
+						<div class="col-5">
+							<%= image_tag('video_play_icon.png', size: "20", style:"margin-right: 10px; margin-top: -20px; margin-left: 5px;")%>
+							<%= video_tag(url_for(message.video), style: "width: 40px; height: 40px; border-radius:5px;") %>
+						</div>
+						<div class="col-6 image_name" >	
+							<% attachment_video = ActiveStorage::Attachment.find(message.video.id).filename %>
+							<% attachment_video = attachment_video.to_s%>
+							<%= truncate(attachment_video, length: 20)%>
+						</div>
+						<div class="col-2">
+							<% if delete_button == true%>
+							<%= link_to image_tag('dustbin.png', size: "10", class: ""), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, style: "margin-left: 3px;"%>
+							<% end %>
+						</div>
+					</div>
+				</div>
+			<%elsif message.message_type == "pdf"%>	
+				<div class="mb-2 mt-2 p-1 border", style="width: 280px; margin-left: 11px;">
+					<div class="row">
+						<div class="col-5">
+							<%= image_tag('pdf_preview_icon.png', size: "20", style:"margin-right: 10px; margin-top: -20px; margin-left: 5px;")%>
+							<iframe src="<%= url_for(message.pdf)%>" width="40px" height="40px"></iframe>
+						</div>
+						<div class="col-6 image_name" >	
+							<% attachment_pdf = ActiveStorage::Attachment.find(message.pdf.id).filename %>
+							<% attachment_pdf = attachment_pdf.to_s%>
+							<%= truncate(attachment_pdf, length: 20)%>
+						</div>
+						<div class="col-2">
+							<% if delete_button == true%>
+							<%= link_to image_tag('dustbin.png', size: "10", class: ""), nodes_message_delete_path(message.id, @bot.id, @node.id), method: :delete ,remote: true, style: "margin-left: 3px;"%>
+							<% end %>
+						</div>
+					</div>
+				</div>	
 			<%else%>
 				<div class="previous_messages", style="width: 280px;">
 					<div class="row">

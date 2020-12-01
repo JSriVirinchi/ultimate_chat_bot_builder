@@ -13,11 +13,17 @@
 <% exit_message = "exit_message_" + (@node.id).to_s%>
 <% previous_message_and_options_card_divider = "previous_message_and_options_card_divider_" +  (@node.id).to_s %>
 <% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
-
+<% submit_button_for_attaching_image = "submit_button_for_attaching_image_" + (@node.id).to_s %>
+<% attach_message_image = "attach_message_image_" + (@node.id).to_s%>
 
 document.getElementById('<%= botmessages_box_after_partial%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_after' , parent_id: @parent_id%>";
 document.getElementById('<%= botresponses_box_before %>').classList.add('hide');
 document.getElementById('<%= botresponses_box_after%>').classList.remove('hide');
+
+document.getElementById('<%= attach_message_image%>').onchange = function(){
+	console.log('uploaded');
+	document.getElementById('<%= submit_button_for_attaching_image%>').click();
+}
 
 <%if @node.messages.first == nil%>
 	document.getElementById('<%= previous_message_and_options_card_divider%>').classList.add('hide');

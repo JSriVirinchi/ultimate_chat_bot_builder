@@ -58,6 +58,38 @@ class NodesController < ApplicationController
 		end  	
 	end
 
+	def nodes_message_attach_media_video
+		@node = Node.find(params[:attach_video_message][:node_id])
+		@bot = Bot.find(@node.bot_id)
+		@parent_id = @node.parent_id
+		@message = Message.new(params.require(:attach_video_message).permit(:video, :node_id, :node_type, :bot_id, :message_type))
+		if @message.save
+			respond_to do |format|
+			    format.js 
+		  	end
+		else
+		 	respond_to do |format|
+			    format.js {flash.now[:alert] = "Upload only videos"}
+		  	end
+		end
+	end
+
+	def nodes_message_attach_media_pdf
+		@node = Node.find(params[:attach_pdf_message][:node_id])
+		@bot = Bot.find(@node.bot_id)
+		@parent_id = @node.parent_id
+		@message = Message.new(params.require(:attach_pdf_message).permit(:pdf, :node_id, :node_type, :bot_id, :message_type))
+		if @message.save
+			respond_to do |format|
+			    format.js 
+		  	end
+		else
+		 	respond_to do |format|
+			    format.js {flash.now[:alert] = "Upload only PDF"}
+		  	end
+		end
+	end
+
 	def message_delete
 		@bot = Bot.find(params[:bot_id])
 		@node = Node.find(params[:node_id])

@@ -1,0 +1,23 @@
+console.log('attached video');
+<% botmessages_previous = "botmessages_previous_" + (@node.id).to_s %>
+<% attaching_media_error_messages = "attaching_media_error_messages_" +  (@node.id).to_s%>
+<% submit_button_for_attaching_video = "submit_button_for_attaching_video_" + (@node.id).to_s %>
+<% attach_message_video = "attach_message_video_" + (@node.id).to_s%>
+<% previous_message_and_options_card_divider = "previous_message_and_options_card_divider_" +  (@node.id).to_s %>
+<% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
+
+document.getElementById('<%= attaching_media_error_messages%>').innerHTML = "<%= j render 'layouts/attach_messages'%>";
+document.getElementById('<%= botmessages_previous%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_previous', delete_button: true, parent_id: @parent_id%>";
+
+<%if @node.messages.first == nil%>
+	document.getElementById('<%= previous_message_and_options_card_divider%>').classList.add('hide');
+	document.getElementById('<%= text_area_form_hide_or_show %>').classList.remove('hide');
+<%else%>
+	document.getElementById('<%= previous_message_and_options_card_divider%>').classList.remove('hide');
+	document.getElementById('<%= text_area_form_hide_or_show %>').classList.add('hide');
+<%end%>
+
+document.getElementById('<%= attach_message_video%>').onchange = function(){
+	console.log('uploaded video');
+	document.getElementById('<%= submit_button_for_attaching_video%>').click();
+}

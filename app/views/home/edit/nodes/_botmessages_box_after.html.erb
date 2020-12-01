@@ -13,11 +13,13 @@
 <% link_to_node_message = "link_to_node_message_" + (@node.id).to_s%>
 <% transfer_to_agent_message = "transfer_to_agent_message_" + (@node.id).to_s%>
 <% exit_message = "exit_message_" + (@node.id).to_s%>
+
 <% dropdownMenuLink_transfer = "dropdownMenuLink_transfer_" + (@node.id).to_s%>
 <% dropdownMenuLink_link_to_node = "dropdownMenuLink_link_to_node_" + (@node.id).to_s%>
 <% botmessage_name_edit_name = "botmessage_name_edit_name_" + (@node.id).to_s %>
 <% botmessage_name_edit_form = "botmessage_name_edit_form_" + (@node.id).to_s %>
 <% infoicon_for_link_to_node = "infoicon_for_link_to_node_" + (@node.id).to_s %>
+
 <% attach_message_image = "attach_message_image_" + (@node.id).to_s%>
 <% nodes_message_attach_media_form = "nodes_message_attach_media_form_" + (@node.id).to_s%>
 <% submit_button_for_attaching_image = "submit_button_for_attaching_image_" + (@node.id).to_s %>
@@ -25,6 +27,12 @@
 <% previous_message_and_options_card_divider = "previous_message_and_options_card_divider_" +  (@node.id).to_s %>
 <% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
 <% add_a_new_text_message_button = 'add_a_new_text_message_button_' +  (@node.id).to_s%>
+<% nodes_message_attach_media_video_form = "nodes_message_attach_media_video_form_" +  (@node.id).to_s%>
+<% attach_message_video = "attach_message_video_" +  (@node.id).to_s %>
+<% submit_button_for_attaching_video = "submit_button_for_attaching_video_" +  (@node.id).to_s%>
+<% nodes_message_attach_media_pdf_form = "nodes_message_attach_media_pdf_form_" +  (@node.id).to_s%>
+<% attach_message_pdf = "attach_message_pdf_" +  (@node.id).to_s %>
+<% submit_button_for_attaching_pdf = "submit_button_for_attaching_pdf_" +  (@node.id).to_s%>
 <%end%>
 
 <!-- content -->
@@ -135,11 +143,39 @@
 			</div>
 			<!-- for video -->
 			<div class="col-3">
-				<%= link_to image_tag('videoicon.JPG', size: "25", class: "ml-1"), root_path %>
+				<%= form_with scope: :attach_video_message, url: nodes_message_attach_media_video_path, method: :post, id: nodes_message_attach_media_video_form , remote: true do |f| %>
+				<%= f.text_field :node_type, value: "bot", class: "hide"%>
+				<%= f.text_field :bot_id, value: @bot.id , class: "hide"%>
+				<%= f.text_field :message_type, value: "video" , class: "hide"%>
+				<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+				<%= f.text_field :node_id, value: @node.id, class: "hide"%>
+				<% end %>
+
+				<label for="<%= attach_message_video%>">
+					<%= image_tag('videoicon.JPG', size: "25", class: "ml-1", style: "cursor: pointer;") %>
+				</label>			
+				<%= f.file_field :video, id: attach_message_video, class: "hide", onchange: "video_upload();"%>
+				
+				<%= f.submit "Add", value: "Add", class: "hide", id: submit_button_for_attaching_video %>
+				<%end%>				
 			</div>
 			<!-- for pdf -->
 			<div class="col-3">
-				<%= link_to image_tag('pdficon.JPG', size: "25", class: "ml-1"), root_path %>	
+				<%= form_with scope: :attach_pdf_message, url: nodes_message_attach_media_pdf_path, method: :post, id: nodes_message_attach_media_pdf_form , remote: true do |f| %>
+				<%= f.text_field :node_type, value: "bot", class: "hide"%>
+				<%= f.text_field :bot_id, value: @bot.id , class: "hide"%>
+				<%= f.text_field :message_type, value: "pdf" , class: "hide"%>
+				<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+				<%= f.text_field :node_id, value: @node.id, class: "hide"%>
+				<% end %>
+
+				<label for="<%= attach_message_pdf%>">
+					<%= image_tag('pdficon.JPG', size: "25", class: "ml-1", style: "cursor: pointer;") %>
+				</label>			
+				<%= f.file_field :pdf, id: attach_message_pdf, class: "hide", onchange: "pdf_upload();"%>
+				
+				<%= f.submit "Add", value: "Add", class: "hide", id: submit_button_for_attaching_pdf %>
+				<%end%>		
 			</div>
 			
 		</div>
@@ -261,13 +297,23 @@
 
 
 <script type="text/javascript">
-	function image_upload(){
-		console.log('uploaded');
-		document.getElementById('<%= submit_button_for_attaching_image%>').click();
-	}
-
-
+	
 	<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
+		function image_upload(){
+			console.log('uploaded');
+			document.getElementById('<%= submit_button_for_attaching_image%>').click();
+		}
+
+		function video_upload(){
+			console.log('uploaded video');
+			document.getElementById('<%= submit_button_for_attaching_video%>').click();
+		}
+
+		function pdf_upload(){
+			console.log('uploaded pdf');
+			document.getElementById('<%= submit_button_for_attaching_pdf%>').click();
+		}
+
 		<%if @node.messages.first == nil%>
 			document.getElementById('<%= previous_message_and_options_card_divider%>').classList.add('hide');
 			document.getElementById('<%= text_area_form_hide_or_show %>').classList.remove('hide');
