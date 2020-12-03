@@ -2,3 +2,12 @@
 <% error_message_compressed = "error_message_compressed_" + (@node.id).to_s%>
 document.getElementById('<%= error_message_expanded %>').classList.remove('hide');
 document.getElementById('<%= error_message_compressed %>').classList.add('hide');
+
+<% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
+	<% error_node_form_in_loop = "error_node_form_in_loop_" + (@error_node.id).to_s + "_" + (message.id).to_s%>
+	<% error_node_edit_icon_for_message = "error_node_edit_icon_for_message_" + (@error_node.id).to_s + "_" + (message.id).to_s %>
+	<% error_node_message_card_in_expanded = "error_node_message_card_in_expanded_" + (@error_node.id).to_s + "_" + (message.id).to_s%>
+	document.getElementById('<%= error_node_form_in_loop%>').classList.add('hide');	
+	document.getElementById('<%= error_node_edit_icon_for_message%>').classList.remove('hide');
+	document.getElementById('<%= error_node_message_card_in_expanded%>').classList.remove('hide');
+<%end%>

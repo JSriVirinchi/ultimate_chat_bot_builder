@@ -311,6 +311,7 @@ class NodesController < ApplicationController
 
 	def error_message_expand_icon
 		@node = Node.find(params[:node_id])
+		@error_node = Node.where(node_type: "error", parent_id: @node.id).first
 		respond_to do |format|
 		   format.js
 	  	end

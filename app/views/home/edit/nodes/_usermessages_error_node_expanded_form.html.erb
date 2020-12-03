@@ -32,7 +32,7 @@
 <%= form_with scope: :error_node, url: error_node_message_save_path(@error_node.id, message_id), method: :post, remote: true do |f| %>
 <!-- error message -->
 	<div class="mt-1">
-		<%= f.radio_button :error_node , "error_message", id: error_message, checked: "checked" %>
+		<%= f.radio_button :error_node , "error_message", id: error_message, checked: "checked", onchange: "submit_error_form('#{message_id}');" %>
 		<%= f.label :error_node , "Send error message", value: "error_message" , class: "ml-2 error_message_text"%>
 	</div>
 	<div class="ml-3 mt-2 mb-2" id= <%= error_message_text_area%>>
@@ -44,7 +44,7 @@
 	</div>
 <!-- transfer to agent -->
 	<div class="mt-1">
-		<%= f.radio_button :error_node , "transfer_to_agent", id: transfer_to_agent  %>
+		<%= f.radio_button :error_node , "transfer_to_agent", id: transfer_to_agent , onchange: "submit_error_form('#{message_id}');" %>
 		<%= f.label :error_node , "Transfer to an agent", value: "transfer_to_agent" , class: "ml-2 error_message_text"%>
 	</div>
 	<div class="hide" id= <%= transfer_to_agent_text_and_dropdown%>>
@@ -68,7 +68,7 @@
 	</div>
 <!-- link to node -->
 	<div class="mt-1">
-		<%= f.radio_button :error_node , "link_to_node", id: link_to_node  %>
+		<%= f.radio_button :error_node , "link_to_node", id: link_to_node , onchange: "submit_error_form('#{message_id}');" %>
 		<%= f.label :error_node , "Link to another node", value: "link_to_node" , class: "ml-2 error_message_text"%>
 	</div>
 	<div class="hide" id= <%= link_to_node_text_and_dropdown%>>
@@ -101,7 +101,7 @@
 	</div>
 <!-- exit message -->
 	<div class="mt-1">
-		<%= f.radio_button :error_node , "exit_message", id: exit_message  %>
+		<%= f.radio_button :error_node , "exit_message", id: exit_message , onchange: "submit_error_form('#{message_id}');" %>
 		<%= f.label :error_node , "Exit conversation", value: "exit_message" , class: "ml-2 error_message_text"%>
 	</div>
 	<div class="ml-3 mt-2 mb-2 hide" id= <%= exit_message_text_area%>>
@@ -113,16 +113,22 @@
 	</div>
 
 	<div class="text-center">
-		<%if message == "default"%>
-			<%= f.submit "Save the error attempt", class: "btn btn-sm btn-outline-secondary mt-2", style: "color: grey; width: 180px;"%>
-		<%else%>
-			<%= f.submit "Update the error attempt", class: "btn btn-sm btn-outline-secondary mt-2", style: "color: grey; width: 180px;", id: submit_button_for_form%>
-		<%end%>
+		<%= f.submit "Update the error attempt", class: "hide btn btn-sm btn-outline-secondary mt-2", style: "color: grey; width: 180px;", id: submit_button_for_form%>
 	</div>
 <!-- end of actual form -->
 <% end %>
 
 <script type="text/javascript">
+
+	function submit_error_form(message_id_for_function){
+		console.log('form submit');
+		console.log(message_id_for_function);
+		<% submit_button_for_form = "submit_button_for_form_" + (@error_node.id).to_s + "_"%>
+		str = '<%= submit_button_for_form%>';
+		str = str + message_id_for_function
+		console.log(str);
+		document.getElementById(str).click();
+	}
 
 	<%if message != "default"%>
 	<%if message.error_node == "error_message"%>

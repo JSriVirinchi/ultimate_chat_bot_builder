@@ -1,6 +1,15 @@
 <% error_message_expanded = "error_message_expanded_" + (@node.id).to_s%>
 document.getElementById('<%= error_message_expanded %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_error_node_expanded'%>";
 
+<% error_node_form_in_loop = "error_node_form_in_loop_" + (@error_node.id).to_s + "_" + (@message.id).to_s%>
+<% error_node_message_card_in_expanded = "error_node_message_card_in_expanded_" + (@error_node.id).to_s + "_" + (@message.id).to_s%>
+<% error_node_edit_icon_for_message = "error_node_edit_icon_for_message_" + (@error_node.id).to_s + "_" + (@message.id).to_s %>
+document.getElementById('<%= error_node_form_in_loop%>').classList.remove('hide');
+document.getElementById('<%= error_node_message_card_in_expanded%>').classList.add('hide');
+document.getElementById('<%= error_node_edit_icon_for_message%>').classList.add('hide');
+
+console.log('<%= @message.id%>');
+
 	<% error_message = "error_message_" + (@error_node.id).to_s + "_"+ "default"%>			
 	<% transfer_to_agent = "transfer_to_agent_" + (@error_node.id).to_s + "_"+ "default"%>			
 	<% link_to_node = "link_to_node_" + (@error_node.id).to_s + "_"+ "default"%>			
@@ -35,6 +44,7 @@ document.getElementById('<%= error_message_expanded %>').innerHTML = "<%= j rend
 		document.getElementById('<%= link_to_node_text_and_dropdown%>').classList.add('hide');			
 		document.getElementById('<%= exit_message_text_area%>').classList.remove('hide');
 	}
+
 
 <% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
 	<% error_message = "error_message_" + (@error_node.id).to_s + "_"+(message.id).to_s%>			
