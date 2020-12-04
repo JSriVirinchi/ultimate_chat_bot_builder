@@ -1,7 +1,7 @@
 <% botmessagesmain_partial = "botmessagesmain_partial_" + (parent_id).to_s%>
 <% usermessagemain_partial_with_connector = "usermessagemain_partial_with_connector_" + (parent_id).to_s%>
 
-<div id="botmessagesmain_partial">
+<div id="<%= botmessagesmain_partial %>">
 	<%= render 'home/edit/nodes/botmessagesmain', parent_id: parent_id%>	
 </div>
 

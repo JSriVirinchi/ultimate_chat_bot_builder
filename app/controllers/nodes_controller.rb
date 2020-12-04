@@ -297,12 +297,14 @@ class NodesController < ApplicationController
 		if params[:message_id] == "default"
 			@message = Message.create(node_type: "error", bot_id: @error_node.bot_id, node_id: @error_node.id, error_node: params[:error_node][:error_node],
 				error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-				error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
+				error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message],
+				error_node_link_to_node: params[:error_node][:error_node_link_to_node])
 		else
 			@message = Message.find(params[:message_id])
 			@message.update(error_node: params[:error_node][:error_node],
 				error_node_message: params[:error_node][:error_node_message], error_node_link_to_message: params[:error_node][:error_node_link_to_message],
-				error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message])
+				error_node_exit_message: params[:error_node][:error_node_exit_message], error_node_transfer_to_agent_message: params[:error_node][:error_node_transfer_to_agent_message],
+				error_node_link_to_node: params[:error_node][:error_node_link_to_node])
 		end
 		respond_to do |format|
 		   format.js

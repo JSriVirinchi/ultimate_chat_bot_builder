@@ -11,7 +11,13 @@ document.getElementById('<%= botresponses_box_compressed %>').classList.remove('
 document.getElementById('<%= botmessages_previous_compressed %>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_previous', delete_button: false, parent_id: @parent_id%>";
 document.getElementById('<%= botmessage_compressed_name%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_name_field', node: @node, edit_tag: false%>";
 
-<% for child in @node.children%>
+<% temperory_node_save = @node.id%>
+console.log('<%= @node.id%>');
+console.log('<%= temperory_node_save %>');
+
+console.log('<%= temperory_node_save %>');
+
+<% for child in Node.find(temperory_node_save).children%>
 	<% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
 	<% define_id = "define_nodes_id_" + child.id.to_s %>
 	<%if child.name != nil || child.user_input_type != nil%>

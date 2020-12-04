@@ -9,7 +9,7 @@
 		<% @error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first %>
 		<% error_node_form_out_loop = "error_node_form_out_loop_" + (@error_node.id).to_s%>
 		<% add_another_error_attempt = "add_another_error_attempt_" + (@error_node.id).to_s%>
-		
+		<% no_error_message_warning = "no_error_message_warning_" + (@error_node.id).to_s%>
 		<div class="error_node_expanded_white">
 			<% number = 0%>
 			<% warning = false%>
@@ -88,6 +88,12 @@
 			<!-- end of looping cards and forms -->
 			<%end%>
 			
+			<%if number == 0%>
+				<div class="error_node_message_text_area error_node_message_text_area_text p-4 mb-2 text-center" id= <%= no_error_message_warning %>>
+					No error messages are added
+				</div>
+			<%end%>
+
 			<!-- form for adding new messages -->
 			<div class="hide" id= <%= error_node_form_out_loop%>>
 				<% number = number + 1%>
@@ -125,12 +131,5 @@
 </div>
 
 <script type="text/javascript">
-	<%if Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first%>	
-		<% @error_node = Node.where(bot_id: @bot.id, parent_id: @node.id, node_type: "error").first %>
-		<%if Message.where(node_type: "error", node_id: @error_node.id).first%>
-		<%else%>
-			document.getElementById('<%= error_node_form_out_loop%>').classList.remove('hide');
-			document.getElementById('<%= add_another_error_attempt%>').classList.add('hide');
-		<%end%>
-	<%end%>	
+	
 </script>

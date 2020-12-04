@@ -27,6 +27,7 @@
 <% error_node_link_node_text_area_id_default = "error_node_link_node_text_area_id_default_" + (@error_node.id).to_s + "_"+(message_id).to_s %>
 <% error_node_exit_message_text_area_id_changed = "error_node_exit_message_text_area_id_changed_" + (@error_node.id).to_s + "_"+(message_id).to_s %>
 <% error_node_exit_message_text_area_id_default = "error_node_exit_message_text_area_id_default_"  + (@error_node.id).to_s + "_"+(message_id).to_s%>
+
 <!-- for each error - actual form -->
 
 <%= form_with scope: :error_node, url: error_node_message_save_path(@error_node.id, message_id), method: :post, remote: true do |f| %>
@@ -37,9 +38,9 @@
 	</div>
 	<div class="ml-3 mt-2 mb-2" id= <%= error_message_text_area%>>
 		<%if message != "default" && message.error_node_message%> 
-			<%= text_area(:error_node, :error_node_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_message, id: error_node_error_message_text_area_id_changed)%>
+			<%= text_area(:error_node, :error_node_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_message, id: error_node_error_message_text_area_id_changed, onchange: "submit_error_form('#{message_id}');")%>
 		<%else%>
-			<%= text_area(:error_node, :error_node_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "I did not understand what you have said. Please rephrase it.", id: error_node_error_message_text_area_id_default)%>
+			<%= text_area(:error_node, :error_node_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "I did not understand what you have said. Please rephrase it.", id: error_node_error_message_text_area_id_default, onchange: "submit_error_form('#{message_id}');")%>
 		<%end%>
 	</div>
 <!-- transfer to agent -->
@@ -60,9 +61,9 @@
 		</div>
 		<div class="ml-3 mt-2 mb-2">
 			<%if message != "default" && message.error_node_transfer_to_agent_message%> 
-				<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_transfer_to_agent_message, id: error_node_transfer_agent_text_area_id_changed)%>
+				<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_transfer_to_agent_message, id: error_node_transfer_agent_text_area_id_changed, onchange: "submit_error_form('#{message_id}');")%>
 			<%else%>
-				<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Transferring to an agent group", id: error_node_transfer_agent_text_area_id_default)%>
+				<%= text_area(:error_node, :error_node_transfer_to_agent_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Transferring to an agent group", id: error_node_transfer_agent_text_area_id_default, onchange: "submit_error_form('#{message_id}');")%>
 			<%end%>	
 		</div>
 	</div>
@@ -73,29 +74,21 @@
 	</div>
 	<div class="hide" id= <%= link_to_node_text_and_dropdown%>>
 		<div class="dropdown show mb-2 ml-3">
-		  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id= <%= link_to_node_text_and_dropdown_id %>, data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 215px; background-color: transparent; color: grey; border-color: grey;">
-		    <span>Select Node</span>
-		  </a>
-		  <div class="dropdown-menu" aria-labelledby=<%= link_to_node_text_and_dropdown_id %>, style="width: 215px;">
-		  	<% node_name_tag = 0%>
+		<%if message_id != 'default'%>	
+		  <%= f.select(:error_node_link_to_node, {},{}, id: link_to_node_text_and_dropdown_id, class: "btn btn-outline-secondary btn-sm dropdown-toggle text-center", style: "width: 215px; background-color: transparent; color: grey; border-color: grey;", onchange:"submit_error_form('#{message_id}');") do %>
 		  	<% for node in Node.where(bot_id: @bot.id, node_type: "bot")%>
-		  		<%if node.name != nil%>	
-		  			<a href="" class="dropdown-item"><%= truncate(node.name, length: 30)%></a>	
-		  			<% node_name_tag = node_name_tag + 1%>
+		  		<%if node.name != nil%>
+		  			<%= content_tag(:option, truncate(node.name, length: 30), value: node.name, class: "")%>
 		  		<%end%>	
-		    <%end%>			
-		    <% if node_name_tag == 0%>
-		    	<div class="text-center" style="color: red; font-size: 10px;">
-		    		Please name the node to select here
-		    	</div>
-		    <% end %>	    
-		  </div>
+		    <%end%>	
+		  <%end%>
+		<%end%>  
 		</div>
 		<div class="ml-3 mt-2 mb-2">
 			<%if message != "default" && message.error_node_link_to_message%>
-				<%= text_area(:error_node, :error_node_link_to_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_link_to_message, id: error_node_link_node_text_area_id_changed)%>
+				<%= text_area(:error_node, :error_node_link_to_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_link_to_message, id: error_node_link_node_text_area_id_changed, onchange: "submit_error_form('#{message_id}');")%>
 			<%else%>
-				<%= text_area(:error_node, :error_node_link_to_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Ok. Lets start from the beginning", id: error_node_link_node_text_area_id_default)%>
+				<%= text_area(:error_node, :error_node_link_to_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Ok. Lets start from the beginning", id: error_node_link_node_text_area_id_default, onchange: "submit_error_form('#{message_id}');")%>
 			<%end%>	
 		</div>
 	</div>
@@ -106,9 +99,9 @@
 	</div>
 	<div class="ml-3 mt-2 mb-2 hide" id= <%= exit_message_text_area%>>
 		<%if message != "default" && message.error_node_exit_message%>
-			<%= text_area(:error_node, :error_node_exit_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_exit_message , id: error_node_exit_message_text_area_id_changed)%>
+			<%= text_area(:error_node, :error_node_exit_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: message.error_node_exit_message , id: error_node_exit_message_text_area_id_changed, onchange: "submit_error_form('#{message_id}');")%>
 		<%else%>
-			<%= text_area(:error_node, :error_node_exit_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Sorry, I did not get what you said. Exiting the conversation." , id: error_node_exit_message_text_area_id_default)%>
+			<%= text_area(:error_node, :error_node_exit_message, cols: 28, rows: 2, class: ' error_node_message_text_area error_node_message_text_area_text', value: "Sorry, I did not get what you said. Exiting the conversation." , id: error_node_exit_message_text_area_id_default, onchange: "submit_error_form('#{message_id}');")%>
 		<%end%>	
 	</div>
 
@@ -124,10 +117,13 @@
 		console.log('form submit');
 		console.log(message_id_for_function);
 		<% submit_button_for_form = "submit_button_for_form_" + (@error_node.id).to_s + "_"%>
+
 		str = '<%= submit_button_for_form%>';
-		str = str + message_id_for_function
+		str = str + message_id_for_function;
+
 		console.log(str);
 		document.getElementById(str).click();
+
 	}
 
 	<%if message != "default"%>

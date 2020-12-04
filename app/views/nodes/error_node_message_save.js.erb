@@ -9,6 +9,14 @@ document.getElementById('<%= error_node_message_card_in_expanded%>').classList.a
 document.getElementById('<%= error_node_edit_icon_for_message%>').classList.add('hide');
 
 console.log('<%= @message.id%>');
+<% link_to_node_text_and_dropdown_id = "link_to_node_text_and_dropdown_id_" + (@error_node.id).to_s + "_" + (@message.id).to_s %>
+
+for(var i=0; i< document.getElementById('<%= link_to_node_text_and_dropdown_id%>').options.length; i++){
+	document.getElementById('<%= link_to_node_text_and_dropdown_id%>').options[i].selected = false;
+	if (document.getElementById('<%= link_to_node_text_and_dropdown_id%>').options[i].value == '<%= @message.error_node_link_to_node%>'){
+		document.getElementById('<%= link_to_node_text_and_dropdown_id%>').options[i].selected = true;
+	}
+}
 
 	<% error_message = "error_message_" + (@error_node.id).to_s + "_"+ "default"%>			
 	<% transfer_to_agent = "transfer_to_agent_" + (@error_node.id).to_s + "_"+ "default"%>			

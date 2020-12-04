@@ -7,7 +7,7 @@
 				<%= image_tag('greenflash.JPG', size: "14", class: "rounded-circle")%>
 			</div>
 			<div class="col-4 mt-2", style="padding-right: 5px;">
-				Add node
+				Define node
 			</div>
 			<div class="col-6 mt-2 ml-2", style="padding-left: 5px;">
 				<%= form_with scope: :define_node, url: define_nodes_path(child.id), method: :get, remote: true do |f| %>
