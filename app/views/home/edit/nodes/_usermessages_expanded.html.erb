@@ -4,6 +4,9 @@
 <% usermessage_message_id = "usermessage_message_id_" + child.id.to_s%>
 <% usermessage_message_partial_id = "usermessage_message_partial_id_" + child.id.to_s%>
 <% usermessage_message_form_submit_button_id = "usermessage_message_form_submit_button_id_" + child.id.to_s%>
+<% usermessage_adding_trigger_phrases_id = "usermessage_adding_trigger_phrases_id_" + child.id.to_s%>
+<% usermessage_message_user_input_dropdown_id = "usermessage_message_user_input_dropdown_id_" + child.id.to_s%>
+
 <div class="row mb-2 hide" id= <%= expanded_define_id%> >
 	<div class="connector_black_link"></div>	
 	<div class = "usermessage_expanded_white_box">
@@ -35,31 +38,32 @@
 				Expected input type
 			</div>
 			<div class=" row ml-3 mt-2" >
-				<%= f.select :user_input_type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2"} %>
+				<%= f.select :user_input_type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2", id: usermessage_message_user_input_dropdown_id, onchange: "changed_user_input_type();"} %>
 			</div>
 				
 			<%= f.submit "Save", value: "Save", class: "hide btn btn-outline-secondary mb-3", style: "width: 270px;", id: usermessage_message_form_submit_button_id%>
             
 		<% end %>
-
-		<div class="row ml-3 mt-3 Node-text-font  p-2 usermessage_trigger_phrases", style="height: 100px; width: 270px; overflow-y: auto; overflow-x: hidden;">
-			<div id= <%= usermessage_message_partial_id%> >				
-				<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true%>
+		<div id= <%= usermessage_adding_trigger_phrases_id %>>
+			<div class="row ml-3 mt-3 Node-text-font  p-2 usermessage_trigger_phrases", style="height: 100px; width: 270px; overflow-y: auto; overflow-x: hidden;">
+				<div id= <%= usermessage_message_partial_id%> >				
+					<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true%>
+				</div>
 			</div>
+			<%= form_with scope: :messages, url: usermessage_messages_create_path, method: :post,  remote: true do |f| %>		
+			<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >	   
+				<%= f.text_field :bot_id, class: "hide", value: child.bot_id%>
+				<%= f.text_field :node_id, class: "hide", value: child.id%>	
+				<%= f.text_field :node_type, class: "hide", value: "user"%>	
+				<div class="col-7">
+					<%= f.text_field :text_messages, class: "text-left form__input p-2 mt-1 usermessage_trigger_phrases", placeholder:  "Add trigger words", id: usermessage_message_id%>
+				</div>					
+				<div class = "col-1 mb-2 mt-1">
+					<%= f.submit "Add", class: "submit-text usermessage_trigger_phrases" %>					
+				</div>			
+			</div>
+			<% end %>
 		</div>
-		<%= form_with scope: :messages, url: usermessage_messages_create_path, method: :post,  remote: true do |f| %>		
-		<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >	   
-			<%= f.text_field :bot_id, class: "hide", value: child.bot_id%>
-			<%= f.text_field :node_id, class: "hide", value: child.id%>	
-			<%= f.text_field :node_type, class: "hide", value: "user"%>	
-			<div class="col-7">
-				<%= f.text_field :text_messages, class: "text-left form__input p-2 mt-1 usermessage_trigger_phrases", placeholder:  "Add trigger words", id: usermessage_message_id%>
-			</div>					
-			<div class = "col-1 mb-2 mt-1">
-				<%= f.submit "Add", class: "submit-text usermessage_trigger_phrases" %>					
-			</div>			
-		</div>
-		<% end %>
 
 		<div class="row mb-3 ml-0 mt-2">
 			<div class="Node-text-font ml-3 mt-1">
@@ -81,4 +85,33 @@
 	function usermessage_message_submit_form(){
 		document.getElementById('<%= usermessage_message_form_submit_button_id%>').click();
 	}
+
+	function changed_user_input_type(){
+		for(var i=0; i< document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options.length; i++){
+			if (document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].selected == true){
+				selected_value = document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].value;
+			}
+		}
+		if (selected_value != "text"){
+			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.add('hide');
+
+			<% parent_id = Node.find(child.parent_id).id %>
+			<% connector_black_link_vertical = "connector_black_link_vertical_" + parent_id.to_s%>
+			height = document.getElementById('<%= connector_black_link_vertical%>').style.height;
+			height = parseInt(height);
+			height = height - 167;
+			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
+		}
+		else{
+			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.remove('hide');
+			<% parent_id = Node.find(child.parent_id).id %>
+			<% connector_black_link_vertical = "connector_black_link_vertical_" + parent_id.to_s%>
+			height = document.getElementById('<%= connector_black_link_vertical%>').style.height;
+			height = parseInt(height);
+			height = height + 167;
+			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";	
+		}
+		
+	}
+
 </script>
