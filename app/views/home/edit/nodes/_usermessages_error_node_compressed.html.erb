@@ -43,7 +43,7 @@
 							Link to another node : 
 							<b id= <%= error_message_link_to_group_name%>>
 								<%if message.error_node_link_to_node%>
-									<%= message.error_node_link_to_node%>
+									<%= Node.find(message.error_node_link_to_node).name %>
 								<%else%>
 									<span style="color: red;">Please select a node</span>
 								<%end%>

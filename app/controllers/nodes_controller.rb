@@ -3,6 +3,17 @@ class NodesController < ApplicationController
 		@bot = Bot.find(params[:botid])
 		@node = Node.create(node_type: params[:nodetype], bot_id: params[:botid], parent_id: params[:parentid])
 		@parent_id = params[:parentid]
+		if Node.where(bot_id: @bot.id, node_type: "bot").count == 1
+			@node.update(name: "Bot_response_1")
+		else
+			last_name = Node.where(bot_id: @bot.id, node_type: "bot").order(:id).second_to_last().name
+			new_last_name = last_name[0..12]
+			last_number = last_name[13..-1].to_i
+			last_number = last_number + 1
+			last_number = last_number.to_s
+			new_last_name = new_last_name + last_number
+			@node.update(name: new_last_name)	
+		end
 		respond_to do |format|
 		    format.js
 	  	end
