@@ -87,31 +87,40 @@
 	}
 
 	function changed_user_input_type(){
+		<% parent_id = Node.find(child.parent_id).id %>
+		<% connector_black_link_vertical = "connector_black_link_vertical_" + parent_id.to_s%>
+		<% height = 53%>
+		<% for i in Node.find(child.parent_id).children%>
+		<%if i.node_type == "user"%>
+			<% if i.name == nil && i.user_input_type == nil%>
+				<% height = height + 52%>
+			<%else%>
+				<%height = height + 108%>
+			<%end %>	
+		<% end %>
+		<% end %>
+		<% height = height + 297%>
+		<% height = height.to_s + "px"%>
+		height = "<%= height%>";
+		height = parseInt(height);
+		console.log(height);
+
 		for(var i=0; i< document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options.length; i++){
 			if (document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].selected == true){
 				selected_value = document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].value;
 			}
 		}
-		if (selected_value != "text"){
-			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.add('hide');
-
-			<% parent_id = Node.find(child.parent_id).id %>
-			<% connector_black_link_vertical = "connector_black_link_vertical_" + parent_id.to_s%>
-			height = document.getElementById('<%= connector_black_link_vertical%>').style.height;
-			height = parseInt(height);
-			height = height - 167;
+		if (selected_value == "text"){
+			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.remove('hide');
 			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
 		}
 		else{
-			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.remove('hide');
-			<% parent_id = Node.find(child.parent_id).id %>
-			<% connector_black_link_vertical = "connector_black_link_vertical_" + parent_id.to_s%>
-			height = document.getElementById('<%= connector_black_link_vertical%>').style.height;
-			height = parseInt(height);
-			height = height + 167;
-			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";	
+			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.add('hide');
+			height = height - 167;	
+			console.log(height);
+			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
 		}
-		
+
 	}
 
 </script>
