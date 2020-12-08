@@ -277,25 +277,7 @@
 		</div>
 		<div class="mb-2 text-center hide" id="<%= link_to_node_message %>">			
 			<div class="dropdown show mb-2 ml-3">
-			  <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" role="button" id="<%= dropdownMenuLink_link_to_node%>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false", style="width: 210px; background-color: transparent; color: black;">
-			    Link to node
-			  </a>
-
-			  <div class="dropdown-menu" aria-labelledby="<%= dropdownMenuLink_transfer%>", style="width: 210px; background-color: rgb(235,253,221);">
-			    <% node_name_tag = 0%>
-			  	<% for node in Node.where(bot_id: @bot.id, node_type: "bot")%>
-			  		<%if node.name != nil && node.name != @node.name%>	
-			  			<a href="" class="dropdown-item"><%= truncate(node.name, length: 30)%></a>	
-			  			<% node_name_tag = node_name_tag + 1%>
-			  		<%end%>	
-			    <%end%>			
-			    <% if node_name_tag == 0%>
-			    	<div class="text-center" style="color: red; font-size: 10px;">
-			    		Please name the node to select here
-			    	</div>
-			    <% end %>	
-			  </div>
-
+				<%= f.select(:link_to_node, Node.where(bot_id: @bot.id, node_type: "bot").where.not(name: @node.name).collect { |p| [ truncate(p.name, length: 25), p.id ] },{}, id: dropdownMenuLink_link_to_node, class: "btn btn-outline-secondary btn-sm dropdown-toggle text-center", style: "width: 210px; background-color: transparent; color: black;") %>
 			</div>
 			<div class="ml-3">
 				<% if @node.link_to_node_message%>

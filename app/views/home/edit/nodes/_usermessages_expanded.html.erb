@@ -3,6 +3,7 @@
 <% usermessage_name_edit_form = "usermessage_name_edit_form_" + child.id.to_s%>
 <% usermessage_message_id = "usermessage_message_id_" + child.id.to_s%>
 <% usermessage_message_partial_id = "usermessage_message_partial_id_" + child.id.to_s%>
+<% usermessage_message_form_submit_button_id = "usermessage_message_form_submit_button_id_" + child.id.to_s%>
 <div class="row mb-2 hide" id= <%= expanded_define_id%> >
 	<div class="connector_black_link"></div>	
 	<div class = "usermessage_expanded_white_box">
@@ -26,6 +27,21 @@
 	    </div>  
 
 		<div class="row card_divider mt-2 ml-0"></div>
+		
+
+		<%= form_with scope: :child_options, url: usermessage_options_form_path(child.id), method: :put,  remote: true do |f| %>
+			
+			<div class= " row Node-text-font mt-3 ml-3">				
+				Expected input type
+			</div>
+			<div class=" row ml-3 mt-2" >
+				<%= f.select :user_input_type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2"} %>
+			</div>
+				
+			<%= f.submit "Save", value: "Save", class: "hide btn btn-outline-secondary mb-3", style: "width: 270px;", id: usermessage_message_form_submit_button_id%>
+            
+		<% end %>
+
 		<div class="row ml-3 mt-3 Node-text-font  p-2 usermessage_trigger_phrases", style="height: 100px; width: 270px; overflow-y: auto; overflow-x: hidden;">
 			<div id= <%= usermessage_message_partial_id%> >				
 				<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true%>
@@ -45,26 +61,24 @@
 		</div>
 		<% end %>
 
-		<%= form_with scope: :child_options, url: usermessage_options_form_path(child.id), method: :put,  remote: true do |f| %>
-			
-			<div class= " row Node-text-font mt-3 ml-3">				
-				Expected input type
+		<div class="row mb-3 ml-0 mt-2">
+			<div class="Node-text-font ml-3 mt-1">
+				Advanced Settings
 			</div>
-			<div class=" row ml-3 mt-3" >
-				<%= f.select :user_input_type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2"} %>
+			<div class=" ml-2">
+				<%= link_to image_tag('downarrow.png', size: "10", class: "rounded-circle"), root_path %>
 			</div>
-				
-			<div class="row mb-3 ml-0 mt-2">
-				<div class="Node-text-font ml-3 mt-1">
-					Advanced Settings
-				</div>
-				<div class=" ml-2">
-					<%= link_to image_tag('downarrow.png', size: "10", class: "rounded-circle"), root_path %>
-				</div>
-			</div>
-			<div class="mb-2 text-center">
-                <%= f.submit "Save", value: "Save", class: "btn btn-outline-secondary mb-3", style: "width: 270px;"%>
-            </div>
-		<% end %>
+		</div>
+
+		<div class="mb-2 text-center">
+            <button class = "btn btn-outline-secondary mb-3", style = "width: 270px;", onclick= "usermessage_message_submit_form()">Save</button>
+        </div>
+
 	</div>
 </div>
+
+<script type="text/javascript">
+	function usermessage_message_submit_form(){
+		document.getElementById('<%= usermessage_message_form_submit_button_id%>').click();
+	}
+</script>

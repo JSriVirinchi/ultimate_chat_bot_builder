@@ -59,7 +59,7 @@
 							Link to another node : 
 							<b>
 								<%if message.error_node_link_to_node%>
-									<%= Node.find(message.error_node_link_to_node).name%>
+									<%= truncate(Node.find(message.error_node_link_to_node).name, length: 20)%>
 								<%else%>
 									<span style="color: red;">Please select a node</span>
 								<%end%>

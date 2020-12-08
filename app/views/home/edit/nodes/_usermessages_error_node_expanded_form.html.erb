@@ -75,7 +75,7 @@
 	<div class="hide" id= <%= link_to_node_text_and_dropdown%>>
 		<div class="dropdown show mb-2 ml-3">
 		<%if message_id != 'default'%>	
-		  <%= f.select(:error_node_link_to_node, Node.where(bot_id: @bot.id, node_type: "bot").collect { |p| [ p.name, p.id ] },{}, id: link_to_node_text_and_dropdown_id, class: "btn btn-outline-secondary btn-sm dropdown-toggle text-center", style: "width: 215px; background-color: transparent; color: grey; border-color: grey;", onchange:"submit_error_form('#{message_id}');") %>
+		  <%= f.select(:error_node_link_to_node, Node.where(bot_id: @bot.id, node_type: "bot").collect { |p| [ truncate(p.name, length: 25), p.id ] },{}, id: link_to_node_text_and_dropdown_id, class: "btn btn-outline-secondary btn-sm dropdown-toggle text-center", style: "width: 215px; background-color: transparent; color: grey; border-color: grey;", onchange:"submit_error_form('#{message_id}');") %>
 		  	
 		<%end%>  
 		</div>

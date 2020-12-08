@@ -26,7 +26,8 @@ class NodesController < ApplicationController
 		@node.update(set_next_action: params[:set_next_action][:set_next_action], 
 			exit_message: params[:set_next_action][:exit_bot_message], 
 			transfer_to_agent_message: params[:set_next_action][:transfer_to_agent_message],
-			link_to_node_message: params[:set_next_action][:link_to_node_message])
+			link_to_node_message: params[:set_next_action][:link_to_node_message],
+			link_to_node: params[:set_next_action][:link_to_node])
 		respond_to do |format|
 		    format.js
 	  	end

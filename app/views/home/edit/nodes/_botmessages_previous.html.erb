@@ -192,11 +192,12 @@
 			 	</div>			 	
 		 	</div>		 		
 		<%end%>
+	<!-- additional info for link to another node -->
 		<%if delete_button == false && @node.set_next_action == "link_to_node"%>
 		 	<div>
 		 		<div class="card_divider mt-2"></div>
 		 		<div class="ml-1 mb-1 text-center Initial-Message-from-Customer">
-			 		Transfering to : <b>Node</b>
+			 		Linking to : <b><%= truncate(Node.find(@node.link_to_node).name, length: 20)%></b>
 			 	</div>			 	
 		 	</div>		 		
 		<%end%>
