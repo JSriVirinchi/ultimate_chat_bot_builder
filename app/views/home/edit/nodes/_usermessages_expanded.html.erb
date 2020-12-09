@@ -38,7 +38,7 @@
 				Expected input type
 			</div>
 			<div class=" row ml-3 mt-2" >
-				<%= f.select :user_input_type, [['Text','text'],['Image','image'],['Video','video'],['Upload Pdf','pdf']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2", id: usermessage_message_user_input_dropdown_id, onchange: "changed_user_input_type();"} %>
+				<%= f.select :user_input_type, [['Text','text'],['Phone number', 'phone_number'],['Email', 'email'],['Image','image'],['Document','document'],['Location','location'], ['Pincode', 'pincode']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2", id: usermessage_message_user_input_dropdown_id, onchange: "changed_user_input_type();"} %>
 			</div>
 				
 			<%= f.submit "Save", value: "Save", class: "hide btn btn-outline-secondary mb-3", style: "width: 270px;", id: usermessage_message_form_submit_button_id%>
@@ -82,6 +82,13 @@
 </div>
 
 <script type="text/javascript">
+	for(var i=0; i< document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options.length; i++){
+		document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].selected = false;
+		if (document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].value == '<%= child.user_input_type %>'){
+			document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].selected = true;
+		}
+	}
+
 	function usermessage_message_submit_form(){
 		document.getElementById('<%= usermessage_message_form_submit_button_id%>').click();
 	}
@@ -110,15 +117,19 @@
 				selected_value = document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].value;
 			}
 		}
+		console.log(selected_value);
 		if (selected_value == "text"){
 			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.remove('hide');
 			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
+			document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true %>";
 		}
 		else{
 			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.add('hide');
 			height = height - 167;	
 			console.log(height);
 			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
+			document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true %>";
+
 		}
 
 	}

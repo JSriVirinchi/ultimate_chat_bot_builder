@@ -1,19 +1,47 @@
-<% user_messages_list = Message.where(node_id: child.id)%>
-<%if Message.where(node_id: child.id).first%>
-<div>
-	<% for message in user_messages_list%>
-		<span class="triggerphrase ml-1 mr-1 mt-4 mb-2 bg-white">
-			<span class= "ml-2 mr-1 mt-4">
-				<%= message.text_messages %>			
-			</span>
-			<% if delete_button == true%>
-			<span class="mt-4 triggerphrase_text" id= <%= "usermessage_message_delete_" + (child.id).to_s%>>
-				<%= link_to image_tag('dustbin.png', size: "10"), usermessage_message_delete_path(message.id, child.bot_id ,child.id), method: :delete ,remote: true, class: "mr-2 mt-1"%>		
-			</span>
+<!-- text -->
+<%if child.user_input_type == "text"%>
+	<% user_messages_list = Message.where(node_id: child.id)%>
+	<%if Message.where(node_id: child.id).first%>
+		<div>
+			<% for message in user_messages_list%>
+				<span class="triggerphrase ml-1 mr-1 mt-4 mb-2 bg-white">
+					<span class= "ml-2 mr-1 mt-4">
+						<%= message.text_messages %>			
+					</span>
+					<% if delete_button == true%>
+					<span class="mt-4 triggerphrase_text" id= <%= "usermessage_message_delete_" + (child.id).to_s%>>
+						<%= link_to image_tag('dustbin.png', size: "10"), usermessage_message_delete_path(message.id, child.bot_id ,child.id), method: :delete ,remote: true, class: "mr-2 mt-1"%>		
+					</span>
+					<%end%>
+				</span>
 			<%end%>
-		</span>
+		</div>	
+	<%else%>
+		No trigger phrases are added yet to this node.
 	<%end%>
-</div>	
-<%else%>
-	No trigger phrases are added yet to this node.
-<%end%>
+<!-- others -->
+<%elsif child.user_input_type == "phone_number"%>
+	<div>
+		<b>Phone number </b> will be provided	
+	</div>
+<%elsif child.user_input_type == "email"%>	
+	<div>
+		<b>Email </b> will be provided
+	</div>
+<%elsif child.user_input_type == "image"%>	
+	<div>
+		<b>Image </b> will be uploaded
+	</div>
+<%elsif child.user_input_type == "document"%>	
+	<div>
+		<b>Document </b> will be uploaded
+	</div>
+<%elsif child.user_input_type == "location"%>
+	<div>
+		<b>Location </b> will be provided	
+	</div>
+<%elsif child.user_input_type == "pincode"%>
+	<div>
+		<b>Pincode </b> will be provided	
+	</div>
+<%end%>	

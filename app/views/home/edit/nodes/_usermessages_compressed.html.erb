@@ -1,6 +1,7 @@
 <% compressed_define_id = "compressed_define_nodes_id_" + child.id.to_s %>
 <% compressed_define_name_id = "compressed_define_nodes_name_id_" + child.id.to_s %>
 <% usermessage_message_compressed_partial_id = "usermessage_message_compressed_partial_id_" + child.id.to_s%>
+<% usermessage_compressed_node_expand_icon = "usermessage_compressed_node_expand_icon_" + child.id.to_s%>
 <div class="row mb-2 hide" id= <%= compressed_define_id%> >
 	<div class="connector_black_link"></div>
 	<div class="usermessage_before">
@@ -12,14 +13,14 @@
 				<%= link_to image_tag('dustbin.png', size: "15"), usermessage_node_delete_path(child.id, "compressed"), method: :delete, remote: true, data: { confirm: "Are you sure that you want to delete this node? This will delete all the children nodes attached to it. You can edit the current node, if you wanted to."}%>
 			</div>
 			<div class="col-1">	
-				<%= link_to image_tag('expand.png', size: "14"), usermessage_expand_path(child.id),  remote: true, class: ""%>
+				<%= link_to image_tag('expand.png', size: "14"), usermessage_expand_path(child.id), id: usermessage_compressed_node_expand_icon , remote: true, class: ""%>
 			</div>			
 		</div>
 		<div class="card_divider mb-2"></div>
 		<div class="row triggerphrases_partial ml-3", style="overflow-y: auto;overflow-x: hidden; height: 50px; width: 280px;" >
-			<div id= <%= usermessage_message_compressed_partial_id%>>
-				<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: false%>
-			</div>			
+				<div id= <%= usermessage_message_compressed_partial_id%>>
+					<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: false%>
+				</div>			
 		</div>
 	</div>
 </div>
