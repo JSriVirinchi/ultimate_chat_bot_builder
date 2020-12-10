@@ -6,6 +6,7 @@
 <% usermessage_message_form_submit_button_id = "usermessage_message_form_submit_button_id_" + child.id.to_s%>
 <% usermessage_adding_trigger_phrases_id = "usermessage_adding_trigger_phrases_id_" + child.id.to_s%>
 <% usermessage_message_user_input_dropdown_id = "usermessage_message_user_input_dropdown_id_" + child.id.to_s%>
+<% connector_green_link_expanded_id = "connector_green_link_expanded_id_" + child.id.to_s%>
 
 <div class="row mb-2 hide" id= <%= expanded_define_id%> >
 	<div class="connector_black_link"></div>	
@@ -80,7 +81,7 @@
 
 	</div>
 	<div class="connector_green_circle "></div>
-	<div class="connector_green_link"></div>
+	<div class="connector_green_link", id="<%= connector_green_link_expanded_id %>"></div>
 </div>
 
 <script type="text/javascript">

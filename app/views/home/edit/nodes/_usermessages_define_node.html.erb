@@ -1,4 +1,5 @@
 <% define_id = "define_nodes_id_" + child.id.to_s %>
+<% connector_green_link_define_id = "connector_green_link_define_id_" + child.id.to_s%>
 <div class="row mb-2" id= <%= define_id%> >
 	<div class="connector_black_link"></div>
 	<div class="usermessage_white_box">
@@ -22,5 +23,5 @@
 		</div>
 	</div>
 	<div class="connector_green_circle "></div>
-	<div class="connector_green_link"></div>
+	<div class="connector_green_link", id="<%= connector_green_link_define_id %>"></div>
 </div>

@@ -5,3 +5,82 @@
 	<div class="connector_green_link"></div>
 	<%= render 'home/edit/botresponse_and_usermessage_loop', parent_id: parent_id%>
 </div>
+
+<script type="text/javascript">
+			
+	<% def changing_links (parent_node_id, count, number_of_children) %>
+		console.log('<%=parent_node_id%>');
+		<% node = Node.find(parent_node_id)%>
+
+		<%if node.parent_id != 0%>
+			<% botresponse_and_usermessage_row = "botresponse_and_usermessage_row_" + (node.parent_id).to_s%>
+			<% connector_green_link_vertical = "connector_green_link_vertical_"+ (node.parent_id).to_s %>
+			<% connector_green_link_partial = "connector_green_link_partial_" + (node.parent_id).to_s%>
+			<% connector_green_link_compressed_id = "connector_green_link_compressed_id_" + (node.parent_id).to_s%>
+			<% connector_green_link_define_id = "connector_green_link_define_id_" + (node.parent_id).to_s%>
+			<% connector_green_link_expanded_id = "connector_green_link_expanded_id_" + (node.parent_id).to_s%>
+
+			console.log(<%= node.id %>);
+			console.log('<%= count%>');
+			console.log('<%= number_of_children%>');
+			console.log('<%= botresponse_and_usermessage_row%>');
+			console.log('<%= connector_green_link_vertical%>');
+			console.log('<%= connector_green_link_partial%>');
+			console.log('<%= connector_green_link_compressed_id%>');
+			console.log('<%= connector_green_link_define_id%>');
+			console.log('<%= connector_green_link_expanded_id%>');
+
+			height = document.getElementById('<%= botresponse_and_usermessage_row%>').offsetHeight;
+			width = document.getElementById('<%= connector_green_link_partial%>').offsetWidth;
+
+			console.log(height);
+			console.log(width);
+
+			count = '<%= count%>';
+			count = parseInt(count);
+			number_of_children = '<%= number_of_children%>';
+			number_of_children = parseInt(number_of_children);
+
+			<%if count == 1%>
+				height = 0;
+				margin_left = -2;
+			<%else%>
+				width = 10 + (count-1)*5;
+				margin_left = 0 - (count-1)*5;
+			<%end%>
+
+			width_of_green_link_define = document.getElementById('<%= connector_green_link_define_id%>').offsetWidth;
+			width_of_green_link_compressed = document.getElementById('<%= connector_green_link_compressed_id%>').offsetWidth;
+			width_of_green_link_expanded = document.getElementById('<%= connector_green_link_expanded_id%>').offsetWidth;
+
+			width_of_green_link_expanded = width_of_green_link_expanded + (number_of_children-count)*5;
+			width_of_green_link_define = width_of_green_link_define + (number_of_children-count)*5;
+			width_of_green_link_compressed = width_of_green_link_compressed + (number_of_children-count)*5;
+
+			document.getElementById('<%= connector_green_link_define_id%>').style.width = width_of_green_link_define + "px";
+			document.getElementById('<%= connector_green_link_compressed_id%>').style.width = width_of_green_link_compressed + "px";
+			document.getElementById('<%= connector_green_link_expanded_id%>').style.width = width_of_green_link_expanded + "px";
+
+			document.getElementById('<%= connector_green_link_vertical%>').style.height = height + "px";
+			document.getElementById('<%= connector_green_link_partial%>').style.width = width + "px";
+			document.getElementById('<%= connector_green_link_partial%>').style.marginLeft = margin_left + "px";
+		<%end%>
+
+		<%number_of_children = 0%>
+		<% for child in Node.where(bot_id: @bot.id, parent_id: parent_node_id) %>
+			<%number_of_children = number_of_children + 1%>
+		<%end%>
+
+		<%count = 0%>
+		<% for child in Node.where(bot_id: @bot.id, parent_id: parent_node_id) %>
+			<%count = count + 1%>
+			<%if child.children.first%>
+				<% changing_links(child.children.first.id, count, number_of_children) %>
+			<%end%>	
+		<%end%>
+
+	<%end%>
+
+	<% main_node = Node.where(bot_id: @bot.id, parent_id: 0).first%>
+	<% changing_links(main_node.id, 1, 0) %>	
+</script>	

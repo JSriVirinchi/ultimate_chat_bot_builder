@@ -2,6 +2,8 @@
 <% compressed_define_name_id = "compressed_define_nodes_name_id_" + child.id.to_s %>
 <% usermessage_message_compressed_partial_id = "usermessage_message_compressed_partial_id_" + child.id.to_s%>
 <% usermessage_compressed_node_expand_icon = "usermessage_compressed_node_expand_icon_" + child.id.to_s%>
+<% connector_green_link_compressed_id = "connector_green_link_compressed_id_" + child.id.to_s%>
+
 <div class="row mb-2 hide" id= <%= compressed_define_id%> >
 	<div class="connector_black_link"></div>
 	<div class="usermessage_before">
@@ -24,5 +26,5 @@
 		</div>
 	</div>
 	<div class="connector_green_circle "></div>
-	<div class="connector_green_link"></div>
+	<div class="connector_green_link", id="<%= connector_green_link_compressed_id %>"></div>
 </div>

@@ -24,9 +24,7 @@
 			</div>
 			<div>
 				<div>
-					<% count = 0%>
 					<% for children in @node.children%>
-						<% count = count + 1%>
 						<% if children.node_type == "user" %>
 						<% botresponse_and_usermessage_row = "botresponse_and_usermessage_row_" + (children.id).to_s%>	
 							<div class="row", id="<%= botresponse_and_usermessage_row%>">
@@ -36,23 +34,7 @@
 								<div class="connector_green_link_partial", id="<%= connector_green_link_partial %>"></div>
 								<div class="row", style="margin-bottom: 5px;">
 									<%= render 'home/edit/botresponse_and_usermessage_loop', parent_id: children.id %>
-								</div>				
-								<script type="text/javascript">
-									count = '<%= count%>';
-									count = parseInt(count);
-									height = document.getElementById('<%= botresponse_and_usermessage_row%>').offsetHeight;
-									width = document.getElementById('<%= connector_green_link_partial%>').offsetWidth;
-									<%if count == 1%>
-										height = 0;
-										margin_left = -2;
-									<%else%>
-										width = 10 + count*10;
-										margin_left = 0 - count*10;
-									<%end%>
-									document.getElementById('<%= connector_green_link_vertical%>').style.height = height + "px";
-									document.getElementById('<%= connector_green_link_partial%>').style.width = width + "px";
-									document.getElementById('<%= connector_green_link_partial%>').style.marginLeft = margin_left + "px";
-								</script>			
+								</div>						
 							</div>							
 						<%end%>
 					<%end%>
@@ -61,4 +43,3 @@
 		</div>
 	<% end %>
 <% end %>
-
