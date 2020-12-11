@@ -30,12 +30,6 @@
 			console.log('<%= connector_green_link_define_id%>');
 			console.log('<%= connector_green_link_expanded_id%>');
 
-			height = document.getElementById('<%= botresponse_and_usermessage_row%>').offsetHeight;
-			width = document.getElementById('<%= connector_green_link_partial%>').offsetWidth;
-
-			console.log(height);
-			console.log(width);
-
 			count = '<%= count%>';
 			count = parseInt(count);
 			number_of_children = '<%= number_of_children%>';
@@ -43,11 +37,43 @@
 
 			<%if count == 1%>
 				height = 0;
+				width = document.getElementById('<%= connector_green_link_partial%>').offsetWidth;
 				margin_left = -2;
 			<%else%>
+				<% white_node = Node.find(node.parent_id)%>
+				<% previous_green_node = Node.find(white_node.parent_id)%>
+				console.log(<%= previous_green_node.id%>);
+
+				height = 0;
+				<% count_for_height = 0 %>
+				<% for child_nodes in previous_green_node.children %>
+					<%count_for_height = count_for_height + 1%>
+					<% if count_for_height < count %>
+						<% botresponse_and_usermessage_row_trail = "botresponse_and_usermessage_row_" + (child_nodes.id).to_s%>
+						<% compressed_define_nodes_id = "compressed_define_nodes_id_" + (child_nodes.id).to_s%>
+						<% define_nodes_id = "define_nodes_id_" + (child_nodes.id).to_s%>
+						<% expanded_define_nodes_id = "expanded_define_nodes_id_" + (child_nodes.id).to_s%>
+
+						if (!(document.getElementById('<%= compressed_define_nodes_id%>').classList.contains('hide'))){
+							user_message_height = document.getElementById('<%= compressed_define_nodes_id%>').offsetHeight;
+						}
+						if (!(document.getElementById('<%= define_nodes_id%>').classList.contains('hide'))){
+							user_message_height = document.getElementById('<%= define_nodes_id%>').offsetHeight;
+						}
+						if (!(document.getElementById('<%= expanded_define_nodes_id%>').classList.contains('hide'))){
+							user_message_height = document.getElementById('<%= expanded_define_nodes_id%>').offsetHeight;
+						}
+
+						height = height - user_message_height - 8 + document.getElementById('<%= botresponse_and_usermessage_row_trail%>').offsetHeight;
+					<%end%>	
+				<%end%>
+
 				width = 10 + (count-1)*5;
-				margin_left = 0 - (count-1)*5;
+				margin_left = 0;
 			<%end%>
+
+			console.log(height);
+			console.log(width);
 
 			width_of_green_link_define = document.getElementById('<%= connector_green_link_define_id%>').offsetWidth;
 			width_of_green_link_compressed = document.getElementById('<%= connector_green_link_compressed_id%>').offsetWidth;
@@ -62,6 +88,8 @@
 			document.getElementById('<%= connector_green_link_expanded_id%>').style.width = width_of_green_link_expanded + "px";
 
 			document.getElementById('<%= connector_green_link_vertical%>').style.height = height + "px";
+			document.getElementById('<%= connector_green_link_vertical%>').style.marginTop = 21 - height + "px";
+			document.getElementById('<%= connector_green_link_vertical%>').style.marginLeft = 29 - (count-1)*5 + "px";
 			document.getElementById('<%= connector_green_link_partial%>').style.width = width + "px";
 			document.getElementById('<%= connector_green_link_partial%>').style.marginLeft = margin_left + "px";
 		<%end%>
@@ -82,5 +110,7 @@
 	<%end%>
 
 	<% main_node = Node.where(bot_id: @bot.id, parent_id: 0).first%>
-	<% changing_links(main_node.id, 1, 0) %>	
+	<%if main_node %>
+		<% changing_links(main_node.id, 1, 0) %>
+	<%end%>	
 </script>	
