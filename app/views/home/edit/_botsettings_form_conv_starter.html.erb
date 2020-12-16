@@ -1,0 +1,41 @@
+<div style = " padding-top: 10%;">
+	<div class = "mb-4 ml-0" >
+		<h4>Who will initiate the conversation?</h4>	
+	</div>		
+	<%= form_with scope: :botsettingsstarter, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
+		<%= f.text_field :Bot, value: "Bot", class: 'hide' %>
+		<%= f.text_field :Customer, value: "Customer", class: 'hide' %>
+		<%=  button_tag(value: "Customer", id: "Customer", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-1 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+				Customer	
+		<% end %>
+		<%=  button_tag(value: "Bot", id: "Bot", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-0", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+				Bot
+		<% end %>
+		<div class = "ml-3 mt-4">
+		<strong>Note</strong>
+		</div>
+		<div class = "ml-3">
+		If bot initiates message, it can send only Whatsapp approved templates.
+		</div>
+		<% if @bot.initconv != nil %>
+			<% if @bot.initconv  == "Customer"%>
+				<style>
+					.button-bot-settings[type="submit"][id="Customer"][value="Customer"]{
+						box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+						border: solid 1px #00b15c;
+						background-color: #deffef;
+					};
+				</style>
+			<% end %>
+			<% if @bot.initconv  == "Bot"%>
+				<style>
+					.button-bot-settings[type="submit"][id="Bot"][value="Bot"]{
+						box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+						border: solid 1px #00b15c;
+						background-color: #deffef;
+					};
+				</style>
+			<% end %>
+		<% end %>	
+	<% end %>
+</div>

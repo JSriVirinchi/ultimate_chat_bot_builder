@@ -1,0 +1,15 @@
+<% space = 0 %>
+<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+	<% space = space + 1 %>
+	<span class="triggerphrase-botsettings ml-3 mr-1 p-2">
+	    <span class= "ml-2 mr-2"><%= phrase.triggerphrase %>
+	        <span class="mb-4 ml-2">
+	        <%= link_to image_tag('deleteicon.png', size: "10"), triggerphrasedelete_path(phrase.id,@bot.id), method: :delete ,remote: true, class: "mr-2"%>
+	        </span>		
+	    </span>	
+	</span>
+
+	<% if space%3 == 0  %>
+	  <br><br>
+	<% end %>
+<% end %>

@@ -1,0 +1,60 @@
+<div style = "padding-top: 10%;">
+   <div style = "overflow-y: auto; overflow-x: hidden;">
+		<%= form_with scope: :botsettingstrigger, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
+			<div class = "mb-4" >
+				<h4>Add keywords to which the bot will respond</h4>	
+				<%= f.text_field :Default, value: "Default", class: 'hide' %>
+				<%= f.text_field :Trigger, value: "Trigger", class: 'hide' %>
+				<%=  button_tag(value: "Default", id: "Default", type: 'submit', class: "container shadow button-bot-settings mt-4", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+						Any keyword (Default bot)
+				<% end %>
+				<%=  button_tag(value: "Trigger",id: "Trigger", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-4 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+						Specific keywords (Triggered bot)	
+				<% end %>		
+			</div>	
+		<% end %>
+
+		<% if @bot.triggerpoint != nil %>
+			<% if @bot.triggerpoint  == "Default"%>
+				<style>
+					.button-bot-settings[type="submit"][id="Default"][value="Default"]{
+						box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+						border: solid 1px #00b15c;
+						background-color: #deffef;
+					};
+				</style>
+			<% end %>
+			<% if @bot.triggerpoint  == "Trigger"%>
+				<style>
+					.button-bot-settings[type="submit"][id="Trigger"][value="Trigger"]{
+						box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+						border: solid 1px #00b15c;
+						background-color: #deffef;
+					};
+				</style>
+			<% end %>
+		<% end %>
+
+		<div id = "botsettings_trigger">
+			<%= render 'home/edit/botsettings_form_specific_key_words' %>
+		</div>
+
+		<div id = "triggered_bot">
+			<div class="text-center mb-1" style = "margin-top: 2%;">
+				<%= form_with scope: :triggerphrase, url: triggerphrasecreate_path(@bot.id), method: :post, remote: true do |f| %>
+					<div class = "row mt-4">
+						<div class = " col-4 text-left ml-4 mr-0 p-0">
+							<%= f.text_field :triggerphrase, class: "text-left form_trigger_input_bot_settings", placeholder:  "Add trigger words", style: "width: 250px; padding-left: 5px;"%> 
+						</div>
+						<div class = "col-1 text-right ml-0 mb-0 form_trigger_input_bot_settings" , style= "padding-bottom: 0px;" >
+							<%= f.submit "Add", class: "submit-text_bot_settings", remote: true %>
+						</div>
+					</div>	
+					<!-- settings_change_path(@bot.id, "reminder") -->
+					<%= link_to " Next", root_path, method: :get, class: "btn btn-success ml-4", style: "margin-right: 10px; margin-top: -68px;",remote: true %>
+				<% end %>
+			</div>
+		</div>
+
+	</div>	
+</div>

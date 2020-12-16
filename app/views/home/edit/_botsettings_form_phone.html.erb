@@ -1,0 +1,30 @@
+<div style = "padding-top: 10%;">
+	<div >
+		<h4>Select which numbers to send messages from</h4>
+	</div>		
+	<%= form_with scope: :botsettingsphone, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
+		<%= f.text_field :phone, value: "9876567828", class: 'hide' %>
+		<%=  button_tag(type: 'submit', class: "col-3 container shadow button-bot-settings ml-3 mt-4", style: "height: 64px;", remote: true, value: "phone", id: "phone" ) do %>	
+			<div class="row">
+				<div class="col-2">
+					<%= image_tag('Business.JPG', size: "20", class: "rounded-circle")%>
+				</div>
+				<div class="col-9">
+					<div class="custom_font">Business 1</div> 
+					<div style="font-size: 12px; color: grey;">+91 9876567828</div>
+				</div>
+			</div>	
+		<% end %>
+	<% end %>
+
+	<% if @bot.phone != nil %>
+		<style>
+			.button-bot-settings[type="submit"][value="phone"][id = "phone"]{
+				box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+				border: solid 1px #00b15c;
+				background-color: #deffef;
+			};
+		</style>
+	<% end %>
+	
+</div>

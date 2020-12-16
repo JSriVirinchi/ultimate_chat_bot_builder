@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_28_064129) do
+ActiveRecord::Schema.define(version: 2020_12_16_114807) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2020_11_28_064129) do
     t.integer "user_id"
     t.string "days"
     t.boolean "active"
+    t.string "reminder"
+    t.string "conversation"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -91,6 +93,14 @@ ActiveRecord::Schema.define(version: 2020_11_28_064129) do
     t.string "link_to_node"
     t.text "link_to_node_message"
     t.boolean "toggle_link_to_node"
+  end
+
+  create_table "reminders", force: :cascade do |t|
+    t.text "reminder"
+    t.integer "bot_id"
+    t.integer "rebootconv"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "triggerphrases", force: :cascade do |t|

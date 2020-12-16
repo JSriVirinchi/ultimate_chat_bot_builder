@@ -1,0 +1,78 @@
+<div id= "set_reminder_click" class = "mt-4 ml-0" >
+	<div style = "overflow-y: auto; overflow-x: hidden;" id = "style-1">
+		<h4 class = "">Send reminder message if the customer doesn't respond?</h4>	
+		<br>
+		<div class = "" style = "margin-left: -13px;">
+			<div id = "botsettings_reminder">
+				<%= render 'home/edit/botsettings_form_previous_reminder' %>
+			</div>
+			<div id = "botsettings_reminder_form" class = "">
+				<!-- reminders_create_botsettings_path(@bot.id) -->
+				<%= form_with scope: :botsettingsreminder, url: root_path, method: :get,  remote: true do |f| %>
+					<span id = "reminder">
+					<%= text_area(:botsettingsreminder, :reminder, cols: 45, rows: 3, class: ' bg-white ml-3 ', placeholder: "Enter reminder message",  remote: true )%>
+					<span class = "row mt-1" >
+						<div class = "col-4 ml-3">
+			                <span style = "color: grey;"> Send After </span>
+			                <span class="mr-2 ml-4" style="width: 13px;"><%= select_minute(5, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %></span>
+			                <span > min </span>
+			            </div> 
+			            <div class="col-1"></div>
+							<%= f.submit "Add", class: "btn btn-success btn-sm ml-3" %>
+						</div> 
+					</span>
+				<% end %>	
+			</div>	
+			<div class = "mt-3 ml-2">
+				<div id = "add_reminder">
+					<!-- settings_change_path(@bot.id, "anotherreminder") -->
+				    <%= link_to '+', root_path, method: :get, class: "mt-3", style: "color: green; text-decoration: none;",remote: true %>
+				    <!-- settings_change_path(@bot.id, "anotherreminder") -->
+					<%= link_to " Add Another Reminder", root_path, method: :get, class: "mt-3", style: "color: green; text-decoration: none;",remote: true %>
+				</div>
+			</div>		
+			<div class = "mt-4 ml-3">
+				After sending reminder message
+				<div id = "conversation">
+					<%= form_with scope: :conversation, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
+						<%= f.text_field :open, value: "open", class: 'hide' %>
+						<%= f.text_field :close, value: "close", class: 'hide' %>
+						<%=  button_tag(value: "open",id: "open", type: 'submit', class: "container shadow button-bot-settings mb-0 mt-1", style: "width: auto; padding-top: 6px; padding-bottom: 6px; margin-left: -1px;", remote: true ) do %>	
+								Keep the Conversation open
+						<% end %>
+						<%=  button_tag(value: "close", id: "close", type: 'submit', class: "container shadow button-bot-settings ml-3 mb-0 mt-1 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+								End Conversation	
+						<% end %>	
+					<% end %>	
+					<% if @bot.conversation != nil %>
+						<% if @bot.conversation  == "open"%>
+							<style>
+								.button-bot-settings[type="submit"][id="open"][value="open"]{
+									box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+									border: solid 1px #00b15c;
+									background-color: #deffef;
+								};
+							</style>
+						<% end %>
+						<% if @bot.conversation  == "close"%>
+							<style>
+								.button-bot-settings[type="submit"][id="close"][value="close"]{
+									box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+									border: solid 1px #00b15c;
+									background-color: #deffef;
+								};
+							</style>
+						<% end %>
+		            <% end %>
+				</div>
+				<% if Reminder.where(bot_id: @bot.id) == [] %>
+					<span style = "margin-top: 0px;">
+						<!-- settings_change_path(@bot.id, "skip") -->
+						<%= link_to " Skip this for now", root_path, method: :get, class: "btn btn-success mt-4 ml-0", style: "margin-right: 20px;",remote: true, id: "skip_this_for_now" %>
+					</span>
+				
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

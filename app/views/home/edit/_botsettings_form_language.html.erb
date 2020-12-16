@@ -1,0 +1,50 @@
+<div style = "padding-top: 10%; ">
+	<div class = "mb-4" >
+		<h4>Select default bot language</h4>
+	</div>		
+	<%= form_with scope: :botsettingslanguage, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
+		<div class = "ml-0 mt-4">
+			<%= f.text_field :English, value: "English", class: 'hide' %>
+			<%= f.text_field :Hindi, value: "Hindi", class: 'hide' %>
+			<%= f.text_field :Tamil, value: "Tamil", class: 'hide' %>
+			<%=  button_tag(value: "English",id: "English" ,type: 'submit', class: "container shadow button-bot-settings ml-3 mt-0", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+					English
+			<% end %>
+			<%=  button_tag(value: "Hindi", id: "Hindi",type: 'submit', class: "container shadow button-bot-settings ml-3 mt-1 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+					Hindi	
+			<% end %>	
+			<%=  button_tag(value: "Tamil", id: "Tamil", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-1 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+					Tamil	
+			<% end %>	
+		</div>
+	<% end %>
+	<% if @bot.language != nil %>
+	    <% if @bot.language == "English"%>
+			<style>
+			    .button-bot-settings[type="submit"][id="English"][value="English"]{
+					box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+					border: solid 1px #00b15c;
+					background-color: #deffef;
+				};
+			</style>
+		<% end %>
+		<% if @bot.language == "Hindi"%>
+			<style>
+			    .button-bot-settings[type="submit"][id="Hindi"][value="Hindi"]{
+					box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+					border: solid 1px #00b15c;
+					background-color: #deffef;
+				};
+			</style>
+		<% end %>
+		<% if @bot.language == "Tamil"%>
+			<style>
+			    .button-bot-settings[type="submit"][id="Tamil"][value="Tamil"]{
+					box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.12);
+					border: solid 1px #00b15c;
+					background-color: #deffef;
+				};
+			</style>
+		<% end %>
+	<% end %>
+</div>

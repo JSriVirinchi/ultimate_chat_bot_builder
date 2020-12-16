@@ -1,0 +1,29 @@
+<div class = " mb-4">
+	<h4>Send reminder message if the customer doesn't respond?</h4>	
+	<%= form_with scope: :setreminder, url: bot_path(@bot.id), method: :put, remote: true do |f| %>
+		<%= f.text_field :no, value: "no", class: 'hide' %>
+		<%= f.text_field :yes, value: "yes", class: 'hide' %>
+		<%=  button_tag(value: "yes", type: 'submit', class: "mt-4 ml-0", style: "margin-right: 20px; border: none; background-color: #f7f2ed", remote: true ) do %>	
+				Yes, Set reminder >
+		<% end %>
+		<% if @bot.reminder == nil %>
+			<div>
+				<%=  button_tag(value: "no", type: 'submit', class: "btn btn-success mt-4 ml-0", style: "margin-right: 20px;", remote: true ) do %>	
+						Skip this for now
+				<% end %>
+			</div>
+		<% end %>
+		<% if @bot.reminder != nil %>
+			<% if @bot.reminder == "no" %>
+				<div>
+					&nbsp;(You skipped this step earlier. If you want, you can add the reminders now.)
+				</div>	
+				<div style = "margin-right: 300px;">
+				<%=  button_tag(value: "no", type: 'submit', class: "btn btn-success mt-4 ml-0", remote: true ) do %>	
+						Skip this step
+				<% end %>
+			</div>	
+			<% end %>
+		<% end %>	
+	<% end %>
+</div>
