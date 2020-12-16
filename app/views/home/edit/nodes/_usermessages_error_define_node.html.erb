@@ -5,11 +5,14 @@
 	<div class="col-6 mt-2", style="padding-right: 5px;">
 		Error Response
 	</div>
+	<% error_message_define_node_type_id = 'error_message_define_node_type_id_' + (@node.id).to_s%>
+	<% error_message_define_bot_id = 'error_message_define_bot_id_' + (@node.id).to_s%>
+	<% error_message_define_parent_id = 'error_message_define_parent_id_' + (@node.id).to_s%>
 	<div class="col-4 mt-2 ml-2", style="padding-left: 5px;">
 		<%= form_with scope: :error_message_define, url: error_message_define_node_path, method: :post, remote: true do |f| %>
-			<%= f.text_field :node_type, value: "error", class: "hide"%>
-			<%= f.text_field :bot_id, value: @bot.id, class: "hide"%>
-			<%= f.text_field :parent_id, value: @node.id, class: "hide"%>
+			<%= f.text_field :node_type, value: "error",id: error_message_define_node_type_id, class: "hide"%>
+			<%= f.text_field :bot_id, value: @bot.id,id: error_message_define_bot_id, class: "hide"%>
+			<%= f.text_field :parent_id, value: @node.id,id: error_message_define_parent_id, class: "hide"%>
 	        <span class="text-center ml-4">
 				<%= f.submit "Define", value: "Define", class: "usermessage_error_button", local: true%>
 		    </span>

@@ -7,6 +7,11 @@
 <% usermessage_adding_trigger_phrases_id = "usermessage_adding_trigger_phrases_id_" + child.id.to_s%>
 <% usermessage_message_user_input_dropdown_id = "usermessage_message_user_input_dropdown_id_" + child.id.to_s%>
 <% connector_green_link_expanded_id = "connector_green_link_expanded_id_" + child.id.to_s%>
+<% usermessages_messages_node_type = 'usermessages_messages_node_type_' + child.id.to_s%>
+<% usermessages_messages_node_id = 'usermessages_messages_node_id_' + child.id.to_s%>
+<% usermessages_messages_bot_id = 'usermessages_messages_bot_id_' + child.id.to_s%>
+<% usermessages_name_edit_default = 'usermessages_name_edit_default_' + child.id.to_s %>
+<% usermessages_name_edit_changed = 'usermessages_name_edit_changed_' + child.id.to_s %>
 
 <div class="row mb-2 hide" id= <%= expanded_define_id%> >
 	<div class="connector_black_link"></div>	
@@ -18,9 +23,9 @@
 			<div class="col-9 ml-3 mt-2 mb-3 hide" id= <%= usermessage_name_edit_form %> >
 				<%= form_with scope: :name_edit, url: usermessage_name_update_path(child.id), method: :put, remote: true do |f|%>					
 					<%if child.name %>
-						<%= f.text_field :name, value: child.name ,class: "form__input", style: "width: 120px;"%>
+						<%= f.text_field :name,id: usermessages_name_edit_changed, value: child.name ,class: "form__input", style: "width: 120px;"%>
 					<% else %>	
-						<%= f.text_field :name, class: "form__input", placeholder: "User Message", style: "width: 120px;"%>
+						<%= f.text_field :name,id: usermessages_name_edit_default, class: "form__input", placeholder: "User Message", style: "width: 120px;"%>
 					<% end %>						
 					<%= f.submit "Update", class: "btn btn-sm btn-outline-secondary"%>
 				<% end %>				
@@ -39,7 +44,7 @@
 				Expected input type
 			</div>
 			<div class=" row ml-3 mt-2" >
-				<%= f.select :user_input_type, [['Text','text'],['Phone number', 'phone_number'],['Email', 'email'],['Image','image'],['Document','document'],['Location','location'], ['Pincode', 'pincode']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2", id: usermessage_message_user_input_dropdown_id, onchange: "changed_user_input_type();"} %>
+				<%= f.select :user_input_type, [['Text','text'],['Phone number', 'phone_number'],['Email', 'email'],['Image','image'],['Document','document'],['Location','location'], ['Pincode', 'pincode']], {}, {style: "width: 269px; border-radius: 5px; padding: 3px;", class: "mt-2", id: usermessage_message_user_input_dropdown_id, onchange: "changed_user_input_type('#{child.parent_id}');"} %>
 			</div>
 				
 			<%= f.submit "Save", value: "Save", class: "hide btn btn-outline-secondary mb-3", style: "width: 270px;", id: usermessage_message_form_submit_button_id%>
@@ -53,9 +58,9 @@
 			</div>
 			<%= form_with scope: :messages, url: usermessage_messages_create_path, method: :post,  remote: true do |f| %>		
 			<div class="row usermessage_trigger_phrases ml-3 mb-3", style="width: 270px;" >	   
-				<%= f.text_field :bot_id, class: "hide", value: child.bot_id%>
-				<%= f.text_field :node_id, class: "hide", value: child.id%>	
-				<%= f.text_field :node_type, class: "hide", value: "user"%>	
+				<%= f.text_field :bot_id, class: "hide",id: usermessages_messages_bot_id, value: child.bot_id%>
+				<%= f.text_field :node_id, class: "hide",id: usermessages_messages_node_id, value: child.id%>	
+				<%= f.text_field :node_type, class: "hide",id: usermessages_messages_node_type , value: "user"%>	
 				<div class="col-7">
 					<%= f.text_field :text_messages, class: "text-left form__input p-2 mt-1 usermessage_trigger_phrases", placeholder:  "Add trigger words", id: usermessage_message_id%>
 				</div>					
@@ -76,13 +81,14 @@
 		</div>
 
 		<div class="mb-2 text-center">
-            <button class = "btn btn-outline-secondary mb-3", style = "width: 270px;", onclick= "usermessage_message_submit_form()">Save</button>
+            <button class = "btn btn-outline-secondary mb-3", style = "width: 270px;", onclick= "usermessage_message_submit_form('<%= child.id %>')">Save</button>
         </div>
 
 	</div>
 	<div class="connector_green_circle "></div>
 	<div class="connector_green_link", id="<%= connector_green_link_expanded_id %>"></div>
 </div>
+
 
 <script type="text/javascript">
 	for(var i=0; i< document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options.length; i++){
@@ -92,11 +98,18 @@
 		}
 	}
 
-	function usermessage_message_submit_form(){
-		document.getElementById('<%= usermessage_message_form_submit_button_id%>').click();
+	function usermessage_message_submit_form(id){
+		<% usermessage_message_form_submit_button_id = "usermessage_message_form_submit_button_id_" %>
+		usermessage_message_form_submit_button_id = '<%= usermessage_message_form_submit_button_id %>';
+		usermessage_message_form_submit_button_id = usermessage_message_form_submit_button_id + id;
+		console.log(usermessage_message_form_submit_button_id);
+
+		document.getElementById(usermessage_message_form_submit_button_id).click();
 	}
 
-	function changed_user_input_type(){
+	function changed_user_input_type(parent_id){
+		console.log(parent_id);
+		console.log('jjj');
 		<% parent_id = Node.find(child.parent_id).id %>
 		<% connector_black_link_vertical = "connector_black_link_vertical_" + parent_id.to_s%>
 		<% height = 53%>

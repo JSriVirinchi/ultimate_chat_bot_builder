@@ -10,7 +10,7 @@
 document.getElementById('<%= expanded_define_id%>').classList.add('hide');
 document.getElementById('<%= compressed_define_id%>').classList.remove('hide');
 document.getElementById('<%= compressed_define_name_id%>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_compressed_name', child: @child%>";
-
+console.log('<%= @id%>');
 height = document.getElementById('<%= connector_black_link_vertical %>').style.height;
 height = parseInt(height);
 
