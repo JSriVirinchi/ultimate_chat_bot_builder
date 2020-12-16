@@ -1,0 +1,15 @@
+<span style = "color: #7e7e7e;" >When no customer response</span>
+<!-- settings_change_path(@bot.id, "5") -->
+<%= link_to " Change", root_path, method: :get,style: "margin-left: 11.25%; color: #157e4b; font-weight: 500; text-decoration: none;" , remote: true %>
+
+<% i =1 %>
+<div class = "mb-4 ml-0 p-0 container" style = "height: 70px; overflow-y: auto;" id = "style-4">
+    <% for reminder in Reminder.where(bot_id: @bot.id)%>
+        <%= "Reminder " + i.to_s() + "- "+ reminder.reminder %>	
+        <br>
+        <% i = i + 1 %>
+    <% end %>
+    <% if Reminder.where(bot_id: @bot.id) == [] %>
+        <span style = "color: #FF8C00;">Not Defined</span><%= image_tag('warning.png', size: "25", class: "mb-2") %>
+    <% end %>      
+</div>

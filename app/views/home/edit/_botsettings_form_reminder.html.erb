@@ -37,10 +37,10 @@
 					<%= form_with scope: :conversation, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
 						<%= f.text_field :open, value: "open", class: 'hide' %>
 						<%= f.text_field :close, value: "close", class: 'hide' %>
-						<%=  button_tag(value: "open",id: "open", type: 'submit', class: "container shadow button-bot-settings mb-0 mt-1", style: "width: auto; padding-top: 6px; padding-bottom: 6px; margin-left: -1px;", remote: true ) do %>	
+						<%=  button_tag(value: "open",id: "open", type: 'submit', class: "container shadow button-bot-settings mb-4 mt-1", style: "width: auto; padding-top: 6px; padding-bottom: 6px; margin-left: -1px;", remote: true ) do %>	
 								Keep the Conversation open
 						<% end %>
-						<%=  button_tag(value: "close", id: "close", type: 'submit', class: "container shadow button-bot-settings ml-3 mb-0 mt-1 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+						<%=  button_tag(value: "close", id: "close", type: 'submit', class: "container shadow button-bot-settings ml-3 mb-4 mt-1 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
 								End Conversation	
 						<% end %>	
 					<% end %>	
@@ -70,9 +70,19 @@
 						<!-- settings_change_path(@bot.id, "skip") -->
 						<%= link_to " Skip this for now", root_path, method: :get, class: "btn btn-success mt-4 ml-0", style: "margin-right: 20px;",remote: true, id: "skip_this_for_now" %>
 					</span>
-				
 				<% end %>
-			</div>
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	document.getElementById('open').onclick = function(){
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	}
+
+	document.getElementById('close').onclick = function(){
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	}
+</script>

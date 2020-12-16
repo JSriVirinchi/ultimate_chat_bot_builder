@@ -1,0 +1,7 @@
+<span style = "color: #7e7e7e">Outgoing number</span>
+<!-- settings_change_path(@bot.id, "1") -->
+<%= link_to " Change", root_path, method: :get,style: "margin-left: 35.5%; color: #157e4b; font-weight: 500; text-decoration: none", remote: true %>
+Business 1 
+<% if @bot.phone != nil %>	
+    (<%="+91 "+ @bot.phone.to_s() %>)
+<% end %>   

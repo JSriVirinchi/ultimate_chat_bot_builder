@@ -39,3 +39,14 @@
 		<% end %>	
 	<% end %>
 </div>
+
+<script type="text/javascript">
+	document.getElementById('Customer').onclick = function(){
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.remove('hide');
+	}
+	document.getElementById('Bot').onclick = function(){
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+	}
+</script>

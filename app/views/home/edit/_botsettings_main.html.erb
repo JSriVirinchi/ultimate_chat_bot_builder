@@ -2,14 +2,28 @@
 	<div class="row ">
 	
 		<!-- form -->
-		<div class="col-12 overflow">
-			<%=  render 'home/edit/botsettings_form_phone'%>
-			<%=  render 'home/edit/botsettings_form_language'%>
-			<%=  render 'home/edit/botsettings_form_conv_starter'%>
-			<%=  render 'home/edit/botsettings_form_trigger_phrases'%>
-			<%=  render 'home/edit/botsettings_form_want_reminder'%>
-			<%=  render 'home/edit/botsettings_form_reminder'%>
-
+		<div class="col-12 overflow " style=" margin-left: 30px;">
+			<div id="botsettings_phone_partial" class="" style="margin-top: 70px;">
+				<%=  render 'home/edit/botsettings_form_phone'%>	
+			</div>
+			<div id="botsettings_language_partial" class="hide" style="margin-top: 70px;">
+				<%=  render 'home/edit/botsettings_form_language'%>
+			</div>			
+			<div id="botsettings_conv_starter_partial" class="hide" style="margin-top: 70px;">
+				<%=  render 'home/edit/botsettings_form_conv_starter'%>
+			</div>
+			<div id="botsettings_trigger_phrases_partial" class="hide" style="margin-top: 70px;">
+				<%=  render 'home/edit/botsettings_form_trigger_phrases'%>
+			</div>			
+			<div id="botsettings_want_reminder_partial" class="hide" style="margin-top: 70px;">
+				<%=  render 'home/edit/botsettings_form_want_reminder'%>
+			</div>
+			<div id="botsettings_reminder_partial" class="hide">
+				<%=  render 'home/edit/botsettings_form_reminder'%>
+			</div>
+			<div id="botsettings_setup_partial" class="hide" style="margin-top: 70px;">
+				<%=  render 'home/edit/botsettings_form_setup_button'%>
+			</div>
 		</div>
 	</div>
 </div>

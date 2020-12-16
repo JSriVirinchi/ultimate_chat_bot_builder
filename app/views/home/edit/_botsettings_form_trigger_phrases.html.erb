@@ -1,5 +1,5 @@
 <div style = "padding-top: 10%;">
-   <div style = "overflow-y: auto; overflow-x: hidden;">
+   <div style = "">
 		<%= form_with scope: :botsettingstrigger, url: bot_path(@bot.id), method: :put,  remote: true do |f| %>
 			<div class = "mb-4" >
 				<h4>Add keywords to which the bot will respond</h4>	
@@ -35,11 +35,11 @@
 			<% end %>
 		<% end %>
 
-		<div id = "botsettings_trigger">
+		<div id = "botsettings_trigger" style="overflow-y: auto; overflow-x: hidden; max-height: 120px;">
 			<%= render 'home/edit/botsettings_form_specific_key_words' %>
 		</div>
 
-		<div id = "triggered_bot">
+		<div id = "triggered_bot" class="hide">
 			<div class="text-center mb-1" style = "margin-top: 2%;">
 				<%= form_with scope: :triggerphrase, url: triggerphrasecreate_path(@bot.id), method: :post, remote: true do |f| %>
 					<div class = "row mt-4">
@@ -51,10 +51,24 @@
 						</div>
 					</div>	
 					<!-- settings_change_path(@bot.id, "reminder") -->
-					<%= link_to " Next", root_path, method: :get, class: "btn btn-success ml-4", style: "margin-right: 10px; margin-top: -68px;",remote: true %>
+					<%= link_to " Next", root_path, id: "Next_button", method: :get, class: "btn btn-success ml-4", style: "margin-right: 10px; margin-top: -68px;",remote: true %>
 				<% end %>
 			</div>
 		</div>
 
 	</div>	
 </div>
+
+<script type="text/javascript">
+	document.getElementById('Trigger').onclick = function(){
+		document.getElementById('triggered_bot').classList.remove('hide');
+	}
+	document.getElementById('Default').onclick = function(){
+		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+	}
+	document.getElementById('Next_button').onclick = function(){
+		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+	}		
+</script>
