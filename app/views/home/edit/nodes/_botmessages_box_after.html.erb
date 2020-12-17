@@ -1,6 +1,6 @@
 <!-- declaring ids -->
 <% @node = Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
-
+<script src = "/assets/ckeditor/ckeditor.js" > </script>
 <%if @node%> 
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
 <% botmessages_previous = "botmessages_previous_" + (@node.id).to_s %>
@@ -65,6 +65,7 @@
 <% botresponses_text_message_bot_id = "botresponses_text_message_bot_id_" + (@node.id).to_s%>
 <% botresponses_text_message_message_type = "botresponses_text_message_message_type_" + (@node.id).to_s%>
 <% botresponses_text_message_node_id = "botresponses_text_message_node_id_" + (@node.id).to_s%>
+
 <%end%>
 
 <!-- content -->
@@ -108,19 +109,16 @@
 	<div class="text-center mx-auto hide" id= <%= text_area_form_hide_or_show%>>
 	<%= form_with scope: :message, url: nodes_message_create_path, method: :post,  remote: true do |f| %>
 		<div class="text-center botresponses_messages_area_full">
-			<%= text_area(:message, :text_messages, cols: 30, rows: 4, class: 'botresponses_messages_area', value: "", id: botresponses_messages_area_text_area, remote: true)%>
+			<%= text_area :message, :text_messages, cols: 30, rows: 4, id: botresponses_messages_area_text_area %>
 			<%= f.text_field :node_type, value: "bot", class: "hide", id: botresponses_text_message_node_type%>
 			<%= f.text_field :bot_id, value: @bot.id , class: "hide", id: botresponses_text_message_bot_id%>
 			<%= f.text_field :message_type, value: "text" , class: "hide", id: botresponses_text_message_message_type%>
 			<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 			<%= f.text_field :node_id, value: @node.id, class: "hide", id: botresponses_text_message_node_id%>
 			<% end %>
-			<div class="card_divider_two ml-2 mt-2 mb-1"></div>
+			
 			<div class="row mb-1 ml-2">
 				<div class="col-4 mt-2">
-					<%= link_to image_tag('boldicon.png', size: "12", class: ""), root_path %>
-					<%= link_to image_tag('italics.jpg', size: "12", class: "ml-1"), root_path %>
-					<%= link_to image_tag('underline.png', size: "15", class: "ml-1"), root_path %>
 				</div>
 				<div class="col-8" style="text-align: right;">
 					<%= f.submit "Add", value: "Add", class: "btn btn-outline-secondary btn-sm mr-4", style: "height: 30px; margin-top: 5px; text-align: right;"%>
@@ -311,7 +309,11 @@
 
 
 <script type="text/javascript">
-	
+	 
+	 CKEDITOR.replace( ('<%= botresponses_messages_area_text_area %>'), {
+        customConfig: "/assets/ckeditor/config.js"
+    });
+
 	<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 		function image_upload(){
 			console.log('uploaded');
