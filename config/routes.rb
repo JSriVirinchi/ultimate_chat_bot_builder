@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get '/statistics/:id', to: 'home#statistics', as: 'statistics'
   get '/testbot/:id', to: 'home#testbot', as: 'testbot'
   resources :bots
+  post '/botsetting/reminders/:id', to:'active#botsettings_reminder_create', as:'botsettings_reminder_create'
+  put '/botsetting/reminders/edit/:id', to:'active#botsettings_reminder_edit', as:'botsettings_reminder_edit'
+  delete '/botsetting/reminders/delete/:id', to:'active#botsettings_reminder_delete', as:'botsettings_reminder_delete'
   put 'active/:id', to: 'active#updateactive', as: 'bot_active'
   #compose message
   get 'triggerphrase/edit/:id' , to: 'active#triggerphraseedit' , as: 'triggerphraseedit'

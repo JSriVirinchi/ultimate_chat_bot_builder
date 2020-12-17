@@ -1,17 +1,15 @@
 <% for reminder in Reminder.where(bot_id: @bot.id)%>
-    <!-- reminders_update_botsettings_path(reminder.id) -->
-    <%= form_with scope: :botsettingsupdatereminder, url: root_path, method: :get,  remote: true do |f| %>
+    <%= form_with scope: :botsettingsupdatereminder, url: botsettings_reminder_edit_path(reminder.id), method: :put,  remote: true do |f| %>
         <%= text_area(:botsettingsupdatereminder, :reminder, cols: 45, rows: 3, class: 'bg-white ml-3 ', value: reminder.reminder,  remote: true )%>
         <div class = "row mt-1" >
             <div class = "col-4 ml-3">
                 <span style = "color: grey;"> Send After </span>
-                <span class="mr-2 ml-4" style="width: 13px;"><%= select_minute(5, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %></span>
+                <span class="mr-2 ml-4" style="width: 13px;"><%= select_minute(reminder.rebootconv, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %></span>
                 <span > min </span>
             </div>
             <div class = "col-1 text-right">
                 <span id = "delete_reminder" class = "mt-0"> 
-                <!-- reminders_delete_botsettings_path(reminder.id) -->
-                <%= link_to image_tag('dustbin.png', size: "15"), root_path, method: :delete, remote: true %>
+                <%= link_to image_tag('dustbin.png', size: "15"), botsettings_reminder_delete_path(reminder.id), method: :delete, remote: true %>
                 </span>
             </div>
             <div>

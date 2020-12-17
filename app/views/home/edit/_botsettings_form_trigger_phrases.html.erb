@@ -35,16 +35,17 @@
 			<% end %>
 		<% end %>
 
+
 		<div id = "botsettings_trigger" style="overflow-y: auto; overflow-x: hidden; max-height: 120px;">
 			<%= render 'home/edit/botsettings_form_specific_key_words' %>
 		</div>
 
 		<div id = "triggered_bot" class="hide">
 			<div class="text-center mb-1" style = "margin-top: 2%;">
-				<%= form_with scope: :triggerphrase, url: triggerphrasecreate_path(@bot.id), method: :post, remote: true do |f| %>
+				<%= form_with scope: :botsettings_triggerphrase, url: triggerphrasecreate_path(@bot.id), method: :post, remote: true do |f| %>
 					<div class = "row mt-4">
 						<div class = " col-4 text-left ml-4 mr-0 p-0">
-							<%= f.text_field :triggerphrase, class: "text-left form_trigger_input_bot_settings", placeholder:  "Add trigger words", style: "width: 250px; padding-left: 5px;"%> 
+							<%= f.text_field :triggerphrase, class: "text-left form_trigger_input_bot_settings",id: 'botsettings_add_triggerphrase_text_field', placeholder:  "Add trigger words", style: "width: 250px; padding-left: 5px;"%> 
 						</div>
 						<div class = "col-1 text-right ml-0 mb-0 form_trigger_input_bot_settings" , style= "padding-bottom: 0px;" >
 							<%= f.submit "Add", class: "submit-text_bot_settings", remote: true %>
@@ -60,8 +61,17 @@
 </div>
 
 <script type="text/javascript">
+	<%if @bot.triggerpoint == "Trigger"%>
+		document.getElementById('triggered_bot').classList.remove('hide');
+	<%end%>
 	document.getElementById('Trigger').onclick = function(){
 		document.getElementById('triggered_bot').classList.remove('hide');
+		document.getElementById('Trigger').style.boxShadow = "0 0 10px 0 rgba(0, 0, 0, 0.12)";
+		document.getElementById('Trigger').style.border = "solid 1px #00b15c";
+		document.getElementById('Trigger').style.backgroundColor = "#deffef";
+		document.getElementById('Default').style.border = "solid 1px grey";
+		document.getElementById('Default').style.backgroundColor = "white";
+		
 	}
 	document.getElementById('Default').onclick = function(){
 		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');

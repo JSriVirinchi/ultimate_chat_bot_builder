@@ -1,0 +1,4 @@
+document.getElementById('botsettings_reminder').innerHTML = "<%= j render 'home/edit/botsettings_form_previous_reminder' %>";
+<% if Reminder.where(bot_id: @bot.id) == [] %>
+	document.getElementById('botsettings_reminder_form').classList.remove('hide');
+<%end%>

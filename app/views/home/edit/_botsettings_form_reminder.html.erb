@@ -6,29 +6,25 @@
 			<div id = "botsettings_reminder">
 				<%= render 'home/edit/botsettings_form_previous_reminder' %>
 			</div>
-			<div id = "botsettings_reminder_form" class = "">
+			<div id = "botsettings_reminder_form" class = "hide">
 				<!-- reminders_create_botsettings_path(@bot.id) -->
-				<%= form_with scope: :botsettingsreminder, url: root_path, method: :get,  remote: true do |f| %>
-					<span id = "reminder">
-					<%= text_area(:botsettingsreminder, :reminder, cols: 45, rows: 3, class: ' bg-white ml-3 ', placeholder: "Enter reminder message",  remote: true )%>
-					<span class = "row mt-1" >
-						<div class = "col-4 ml-3">
-			                <span style = "color: grey;"> Send After </span>
-			                <span class="mr-2 ml-4" style="width: 13px;"><%= select_minute(5, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %></span>
-			                <span > min </span>
-			            </div> 
-			            <div class="col-1"></div>
-							<%= f.submit "Add", class: "btn btn-success btn-sm ml-3" %>
-						</div> 
-					</span>
+				<%= form_with scope: :botsettingsreminder, url: botsettings_reminder_create_path(@bot.id), method: :post,  remote: true do |f| %>
+						<%= text_area(:botsettingsreminder, :reminder, cols: 45, rows: 3, class: ' bg-white ml-3 ',id: "botsettings_reminder_form_text_area", placeholder: "Enter reminder message",  remote: true )%>
+						<span class = "row mt-1" >
+							<div class = "col-4 ml-3">
+				                <span style = "color: grey;"> Send After </span>
+				                <span class="mr-2 ml-4" style="width: 13px;"><%= select_minute(5, field_name: 'rebootconv', style: "background-color: #f7f2ed;") %></span>
+				                <span > min </span>
+				            </div> 
+				            <div class="col-1"></div>
+								<%= f.submit "Add", class: "btn btn-success btn-sm ml-3" %>
+							</div> 
+						</span>
 				<% end %>	
 			</div>	
 			<div class = "mt-3 ml-2">
 				<div id = "add_reminder">
-					<!-- settings_change_path(@bot.id, "anotherreminder") -->
-				    <%= link_to '+', root_path, method: :get, class: "mt-3", style: "color: green; text-decoration: none;",remote: true %>
-				    <!-- settings_change_path(@bot.id, "anotherreminder") -->
-					<%= link_to " Add Another Reminder", root_path, method: :get, class: "mt-3", style: "color: green; text-decoration: none;",remote: true %>
+					<span id="add_a_new_reminder" class="mt-3" style="cursor: pointer;color: green; text-decoration: none;">+ Add Another Reminder</span>
 				</div>
 			</div>		
 			<div class = "mt-4 ml-3">
@@ -67,7 +63,7 @@
 				</div>
 				<% if Reminder.where(bot_id: @bot.id) == [] %>
 					<span style = "margin-top: 0px;">
-						<!-- settings_change_path(@bot.id, "skip") -->
+						<!-- a simple link to show the compose message link -->
 						<%= link_to " Skip this for now", root_path, method: :get, class: "btn btn-success mt-4 ml-0", style: "margin-right: 20px;",remote: true, id: "skip_this_for_now" %>
 					</span>
 				<% end %>
@@ -76,12 +72,25 @@
 </div>
 
 <script type="text/javascript">
+	<% if Reminder.where(bot_id: @bot.id) == [] %>
+		document.getElementById('botsettings_reminder_form').classList.remove('hide');
+	<%end%>
+	document.getElementById('add_a_new_reminder').onclick = function(){
+		console.log('qwe');
+		document.getElementById('botsettings_reminder_form').classList.remove('hide');
+	}
+	document.getElementById('skip_this_for_now').onclick = function(){
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	}
 	document.getElementById('open').onclick = function(){
+		console.log('open');
 		document.getElementById('botsettings_reminder_partial').classList.add('hide');
 		document.getElementById('botsettings_setup_partial').classList.remove('hide');
 	}
 
 	document.getElementById('close').onclick = function(){
+		console.log('close');
 		document.getElementById('botsettings_reminder_partial').classList.add('hide');
 		document.getElementById('botsettings_setup_partial').classList.remove('hide');
 	}

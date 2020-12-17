@@ -1,6 +1,6 @@
 <div class = " mb-4">
 	<h4>Send reminder message if the customer doesn't respond?</h4>	
-	<%= form_with scope: :setreminder, url: bot_path(@bot.id), method: :put, remote: true do |f| %>
+	<%= form_with scope: :botsettingssetreminder, url: bot_path(@bot.id), method: :put, remote: true do |f| %>
 		<%= f.text_field :no, value: "no", class: 'hide' %>
 		<%= f.text_field :yes, value: "yes", class: 'hide' %>
 		<%=  button_tag(value: "yes",id: "yes", type: 'submit', class: "mt-4 ml-0", style: "margin-right: 20px; border: none; background-color: #f7f2ed", remote: true ) do %>	
@@ -37,9 +37,11 @@
 		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
 		document.getElementById('botsettings_setup_partial').classList.remove('hide');
 	}
-	document.getElementById('no_duplicate').onclick = function(){
-		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
-		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	if (document.getElementById('no_duplicate')){
+		document.getElementById('no_duplicate').onclick = function(){
+			document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+			document.getElementById('botsettings_setup_partial').classList.remove('hide');
+		}
 	}
 
 </script>

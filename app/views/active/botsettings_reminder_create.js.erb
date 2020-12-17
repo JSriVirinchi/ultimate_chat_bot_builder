@@ -1,0 +1,8 @@
+document.getElementById('botsettings_reminder').innerHTML = "<%= j render 'home/edit/botsettings_form_previous_reminder' %>";
+document.getElementById('botsettings_reminder_form').classList.add('hide');
+document.getElementById('botsettings_reminder_form_text_area').value = "";
+
+document.getElementById('add_a_new_reminder').onclick = function(){
+	console.log('abc');
+	document.getElementById('botsettings_reminder_form').classList.remove('hide');
+}

@@ -1,9 +1,11 @@
 <span style = "color: #7e7e7e;" >Bot trigger</span>
-<!-- settings_change_path(@bot.id, "4") -->
-<%= link_to " Change", root_path, method: :get,style: "margin-left: 51.15%; color: #157e4b; font-weight: 500; text-decoration: none" , remote: true %>
-<div class = "mb-2 ml-0">
+
+<%= link_to " Change", root_path, method: :get,id: 'change_link_botrigger',style: "margin-left: 51.15%; color: #157e4b; font-weight: 500; text-decoration: none" , remote: true %>
+<div class = " row mb-2 ml-0">
      <% if @bot.triggerpoint == "Default" %>
-        The bot will activate upon any message sent by customer
+        <div class="col-9" style="margin-left: -15px; ">     
+            Any message will trigger the bot
+        </div>    
     <% end %> 
     <% if @bot.triggerpoint == "Trigger" %>
         <% if Triggerphrase.where(bot_id: @bot.id) == [] %>
@@ -11,7 +13,7 @@
         <% end %>  
         <% names = "" %>
             <% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
-                <% names.concat(phrase.trigger + ", ") %>
+                <% names.concat(phrase.triggerphrase + ", ") %>
             <% end %> 
         <%= names.truncate(29) %>       
     <% end %>

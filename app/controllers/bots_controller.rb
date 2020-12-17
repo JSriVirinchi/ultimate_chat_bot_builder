@@ -14,15 +14,35 @@ class BotsController < ApplicationController
 
 	def update
 		@bot = Bot.find(params[:id])
-		if @bot.update(params.require(:botsettings).permit(:language, :initconv, :triggerpoint, :days))
-			@bot.update(params.require(:date).permit(:rebootconv))
-
-			flash[:notice]="Successfully saved"
-			redirect_to composemessage_path
-		else
-			flash[:alert]="Not successfully saved"
-			redirect_to botsettings_path
-		end	
+		if params[:botsettingsphone]
+			@bot.update(params.require(:botsettingsphone).permit(:phone))
+		end
+		if params[:botsettingslanguage]
+			@bot.update(language: params[:button])
+		end
+		if params[:botsettingsstarter]
+			@bot.update(initconv: params[:button])
+		end
+		if params[:botsettingstrigger]
+			if @bot.triggerpoint == "Trigger"
+				if params[:button] == "Default"
+					for triggerphrases in Triggerphrase.where(bot_id: @bot.id)
+						triggerphrases.destroy
+					end
+				end
+			end
+			@bot.update(triggerpoint: params[:button])
+		end
+		if params[:botsettingssetreminder]
+			@bot.update(reminder: params[:button])
+		end
+		if params[:conversation]
+			@bot.update(conversation: params[:button])
+		end
+		
+		respond_to do |format|
+			format.js
+		end
 	end
 
 

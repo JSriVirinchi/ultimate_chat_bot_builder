@@ -1,8 +1,15 @@
 // console.log('nanna');
-document.getElementById('triggerphrases_partial').innerHTML = "<%= j render 'home/edit/nodes/triggerphrases' %>";
-document.getElementById('addtriggerphrasefield').value = "";
-document.getElementById('addtriggerphrasefield').placeholder = "Add a new phrase";
-<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
-	str = <%= "triggerphrase_delete" + (phrase.id).to_s %>;
-	document.getElementById(str.id).classList.remove('hide');
-<% end %>
+<%if params[:triggerphrase]%>
+	document.getElementById('triggerphrases_partial').innerHTML = "<%= j render 'home/edit/nodes/triggerphrases' %>";
+	document.getElementById('addtriggerphrasefield').value = "";
+	document.getElementById('addtriggerphrasefield').placeholder = "Add a new phrase";
+	<% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+		str = <%= "triggerphrase_delete" + (phrase.id).to_s %>;
+		document.getElementById(str.id).classList.remove('hide');
+	<% end %>
+<%end%>
+
+<%if params[:botsettings_triggerphrase]%>
+	document.getElementById('botsettings_trigger').innerHTML = "<%= j render 'home/edit/botsettings_form_specific_key_words' %>";
+	document.getElementById('botsettings_add_triggerphrase_text_field').value = "";
+<%end%>
