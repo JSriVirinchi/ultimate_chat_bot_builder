@@ -1,0 +1,2 @@
+<% botmessages_previous = "botmessages_previous_" + (@node.id).to_s %>
+document.getElementById('<%= botmessages_previous %>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_previous', delete_button: true, parent_id: @node.parent_id %>";

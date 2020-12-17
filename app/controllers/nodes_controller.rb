@@ -380,4 +380,23 @@ class NodesController < ApplicationController
 		   format.js
 	  	end
 	end
+
+	def ckeditor_text_messages_edit_icon
+		@node = Node.find(params[:node_id])
+		@bot = Bot.find(params[:bot_id])
+		@message = Message.find(params[:message_id])
+		respond_to do |format|
+		   format.js
+	  	end
+	end
+
+	def ckeditor_text_messages_update
+		@node = Node.find(params[:node_id])
+		@bot = Bot.find(params[:bot_id])
+		@message = Message.find(params[:message_id])
+		@message.update(text_messages: params[:previous_text_messages][:text_messages])
+		respond_to do |format|
+		   format.js
+	  	end
+	end
 end

@@ -57,5 +57,7 @@ Rails.application.routes.draw do
   get 'nodes/botresponse/add_a_new_text_message_button/:node_id', to: 'nodes#add_a_new_text_message_button', as:'add_a_new_text_message_button'
   post 'nodes/botresponse/nodes_message_attach_media_video', to: 'nodes#nodes_message_attach_media_video', as:'nodes_message_attach_media_video'
   post 'nodes/botresponse/nodes_message_attach_media_pdf', to: 'nodes#nodes_message_attach_media_pdf', as:'nodes_message_attach_media_pdf'
+  get 'nodes/ckeditor/text_messages/edit_icon/:node_id/:bot_id/:message_id', to:'nodes#ckeditor_text_messages_edit_icon', as: 'ckeditor_text_messages_edit_icon'
+  post 'nodes/ckeditor/text_messages/update/:node_id/:bot_id/:message_id', to: 'nodes#ckeditor_text_messages_update', as: 'ckeditor_text_messages_update'
 end
 
