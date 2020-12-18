@@ -29,6 +29,10 @@
 </div>
 
 <script type="text/javascript">
+	<%if @bot.phone == nil || @bot.language == nil || @bot.initconv == nil || @bot.triggerpoint == nil || @bot.reminder == nil || @bot.conversation == nil %>
+		document.getElementById('compose_message_navbar_link').classList.add('hide');
+	<%end%>
+	
 	document.getElementById('change_link_out_going_number').onclick = function(){
 
 		document.getElementById('botsettings_phone_partial').classList.add('hide');
