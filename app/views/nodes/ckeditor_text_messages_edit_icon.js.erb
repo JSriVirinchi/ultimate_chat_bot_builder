@@ -1,16 +1,21 @@
 <% previous_messages_rich_text = "previous_messages_rich_text_" + (@message.id).to_s()%>
 <% previous_messages_div_box = "previous_messages_div_box_" + (@message.id).to_s()%>
+<% delete_button_div_id_in_edit_view = "delete_button_div_id_in_edit_view_" + (@message.id).to_s()%>
 
 document.getElementById('<%= previous_messages_rich_text %>').classList.add('hide');
 document.getElementById('<%= "text_area_message_" + (@message.id).to_s() %>').classList.remove('hide');
 
 document.getElementById('<%= "edit_message_" + (@message.id).to_s() %>').classList.add('hide');
-document.getElementById('<%= "delete_text_message_" + (@message.id).to_s() %>').classList.add('hide');
 document.getElementById('<%= "send_text_message_" + (@message.id).to_s() %>').classList.remove('hide');
 document.getElementById('<%= previous_messages_div_box %>').style.padding = "0px";
 document.getElementById('<%= previous_messages_div_box %>').style.width = "276px";
 document.getElementById('<%= previous_messages_div_box %>').style.paddingLeft = "2px";
 document.getElementById('<%= previous_messages_div_box %>').style.marginLeft = "12px";
+
+document.getElementById('<%= "delete_text_message_" + (@message.id).to_s() %>').classList.add('styling_the_delete_position');
+document.getElementById('<%= delete_button_div_id_in_edit_view %>').style.padding = "0px";
+document.getElementById('<%= delete_button_div_id_in_edit_view %>').style.height = "0px";
+document.getElementById('<%= delete_button_div_id_in_edit_view %>').style.width = "0px";
 
 <% previousmessageckeditorid = "previousmessageckeditor_" + (@message.id).to_s()%>
 CKEDITOR.replace(('<%= previousmessageckeditorid %>'), {

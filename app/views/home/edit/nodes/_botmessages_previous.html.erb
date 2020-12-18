@@ -13,6 +13,7 @@
             <% delete_text_message = "delete_text_message_" + (message.id).to_s() %>
             <% previous_messages_rich_text = "previous_messages_rich_text_" + (message.id).to_s()%>
             <% previous_messages_div_box = "previous_messages_div_box_" + (message.id).to_s()%>
+            <% delete_button_div_id_in_edit_view = "delete_button_div_id_in_edit_view_" + (message.id).to_s()%>
 
 			<%if message.message_type == "image"%>
 				<div class="mb-2 mt-2 p-1 border", style="width: 280px; margin-left: 11px;">
@@ -83,14 +84,14 @@
 		                                <%= f.submit "Update", class: "hide btn btn-outline-secondary btn-sm mr-4", style: "height: 30px; margin-top: 5px; margin-left: 200px; margin-bottom: 5px; text-align: right;" ,id: send_text_message, remote: true%>
 		                        	<% end %>
 		                        </div>	                        	                        	
-		                        <div class="col-8 mr-2" id= <%= previous_messages_rich_text %> >
+		                        <div class="col-8 mr-2" style="line-height: 1; word-break: break-all;" id= <%= previous_messages_rich_text %>>
 		                        	<%= raw(message.text_messages)%>
 		                        </div>
 		                          
 		                        <div class = "col-1 ml-1">
 		                            <%= link_to image_tag('editiconblack.png', size: "12", class: ""), ckeditor_text_messages_edit_icon_path(@node.id, @bot.id, message.id), method: :get, remote: true, id: edit_message %>
 		                        </div>
-		                        <div class = "col-1">                        
+		                        <div class = "col-1" id= <%= delete_button_div_id_in_edit_view%> >               
 		                            <%= link_to image_tag('dustbin.png', size: "12", class: ""), nodes_message_delete_path(message.id, @bot.id, @node.id),id: delete_text_message, method: :delete ,remote: true, class: ""%>
 		                        </div>	                        
 		                    </div>
@@ -98,9 +99,9 @@
 						<!--  -->
 				<% end %>
 				<%if delete_button == false%>
-					<div class="previous_messages", style="width: 280px;">
+					<div class="previous_messages", style="width: 280px;  word-break: break-all;">
 						<div class="row">
-							<div class="col-10">
+							<div class="col-10" style="line-height: 1;">
 								<%= raw(message.text_messages)%>
 							</div>
 						</div>	

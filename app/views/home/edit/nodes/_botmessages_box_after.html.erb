@@ -310,10 +310,10 @@
 
 <script type="text/javascript">
 	 
-	 CKEDITOR.replace( ('<%= botresponses_messages_area_text_area %>'), {
+	CKEDITOR.replace( ('<%= botresponses_messages_area_text_area %>'), {
         customConfig: "/assets/ckeditor/config.js"
     });
-
+	 
 	<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 		function image_upload(){
 			console.log('uploaded');

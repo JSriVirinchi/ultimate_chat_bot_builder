@@ -1,4 +1,6 @@
 // console.log('agni skalana');
+"/assets/ckeditor/config.js";
+
 <% botmessages_box_after_partial = "botmessages_box_after_partial_" + (@parent_id).to_s %>
 <% botresponses_box_before = "botresponses_box_before_" + (@parent_id).to_s %>
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
@@ -19,6 +21,7 @@
 <% submit_button_for_attaching_video = "submit_button_for_attaching_video_" +  (@node.id).to_s%>
 <% attach_message_pdf = "attach_message_pdf_" +  (@node.id).to_s %>
 <% submit_button_for_attaching_pdf = "submit_button_for_attaching_pdf_" +  (@node.id).to_s%>
+<%= botresponses_messages_area_text_area = "botresponses_messages_area_text_area_" + (@node.id).to_s %>
 
 
 document.getElementById('<%= botmessages_box_after_partial%>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_after' , parent_id: @parent_id%>";
@@ -76,3 +79,6 @@ document.getElementById('<%= link_to_node %>').onclick = function() {
 	document.getElementById('<%= transfer_to_agent_message %>').classList.add('hide');
 	document.getElementById('<%= link_to_node_message %>').classList.remove('hide');
 }
+CKEDITOR.replace( ('<%= botresponses_messages_area_text_area %>'), {
+    customConfig: "/assets/ckeditor/config.js"
+});

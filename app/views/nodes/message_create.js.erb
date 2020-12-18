@@ -13,3 +13,7 @@ document.getElementById('<%= botresponses_messages_area_text_area%>').value = ""
 	document.getElementById('<%= previous_message_and_options_card_divider%>').classList.remove('hide');
 	document.getElementById('<%= text_area_form_hide_or_show %>').classList.add('hide');
 <%end%>
+
+for(instance in CKEDITOR.instances){
+	CKEDITOR.instances[instance].setData('<p></p>');
+};
