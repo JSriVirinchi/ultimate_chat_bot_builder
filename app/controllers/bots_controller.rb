@@ -22,6 +22,11 @@ class BotsController < ApplicationController
 		end
 		if params[:botsettingsstarter]
 			@bot.update(initconv: params[:button])
+			if @bot.initconv == "Bot"
+				for triggerphrases in Triggerphrase.where(bot_id: @bot.id)
+					triggerphrases.destroy
+				end
+			end 
 		end
 		if params[:botsettingstrigger]
 			if @bot.triggerpoint == "Trigger"

@@ -9,7 +9,7 @@
 			<div id = "botsettings_reminder_form" class = "hide">
 				<!-- reminders_create_botsettings_path(@bot.id) -->
 				<%= form_with scope: :botsettingsreminder, url: botsettings_reminder_create_path(@bot.id), method: :post,  remote: true do |f| %>
-						<%= text_area(:botsettingsreminder, :reminder, cols: 45, rows: 3, class: ' bg-white ml-3 ',id: "botsettings_reminder_form_text_area", placeholder: "Enter reminder message",  remote: true )%>
+						<%= text_area(:botsettingsreminder, :reminder, cols: 45, rows: 3, class: ' bg-white ml-3 ',id: "botsettings_reminder_form_text_area", placeholder: "Enter reminder message", style: "border-radius: 10px 10px 0px 10px;", remote: true )%>
 						<span class = "row mt-1" >
 							<div class = "col-4 ml-3">
 				                <span style = "color: grey;"> Send After </span>
@@ -61,19 +61,18 @@
 						<% end %>
 		            <% end %>
 				</div>
-				<% if Reminder.where(bot_id: @bot.id) == [] %>
-					<span style = "margin-top: 0px;">
-						<!-- a simple link to show the compose message link -->
-						<%= link_to " Skip this for now", root_path, method: :get, class: "btn btn-success mt-4 ml-0", style: "margin-right: 20px;",remote: true, id: "skip_this_for_now" %>
-					</span>
-				<% end %>
-		</div>
+				<span style = "margin-top: 0px;">
+					<!-- a simple link to show the compose message link -->
+					<%= link_to " Skip this for now", root_path, method: :get, class: "hide btn btn-success mt-4 ml-0", style: "margin-right: 20px;",remote: true, id: "skip_this_for_now" %>
+				</span>
+	</div>
 	</div>
 </div>
 
 <script type="text/javascript">
 	<% if Reminder.where(bot_id: @bot.id) == [] %>
 		document.getElementById('botsettings_reminder_form').classList.remove('hide');
+		document.getElementById('skip_this_for_now').classList.remove('hide');
 	<%end%>
 	document.getElementById('add_a_new_reminder').onclick = function(){
 		console.log('qwe');

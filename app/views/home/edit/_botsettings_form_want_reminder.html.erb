@@ -6,29 +6,37 @@
 		<%=  button_tag(value: "yes",id: "yes", type: 'submit', class: "mt-4 ml-0", style: "margin-right: 20px; border: none; background-color: #f7f2ed", remote: true ) do %>	
 				Yes, Set reminder >
 		<% end %>
-		<% if @bot.reminder == nil %>
-			<div>
-				<%=  button_tag(value: "no",id: "no", type: 'submit', class: "btn btn-success mt-4 ml-0", style: "margin-right: 20px;", remote: true ) do %>	
-						Skip this for now
-				<% end %>
-			</div>
-		<% end %>
-		<% if @bot.reminder != nil %>
-			<% if @bot.reminder == "no" %>
-				<div>
-					&nbsp;(You skipped this step earlier. If you want, you can add the reminders now.)
-				</div>	
-				<div style = "margin-right: 300px;">
-				<%=  button_tag(value: "no",id: "no_duplicate", type: 'submit', class: "btn btn-success mt-4 ml-0", remote: true ) do %>	
-						Skip this step
-				<% end %>
-			</div>	
+		
+		<div>
+			<%=  button_tag(value: "no",id: "no", type: 'submit', class: "hide btn btn-success mt-4 ml-0", style: "margin-right: 20px;", remote: true ) do %>	
+					Skip this for now
 			<% end %>
-		<% end %>	
+		</div>
+		
+		<div class="hide" id="you_skipped_this_step">
+			&nbsp;(You skipped this step earlier. If you want, you can add the reminders now.)
+		</div>	
+		<div style = "margin-right: 300px;">
+			<%=  button_tag(value: "no",id: "no_duplicate", type: 'submit', class: "hide btn btn-success mt-4 ml-0", remote: true ) do %>	
+					Skip this step
+			<% end %>
+		</div>	
+				
 	<% end %>
 </div>
 
 <script type="text/javascript">
+	<% if @bot.reminder == nil %>
+		document.getElementById('no').classList.remove('hide');
+	<% end %>
+
+	<% if @bot.reminder != nil %>
+		<% if @bot.reminder == "no" %>
+			document.getElementById('no_duplicate').classList.remove('hide');
+			document.getElementById('you_skipped_this_step').classList.remove('hide');
+		<% end %>
+	<% end %>
+
 	document.getElementById('yes').onclick = function(){
 		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
 		document.getElementById('botsettings_reminder_partial').classList.remove('hide');

@@ -1,20 +1,36 @@
 <span style = "color: #7e7e7e;" >Bot trigger</span>
 
-<%= link_to " Change", root_path, method: :get,id: 'change_link_botrigger',style: "margin-left: 51.15%; color: #157e4b; font-weight: 500; text-decoration: none" , remote: true %>
+<span id="change_link_botrigger" style="margin-left: 51.15%; color: #157e4b; font-weight: 500; text-decoration: none; cursor: pointer;">Change</span>
+
 <div class = " row mb-2 ml-0">
-     <% if @bot.triggerpoint == "Default" %>
+    <%if @bot.initconv == "Bot"%>
         <div class="col-9" style="margin-left: -15px; ">     
-            Any message will trigger the bot
-        </div>    
-    <% end %> 
-    <% if @bot.triggerpoint == "Trigger" %>
-        <% if Triggerphrase.where(bot_id: @bot.id) == [] %>
-            You have not added any triggerphrases yet.
-        <% end %>  
-        <% names = "" %>
-            <% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
-                <% names.concat(phrase.triggerphrase + ", ") %>
-            <% end %> 
-        <%= names.truncate(29) %>       
-    <% end %>
+            Bot will start the conversation
+        </div> 
+    <%else%>
+        <% if @bot.triggerpoint == "Default" %>
+            <div class="col-9" style="margin-left: -15px; ">     
+                Any message will trigger the bot
+            </div>    
+        <% end %> 
+
+        <% if @bot.triggerpoint == "Trigger" %>
+            <% if Triggerphrase.where(bot_id: @bot.id) == [] %>
+                No triggerphrases are added.
+            <% end %>  
+            <% names = "" %>
+                <% for phrase in Triggerphrase.where(bot_id: @bot.id)%>
+                    <% names.concat(phrase.triggerphrase + ", ") %>
+                <% end %> 
+            <%= names.truncate(29) %>       
+        <% end %>
+    <%end%>    
+
 </div>
+
+<script type="text/javascript">
+    <%if @bot.initconv == "Bot"%>
+        document.getElementById('change_link_botrigger').style.color = "grey";
+        document.getElementById('change_link_botrigger').style.cursor = "no-drop";
+    <%end%>
+</script>

@@ -21,7 +21,7 @@
 
 <script type="text/javascript">
       // show form
-      <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil && @bot.starttime==nil && @bot.endtime==nil && @bot.startdate == nil && @bot.enddate== nil && @bot.rebootconv==nil && @bot.days==nil && @bot.active==nil)%>
+      <% if (@bot.phone == nil && @bot.language == nil && @bot.initconv == nil && @bot.triggerpoint==nil  && @bot.rebootconv==nil && @bot.active==nil)%>
        document.getElementById('botsettings_startsetup').classList.remove('hide');        
        document.getElementById('botsettings_startsetup_edit').classList.add('hide');        
        document.getElementById('actualform').classList.add('hide');        
@@ -31,5 +31,10 @@
         document.getElementById('actualform').classList.remove('hide');
         document.getElementById('botsettings_startsetup').classList.add('hide');
         document.getElementById('botsettings_startsetup_edit').classList.remove('hide');
+
+        document.getElementById('Botlanguage').classList.add('hide');
+        document.getElementById('Conversationstarter').classList.add('hide');
+        document.getElementById('Bottrigger').classList.add('hide');
+        document.getElementById('NoCustomerResponse').classList.add('hide');
       }
 </script>

@@ -1,6 +1,6 @@
 <% for reminder in Reminder.where(bot_id: @bot.id)%>
     <%= form_with scope: :botsettingsupdatereminder, url: botsettings_reminder_edit_path(reminder.id), method: :put,  remote: true do |f| %>
-        <%= text_area(:botsettingsupdatereminder, :reminder, cols: 45, rows: 3, class: 'bg-white ml-3 ', value: reminder.reminder,  remote: true )%>
+        <%= text_area(:botsettingsupdatereminder, :reminder, cols: 45, rows: 3, class: 'bg-white ml-3 ', value: reminder.reminder, style: "border-radius: 10px 10px 0px 10px;", remote: true )%>
         <div class = "row mt-1" >
             <div class = "col-4 ml-3">
                 <span style = "color: grey;"> Send After </span>

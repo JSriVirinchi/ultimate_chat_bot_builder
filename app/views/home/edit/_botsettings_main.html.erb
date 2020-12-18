@@ -70,6 +70,7 @@
 
 	document.getElementById('change_link_botrigger').onclick = function(){
 
+		<%if @bot.initconv != "Bot"%>
 		document.getElementById('botsettings_phone_partial').classList.add('hide');
 		document.getElementById('botsettings_language_partial').classList.add('hide');
 		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
@@ -78,7 +79,8 @@
 		document.getElementById('botsettings_reminder_partial').classList.add('hide');
 		document.getElementById('botsettings_setup_partial').classList.add('hide');
 
-		document.getElementById('botsettings_phone_partial').classList.remove('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.remove('hide');
+		<%end%>
 	}
 
 	document.getElementById('change_link_no_customer_response').onclick = function(){
@@ -91,6 +93,10 @@
 		document.getElementById('botsettings_reminder_partial').classList.add('hide');
 		document.getElementById('botsettings_setup_partial').classList.add('hide');
 
-		document.getElementById('botsettings_phone_partial').classList.remove('hide');
+		<%if @bot.reminder != nil%>
+			document.getElementById('botsettings_reminder_partial').classList.remove('hide');
+		<%else%>
+			document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		<%end%>
 	}
 </script>

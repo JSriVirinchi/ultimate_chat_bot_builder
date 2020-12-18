@@ -5,7 +5,7 @@
 				<h4>Add keywords to which the bot will respond</h4>	
 				<%= f.text_field :Default, value: "Default", class: 'hide' %>
 				<%= f.text_field :Trigger, value: "Trigger", class: 'hide' %>
-				<%=  button_tag(value: "Default", id: "Default", type: 'submit', class: "container shadow button-bot-settings mt-4", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+				<%=  button_tag(value: "Default", id: "Default", type: 'submit', class: "container shadow button-bot-settings mt-4", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true, data:{confirm: "If there are any triggerphrases added by you for this bot, then all the triggerphrases will be deleted if this is made into a default bot."} ) do %>	
 						Any keyword (Default bot)
 				<% end %>
 				<%=  button_tag(value: "Trigger",id: "Trigger", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-4 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
@@ -61,6 +61,12 @@
 </div>
 
 <script type="text/javascript">
+	<%if Triggerphrase.where(bot_id: @bot.id) == []%>
+		document.getElementById('Next_button').classList.add('hide');
+	<%else%>
+		document.getElementById('Next_button').classList.remove('hide');
+	<%end%>
+
 	<%if @bot.triggerpoint == "Trigger"%>
 		document.getElementById('triggered_bot').classList.remove('hide');
 	<%end%>

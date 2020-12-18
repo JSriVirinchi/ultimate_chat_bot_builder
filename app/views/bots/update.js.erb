@@ -1,4 +1,227 @@
+<%if params[:botsettingsphone]%>
+	document.getElementById('botsettings_phone_partial').innerHTML = "<%= j render 'home/edit/botsettings_form_phone'%>";
+	document.getElementById('Outgoingnumber').innerHTML = "<%= j render 'home/edit/botsettings_outgoingnumber' %>";
+
+	document.getElementById('phone').onclick = function(){
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.remove('hide');
+	};
+
+	document.getElementById('Botlanguage').classList.remove('hide');
+<%end%>
+
+<%if params[:botsettingslanguage]%>
+	document.getElementById('botsettings_language_partial').innerHTML = "<%= j render 'home/edit/botsettings_form_language'%>";
+	document.getElementById('Botlanguage').innerHTML = "<%= j render 'home/edit/botsettings_botlanguage' %>";
+	
+	document.getElementById('English').onclick = function(){
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.remove('hide');
+	};
+	document.getElementById('Hindi').onclick = function(){
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.remove('hide');
+	};
+	document.getElementById('Tamil').onclick = function(){
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.remove('hide');
+	};
+
+	document.getElementById('Conversationstarter').classList.remove('hide');
+<%end%>
+
+<%if params[:botsettingsstarter]%>
+	document.getElementById('botsettings_conv_starter_partial').innerHTML = "<%= j render 'home/edit/botsettings_form_conv_starter'%>";
+	document.getElementById('Conversationstarter').innerHTML = " <%= j render 'home/edit/botsettings_conversationstarter' %>";
+	document.getElementById('Bottrigger').innerHTML = "<%= j render 'home/edit/botsettings_bottrigger' %>";
+	document.getElementById('botsettings_trigger').innerHTML = "<%= j render 'home/edit/botsettings_form_specific_key_words' %>";
+	
+	document.getElementById('Customer').onclick = function(){
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.remove('hide');
+	};
+	document.getElementById('Bot').onclick = function(){
+
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		document.getElementById('change_link_botrigger').style.color = "grey";
+		document.getElementById('change_link_botrigger').style.cursor = "no-drop";
+		document.getElementById('NoCustomerResponse').classList.remove('hide');
+
+	};
+	<%if @bot.initconv == "Bot"%>
+		document.getElementById('change_link_botrigger').style.color = "grey";
+        document.getElementById('change_link_botrigger').style.cursor = "no-drop";
+	<%end%>
+
+	document.getElementById('Bottrigger').classList.remove('hide');
+<%end%>
+
+<%if params[:botsettingstrigger]%>
+	document.getElementById('botsettings_trigger_phrases_partial').innerHTML = "<%= j render 'home/edit/botsettings_form_trigger_phrases'%>";
+	document.getElementById('Bottrigger').innerHTML = "<%= j render 'home/edit/botsettings_bottrigger' %>";
+
+	<%if Triggerphrase.where(bot_id: @bot.id) == []%>
+		document.getElementById('Next_button').classList.add('hide');
+	<%else%>
+		document.getElementById('Next_button').classList.remove('hide');	
+	<%end%>
+
+	<%if @bot.triggerpoint == "Trigger"%>
+		document.getElementById('triggered_bot').classList.remove('hide');
+	<%end%>
+	document.getElementById('Trigger').onclick = function(){
+		document.getElementById('triggered_bot').classList.remove('hide');
+		document.getElementById('Trigger').style.boxShadow = "0 0 10px 0 rgba(0, 0, 0, 0.12)";
+		document.getElementById('Trigger').style.border = "solid 1px #00b15c";
+		document.getElementById('Trigger').style.backgroundColor = "#deffef";
+		document.getElementById('Default').style.border = "solid 1px grey";
+		document.getElementById('Default').style.backgroundColor = "white";
+		
+	};
+	document.getElementById('Default').onclick = function(){
+		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('NoCustomerResponse').classList.remove('hide');
+	};
+	document.getElementById('Next_button').onclick = function(){
+		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('NoCustomerResponse').classList.remove('hide');
+	};
+
+
+<%end%>
+
+<%if params[:botsettingssetreminder]%>
+	document.getElementById('botsettings_want_reminder_partial').innerHTML = "<%= j render 'home/edit/botsettings_form_want_reminder'%>";
+	document.getElementById('botsettings_reminder_partial').innerHTML = "<%= j render 'home/edit/botsettings_form_reminder'%>";
+	document.getElementById('NoCustomerResponse').innerHTML = "<%= j render 'home/edit/botsettings_noCustomerResponse' %>";
+
+	<% if Reminder.where(bot_id: @bot.id) == [] %>
+		document.getElementById('botsettings_reminder_form').classList.remove('hide');
+		document.getElementById('skip_this_for_now').classList.remove('hide');
+	<%end%>
+	document.getElementById('add_a_new_reminder').onclick = function(){
+		console.log('qwe');
+		document.getElementById('botsettings_reminder_form').classList.remove('hide');
+	};
+	document.getElementById('skip_this_for_now').onclick = function(){
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	};
+	document.getElementById('open').onclick = function(){
+		console.log('open');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	};
+
+	document.getElementById('close').onclick = function(){
+		console.log('close');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	};
+<%end%>
+
 <%if params[:conversation]%>
+	document.getElementById('botsettings_reminder_partial').innerHTML = "<%= j render 'home/edit/botsettings_form_reminder'%>";
 	document.getElementById('botsettings_reminder_partial').classList.add('hide');
 	document.getElementById('botsettings_setup_partial').classList.remove('hide');
 <%end%>
+
+
+	document.getElementById('change_link_out_going_number').onclick = function(){
+
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.add('hide');
+
+		document.getElementById('botsettings_phone_partial').classList.remove('hide');
+	}
+
+	document.getElementById('change_link_botlanguage').onclick = function(){
+
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.add('hide');
+
+		document.getElementById('botsettings_language_partial').classList.remove('hide');
+	}
+
+	document.getElementById('change_link_conversation_starter').onclick = function(){
+
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.add('hide');
+
+		document.getElementById('botsettings_conv_starter_partial').classList.remove('hide');
+	};
+
+	document.getElementById('change_link_botrigger').onclick = function(){
+		<%if @bot.initconv != "Bot"%>
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.add('hide');
+
+		document.getElementById('botsettings_trigger_phrases_partial').classList.remove('hide');
+		<%end%>
+	};
+
+	document.getElementById('change_link_no_customer_response').onclick = function(){
+
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.add('hide');
+
+		<%if @bot.reminder != nil%>
+			document.getElementById('botsettings_reminder_partial').classList.remove('hide');
+		<%else%>
+			document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		<%end%>
+	};
+
+	<% if @bot.reminder == nil %>
+		document.getElementById('no').classList.remove('hide');
+	<% end %>
+
+	<% if @bot.reminder != nil %>
+		<% if @bot.reminder == "no" %>
+			document.getElementById('no_duplicate').classList.remove('hide');
+			document.getElementById('you_skipped_this_step').classList.remove('hide');
+		<% end %>
+	<% end %>
+
+	document.getElementById('yes').onclick = function(){
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.remove('hide');
+	}
+	document.getElementById('no').onclick = function(){
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.remove('hide');
+	}
+	if (document.getElementById('no_duplicate')){
+		document.getElementById('no_duplicate').onclick = function(){
+			document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+			document.getElementById('botsettings_setup_partial').classList.remove('hide');
+		}
+	}

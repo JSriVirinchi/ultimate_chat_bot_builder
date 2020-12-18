@@ -1,8 +1,40 @@
 document.getElementById('botsettings_reminder').innerHTML = "<%= j render 'home/edit/botsettings_form_previous_reminder' %>";
 document.getElementById('botsettings_reminder_form').classList.add('hide');
 document.getElementById('botsettings_reminder_form_text_area').value = "";
+document.getElementById('NoCustomerResponse').innerHTML = "<%= j render 'home/edit/botsettings_noCustomerResponse' %>";
 
 document.getElementById('add_a_new_reminder').onclick = function(){
 	console.log('abc');
 	document.getElementById('botsettings_reminder_form').classList.remove('hide');
 }
+
+	document.getElementById('change_link_botrigger').onclick = function(){
+		<%if @bot.initconv != "Bot"%>
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.add('hide');
+
+		document.getElementById('botsettings_trigger_phrases_partial').classList.remove('hide');
+		<%end%>
+	};
+
+	document.getElementById('change_link_no_customer_response').onclick = function(){
+
+		document.getElementById('botsettings_phone_partial').classList.add('hide');
+		document.getElementById('botsettings_language_partial').classList.add('hide');
+		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
+		document.getElementById('botsettings_trigger_phrases_partial').classList.add('hide');
+		document.getElementById('botsettings_want_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_reminder_partial').classList.add('hide');
+		document.getElementById('botsettings_setup_partial').classList.add('hide');
+
+		<%if @bot.reminder != nil%>
+			document.getElementById('botsettings_reminder_partial').classList.remove('hide');
+		<%else%>
+			document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		<%end%>
+	};

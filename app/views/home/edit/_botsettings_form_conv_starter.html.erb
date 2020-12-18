@@ -8,7 +8,7 @@
 		<%=  button_tag(value: "Customer", id: "Customer", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-1 text-center", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
 				Customer	
 		<% end %>
-		<%=  button_tag(value: "Bot", id: "Bot", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-0", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true ) do %>	
+		<%=  button_tag(value: "Bot", id: "Bot", type: 'submit', class: "container shadow button-bot-settings ml-3 mt-0", style: "width: auto; padding-top: 6px; padding-bottom: 6px;", remote: true, data:( @bot.triggerpoint != nil ? {confirm: "If any triggerphrases have been added, they will be deleted if bot starts the conversation"} : nil) ) do %>	
 				Bot
 		<% end %>
 		<div class = "ml-3 mt-4">
@@ -46,7 +46,12 @@
 		document.getElementById('botsettings_trigger_phrases_partial').classList.remove('hide');
 	}
 	document.getElementById('Bot').onclick = function(){
+
 		document.getElementById('botsettings_conv_starter_partial').classList.add('hide');
 		document.getElementById('botsettings_want_reminder_partial').classList.remove('hide');
+		document.getElementById('change_link_botrigger').style.color = "grey";
+		document.getElementById('change_link_botrigger').style.cursor = "no-drop";
+		document.getElementById('NoCustomerResponse').classList.remove('hide');
+
 	}
 </script>
