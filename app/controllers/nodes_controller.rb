@@ -400,4 +400,12 @@ class NodesController < ApplicationController
 		   format.js
 	  	end
 	end
+
+	def nodes_message_delete_text_area
+		@node = Node.find(params[:node_id])
+		@bot = Bot.find(@node.bot_id)
+		respond_to do |format|
+		   format.js
+	  	end
+	end
 end

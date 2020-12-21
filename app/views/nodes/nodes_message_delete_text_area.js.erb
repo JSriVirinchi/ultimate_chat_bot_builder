@@ -1,0 +1,5 @@
+<% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
+<% previous_message_and_options_card_divider = "previous_message_and_options_card_divider_" +  (@node.id).to_s %>
+
+document.getElementById('<%= previous_message_and_options_card_divider%>').classList.remove('hide');
+document.getElementById('<%= text_area_form_hide_or_show %>').classList.add('hide');
