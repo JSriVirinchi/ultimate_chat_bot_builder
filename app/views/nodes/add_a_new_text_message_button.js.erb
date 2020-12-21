@@ -1,5 +1,13 @@
+"/assets/ckeditor/config.js";
+
 <% previous_message_and_options_card_divider = "previous_message_and_options_card_divider_" +  (@node.id).to_s %>
 <% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
+<% botmessages_box_after_text_area_partial = "botmessages_box_after_text_area_partial_" +  (@node.id).to_s%>
+<% botresponses_messages_area_text_area = "botresponses_messages_area_text_area_" + (@node.id).to_s%>
 
+document.getElementById('<%= botmessages_box_after_text_area_partial %>').innerHTML = "<%= j render 'home/edit/nodes/botmessages_box_after_text_area', parent_id: @node.parent_id%>";
 document.getElementById('<%= previous_message_and_options_card_divider%>').classList.add('hide');
 document.getElementById('<%= text_area_form_hide_or_show %>').classList.remove('hide');
+
+editor = CKEDITOR.replace('<%= botresponses_messages_area_text_area %>');
+editor.setData('<p></p>');

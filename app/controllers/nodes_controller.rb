@@ -376,6 +376,7 @@ class NodesController < ApplicationController
 
 	def add_a_new_text_message_button
 		@node = Node.find(params[:node_id])
+		@bot = Bot.find(@node.bot_id)
 		respond_to do |format|
 		   format.js
 	  	end

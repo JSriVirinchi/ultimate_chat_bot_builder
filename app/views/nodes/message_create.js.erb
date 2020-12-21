@@ -14,6 +14,3 @@ document.getElementById('<%= botresponses_messages_area_text_area%>').value = ""
 	document.getElementById('<%= text_area_form_hide_or_show %>').classList.add('hide');
 <%end%>
 
-for(instance in CKEDITOR.instances){
-	CKEDITOR.instances[instance].setData('<p></p>');
-};

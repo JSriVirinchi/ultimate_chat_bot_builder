@@ -4,7 +4,7 @@
 <%if @node%> 
 <% botresponses_box_after = "botresponses_box_after_" + (@node.id).to_s %>
 <% botmessages_previous = "botmessages_previous_" + (@node.id).to_s %>
-<% botresponses_messages_area_text_area = "botresponses_messages_area_text_area_" + (@node.id).to_s%>
+
 <% add_a_node = "add_a_node_" + (@node.id).to_s%>
 <% link_to_node = "link_to_node_" + (@node.id).to_s%>
 <% link_to_node_label = "link_to_node_label_" + (@node.id).to_s%>
@@ -26,7 +26,7 @@
 <% submit_button_for_attaching_image = "submit_button_for_attaching_image_" + (@node.id).to_s %>
 <% attaching_media_error_messages = "attaching_media_error_messages_" +  (@node.id).to_s%>
 <% previous_message_and_options_card_divider = "previous_message_and_options_card_divider_" +  (@node.id).to_s %>
-<% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
+
 <% add_a_new_text_message_button = 'add_a_new_text_message_button_' +  (@node.id).to_s%>
 <% nodes_message_attach_media_video_form = "nodes_message_attach_media_video_form_" +  (@node.id).to_s%>
 <% attach_message_video = "attach_message_video_" +  (@node.id).to_s %>
@@ -61,10 +61,8 @@
 <% name_edit_text_field_changed = "name_edit_text_field_changed_" + (@node.id).to_s%>
 <% name_edit_text_field_default = "name_edit_text_field_default_" + (@node.id).to_s%>
 
-<% botresponses_text_message_node_type = "botresponses_text_message_node_type_" + (@node.id).to_s%>
-<% botresponses_text_message_bot_id = "botresponses_text_message_bot_id_" + (@node.id).to_s%>
-<% botresponses_text_message_message_type = "botresponses_text_message_message_type_" + (@node.id).to_s%>
-<% botresponses_text_message_node_id = "botresponses_text_message_node_id_" + (@node.id).to_s%>
+<% text_area_form_hide_or_show = "text_area_form_hide_or_show_" +  (@node.id).to_s %>
+<% botmessages_box_after_text_area_partial = "botmessages_box_after_text_area_partial_" +  (@node.id).to_s%>
 
 <%end%>
 
@@ -105,28 +103,9 @@
 		<%= render 'home/edit/nodes/botmessages_previous', delete_button: true, parent_id: parent_id %>
 	</div>
 	<!-- text area -->
-	
-	<div class="text-center mx-auto hide" id= <%= text_area_form_hide_or_show%>>
-	<%= form_with scope: :message, url: nodes_message_create_path, method: :post,  remote: true do |f| %>
-		<div class="text-center botresponses_messages_area_full">
-			<%= text_area :message, :text_messages, cols: 30, rows: 4, id: botresponses_messages_area_text_area %>
-			<%= f.text_field :node_type, value: "bot", class: "hide", id: botresponses_text_message_node_type%>
-			<%= f.text_field :bot_id, value: @bot.id , class: "hide", id: botresponses_text_message_bot_id%>
-			<%= f.text_field :message_type, value: "text" , class: "hide", id: botresponses_text_message_message_type%>
-			<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
-			<%= f.text_field :node_id, value: @node.id, class: "hide", id: botresponses_text_message_node_id%>
-			<% end %>
-			
-			<div class="row mb-1 ml-2">
-				<div class="col-4 mt-2">
-				</div>
-				<div class="col-8" style="text-align: right;">
-					<%= f.submit "Add", value: "Add", class: "btn btn-outline-secondary btn-sm mr-4", style: "height: 30px; margin-top: 5px; text-align: right;"%>
-				</div>
-			</div>
-		</div>
-	<% end %>	
-	</div>
+	<div id= "<%= botmessages_box_after_text_area_partial %>" >
+		<%=  render 'home/edit/nodes/botmessages_box_after_text_area', parent_id: parent_id%>	
+	</div>	
 	
 	<div class="card_divider mt-3 mb-2 ml-3" style="width: 270px;" id= <%= previous_message_and_options_card_divider%>>
 		
@@ -309,11 +288,7 @@
 
 
 <script type="text/javascript">
-	 
-	CKEDITOR.replace( ('<%= botresponses_messages_area_text_area %>'), {
-        customConfig: "/assets/ckeditor/config.js"
-    });
-	 
+	  
 	<% if Node.where(bot_id: @bot.id, parent_id: parent_id).first%>
 		function image_upload(){
 			console.log('uploaded');
