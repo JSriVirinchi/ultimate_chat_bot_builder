@@ -1,5 +1,5 @@
 <!-- text -->
-<%if child.user_input_type == "text"%>
+<%if user_input_type == "text" || user_input_type == nil %>
 	<% user_messages_list = Message.where(node_id: child.id)%>
 	<%if Message.where(node_id: child.id).first%>
 		<div>
@@ -20,27 +20,27 @@
 		No trigger phrases are added yet to this node.
 	<%end%>
 <!-- others -->
-<%elsif child.user_input_type == "phone_number"%>
+<%elsif user_input_type == "phone_number"%>
 	<div>
 		<b>Phone number </b> will be provided	
 	</div>
-<%elsif child.user_input_type == "email"%>	
+<%elsif user_input_type == "email"%>	
 	<div>
 		<b>Email </b> will be provided
 	</div>
-<%elsif child.user_input_type == "image"%>	
+<%elsif user_input_type == "image"%>	
 	<div>
 		<b>Image </b> will be uploaded
 	</div>
-<%elsif child.user_input_type == "document"%>	
+<%elsif user_input_type == "document"%>	
 	<div>
 		<b>Document </b> will be uploaded
 	</div>
-<%elsif child.user_input_type == "location"%>
+<%elsif user_input_type == "location"%>
 	<div>
 		<b>Location </b> will be provided	
 	</div>
-<%elsif child.user_input_type == "pincode"%>
+<%elsif user_input_type == "pincode"%>
 	<div>
 		<b>Pincode </b> will be provided	
 	</div>

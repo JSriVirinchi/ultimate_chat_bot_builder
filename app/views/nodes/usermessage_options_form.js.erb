@@ -29,6 +29,5 @@ height = "<%= height%>";
 height = parseInt(height);
 
 document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
-document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false%>";
-document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true %>";
-
+document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false , user_input_type: @child.user_input_type%>";
+document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true , user_input_type: @child.user_input_type%>";

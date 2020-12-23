@@ -21,7 +21,7 @@
 		<div class="card_divider mb-2"></div>
 		<div class="row triggerphrases_partial ml-3", style="overflow-y: auto;overflow-x: hidden; height: 50px; width: 280px;" >
 				<div id= <%= usermessage_message_compressed_partial_id%>>
-					<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: false%>
+					<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: false, user_input_type: child.user_input_type%>
 				</div>			
 		</div>
 	</div>
