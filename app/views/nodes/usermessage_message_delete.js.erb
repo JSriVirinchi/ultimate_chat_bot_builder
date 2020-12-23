@@ -1,40 +1,6 @@
 //console.log('deleted');
 <% usermessage_message_partial_id = "usermessage_message_partial_id_" + @child.id.to_s%>
 <% usermessage_message_compressed_partial_id = "usermessage_message_compressed_partial_id_" + @child.id.to_s%>
-<% usermessage_message_user_input_dropdown_id = "usermessage_message_user_input_dropdown_id_" + @child.id.to_s%>
 
-for(var i=0; i< document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options.length; i++){
-	if (document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].selected == true){
-		selected_value = document.getElementById('<%= usermessage_message_user_input_dropdown_id%>').options[i].value;
-	}
-}
-
-if (selected_value == "text"){
-	document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true, user_input_type: 'text' %>";
-	document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false, user_input_type: 'text' %>";
-}
-if (selected_value == "phone_number"){
-	document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true, user_input_type: 'phone_number' %>";
-	document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false, user_input_type: 'phone_number' %>";
-}
-if (selected_value == "email"){
-	document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true, user_input_type: 'email' %>";
-	document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false, user_input_type: 'email' %>";
-}
-if (selected_value == "image"){
-	document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true, user_input_type: 'image' %>";
-	document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false, user_input_type: 'image' %>";
-}
-if (selected_value == "document"){
-	document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true, user_input_type: 'document' %>";
-	document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false, user_input_type: 'document' %>";
-}
-if (selected_value == "location"){
-	document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true, user_input_type: 'location' %>";
-	document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false, user_input_type: 'location' %>";
-}
-if (selected_value == "pincode"){
-	document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true, user_input_type: 'pincode'%>";
-	document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false, user_input_type: 'pincode'%>";
-}
-
+document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: true%>";
+document.getElementById('<%= usermessage_message_compressed_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: @child, delete_button: false %>";

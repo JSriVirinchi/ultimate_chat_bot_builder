@@ -53,7 +53,7 @@
 		<div id= <%= usermessage_adding_trigger_phrases_id %>>
 			<div class="row ml-3 mt-3 Node-text-font  p-2 usermessage_trigger_phrases", style="height: 100px; width: 270px; overflow-y: auto; overflow-x: hidden;">
 				<div id= <%= usermessage_message_partial_id%> >				
-					<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: child.user_input_type %>
+					<%= render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true%>
 				</div>
 			</div>
 			<%= form_with scope: :messages, url: usermessage_messages_create_path, method: :post,  remote: true do |f| %>		
@@ -139,33 +139,12 @@
 		if (selected_value == "text"){
 			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.remove('hide');
 			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
-			document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: 'text' %>";
 		}
 		else{
 			document.getElementById('<%= usermessage_adding_trigger_phrases_id%>').classList.add('hide');
 			height = height - 167;	
 			console.log(height);
 			document.getElementById('<%= connector_black_link_vertical %>').style.height =  height + "px";
-
-			if (selected_value == "phone_number"){
-				document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: 'phone_number' %>";
-			}
-			if (selected_value == "email"){
-				document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: 'email' %>";
-			}
-			if (selected_value == "image"){
-				document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: 'image' %>";
-			}
-			if (selected_value == "document"){
-				document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: 'document' %>";
-			}
-			if (selected_value == "location"){
-				document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: 'location' %>";
-			}
-			if (selected_value == "pincode"){
-				document.getElementById('<%= usermessage_message_partial_id %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_message_previous', child: child, delete_button: true, user_input_type: 'pincode'%>";
-			}
-			
 
 		}
 
