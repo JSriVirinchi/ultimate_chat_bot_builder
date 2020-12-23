@@ -1,7 +1,9 @@
 <% error_node_form_out_loop = "error_node_form_out_loop_" + (@error_node.id).to_s%>
 <% add_another_error_attempt = "add_another_error_attempt_" + (@error_node.id).to_s%>
+<% error_node_form_out_loop_main_form = "error_node_form_out_loop_main_form_" + (@error_node.id).to_s%>
 
 document.getElementById('<%= error_node_form_out_loop%>').classList.remove('hide');
+document.getElementById('<%= error_node_form_out_loop_main_form %>').innerHTML = "<%= j render 'home/edit/nodes/usermessages_error_node_expanded_form', message: 'default'%>";
 document.getElementById('<%= add_another_error_attempt%>').classList.add('hide');
 
 <% for message in Message.where(node_type: "error", node_id: @error_node.id)%>
@@ -16,4 +18,14 @@ document.getElementById('<%= add_another_error_attempt%>').classList.add('hide')
 <% submit_button_for_form = "submit_button_for_form_" + (@error_node.id).to_s + "_" + "default"%>
 document.getElementById('<%= submit_button_for_form %>').click();
 
+function submit_error_form(message_id_for_function){
+	console.log('form submit');
+	console.log(message_id_for_function);
+	<% submit_button_for_form = "submit_button_for_form_" + (@error_node.id).to_s + "_"%>
 
+	str = '<%= submit_button_for_form%>';
+	str = str + message_id_for_function;
+
+	console.log(str);
+	document.getElementById(str).click();
+}

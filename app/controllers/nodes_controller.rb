@@ -354,6 +354,8 @@ class NodesController < ApplicationController
 
 	def error_node_add_another_error_attempt
 		@error_node = Node.find(params[:node_id])
+		@bot = Bot.find(@error_node.bot_id)
+		@node = Node.find(@error_node.parent_id)
 		respond_to do |format|
 		   format.js
 	  	end

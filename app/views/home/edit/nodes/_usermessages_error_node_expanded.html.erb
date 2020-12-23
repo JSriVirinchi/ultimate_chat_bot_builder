@@ -10,6 +10,7 @@
 		<% error_node_form_out_loop = "error_node_form_out_loop_" + (@error_node.id).to_s%>
 		<% add_another_error_attempt = "add_another_error_attempt_" + (@error_node.id).to_s%>
 		<% no_error_message_warning = "no_error_message_warning_" + (@error_node.id).to_s%>
+		<% error_node_form_out_loop_main_form = "error_node_form_out_loop_main_form_" + (@error_node.id).to_s%>
 		<div class="error_node_expanded_white">
 			<% number = 0%>
 			<% warning = false%>
@@ -114,10 +115,11 @@
 					<%= link_to image_tag('dustbin.png', size: "14", class: ""), error_node_delete_icon_for_new_attempt_path(@error_node.id), remote: true %>
 				</span>
 				<%end%>
-				<div class="error_message_node_form_showing_off mt-2">
+				<div class="error_message_node_form_showing_off mt-2" id= <%= error_node_form_out_loop_main_form %>>
 					<%= render 'home/edit/nodes/usermessages_error_node_expanded_form', message: "default"%>
 				</div>
 			</div>
+
 
 			<!-- save and add another error attempt to collpase exapnded and add new error message -->
 			<div class="text-center mt-2">
